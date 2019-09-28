@@ -32,6 +32,7 @@
   color: #B8B4CC;
   justify-content: flex-start;
   width: 6em;
+  text-transform: uppercase;
 }
 
 #middlePanelTopLeftBottom {
