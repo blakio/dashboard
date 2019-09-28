@@ -2,6 +2,7 @@
   height: 100%;
   flex-direction: column;
   justify-content: flex-start;
+  margin-top: 4em;
 }
 
 .sideOptionHeading {
@@ -21,11 +22,15 @@
 }
 
 .sideOptionBody div {
-  background-color: rgba(184, 180, 204, 0.4);
+  background-color: #F1F0F6;
   padding: 0.4em;
   border-radius: 0.2em;
   color: #595667;
   font-weight: 900;
   font-size: 1.2em;
   margin: 0.4em;
+}
+
+.sideOptionBody div.selected {
+  background-color: #DED0F1;
 }

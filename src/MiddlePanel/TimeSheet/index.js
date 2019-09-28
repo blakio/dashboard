@@ -31,7 +31,13 @@ function TimeSheet() {
           options={jobTypes}
         />
       </div>
-      <div className="middlePanelMiddleChild"></div>
+      <div className="middlePanelMiddleChild flex">
+        <div id="outterClockInButton" className="flex">
+          <div id="clockInButton" className="flex">
+            <p>clock in</p>
+          </div>
+        </div>
+      </div>
       <div className="middlePanelMiddleChild">
         <TimeSheetSideOptions
           title="Job Number"

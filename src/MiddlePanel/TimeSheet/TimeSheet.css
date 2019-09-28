@@ -69,3 +69,21 @@
   height: 100%;
   width: 33.33%;
 }
+
+#outterClockInButton {
+  height: 15.5em;
+  width: 15.5em;
+  border-radius: 50%;
+  background-color: #F1F0F6;
+}
+
+#clockInButton {
+  height: 12.5em;
+  width: 12.5em;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 1px solid #DED0F1;
+  -webkit-box-shadow: 0px 20px 7px -3px rgba(215,206,232,0.75);
+  -moz-box-shadow: 0px 20px 7px -3px rgba(215,206,232,0.75);
+  box-shadow: 0px 20px 7px -3px rgba(215,206,232,0.75);
+}
