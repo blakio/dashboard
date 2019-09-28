@@ -6,6 +6,7 @@
 #middlePanelTop {
   height: 25%;
   width: 100%;
+  justify-content: space-between;
 }
 
 #middlePanelMiddle {
@@ -16,4 +17,55 @@
 #middlePanelBottom {
   height: 25%;
   width: 100%;
+}
+
+#middlePanelTopLeft {
+  height: 100%;
+  flex-direction: column;
+}
+
+#middlePanelTopLeftTop,
+#middlePanelTopLeftBottom {
+  margin-left: 6rem;
+  font-size: 2.4em;
+  font-weight: 600;
+  color: #B8B4CC;
+  justify-content: flex-start;
+  width: 6em;
+}
+
+#middlePanelTopLeftBottom {
+  color: #3A3460;
+}
+
+#middlePanelTopRight {
+  justify-content: flex-end;
+}
+
+.percentFilter {
+  font-size: 1.6em;
+  font-weight: 800;
+  color: #3A3460;
+  margin: 0;
+  padding: 0.2em;
+  text-align: center;
+  margin-right: 0.2em;
+}
+
+.percentFilter.selected {
+  background-color: #3A3460;
+  color: #B8B4CC;
+  border-radius: 0.2em;
+}
+
+#progressPercent {
+  font-size: 4em;
+  font-weight: 600;
+  color: #B8B4CC;
+  margin-right: 6rem;
+}
+
+.middlePanelMiddleChild {
+  height: 100%;
+  width: 33.33%;
 }

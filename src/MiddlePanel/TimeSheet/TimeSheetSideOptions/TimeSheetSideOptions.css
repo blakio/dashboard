@@ -1,0 +1,31 @@
+.timeSheetSideOptions {
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.sideOptionHeading {
+  height: 20%;
+  width: 100%;
+}
+
+.sideOptionHeading p {
+  font-size: 1em;
+  color: #a39fb6;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.sideOptionBody {
+  flex-wrap: wrap;
+}
+
+.sideOptionBody div {
+  background-color: rgba(184, 180, 204, 0.4);
+  padding: 0.4em;
+  border-radius: 0.2em;
+  color: #595667;
+  font-weight: 900;
+  font-size: 1.2em;
+  margin: 0.4em;
+}
