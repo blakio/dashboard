@@ -8,3 +8,14 @@
   width: 100%;
   border-right: 0.1em solid #F2F1FA;
 }
+
+#leftPanelLiner {
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.sideIcon {
+  color: #B8B4CC;
+  font-size: 1.72em;
+  margin-top: 1.8em;
+}

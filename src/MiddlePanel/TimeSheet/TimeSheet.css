@@ -1,0 +1,19 @@
+#timesheet {
+  height: 100%;
+  width: 100%;
+}
+
+#middlePanelTop {
+  height: 25%;
+  width: 100%;
+}
+
+#middlePanelMiddle {
+  height: 50%;
+  width: 100%;
+}
+
+#middlePanelBottom {
+  height: 25%;
+  width: 100%;
+}
