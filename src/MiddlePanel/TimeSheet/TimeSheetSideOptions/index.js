@@ -9,11 +9,11 @@ function TimeSheetSideOptions(props) {
   } = props;
 
   return (<div className="timeSheetSideOptions flex">
-    <div className="sideOptionHeading flex">
+    <div className="sideOptionHeading sectionHeading flex">
       <p>{title}</p>
     </div>
     <div className="sideOptionBody flex">
-      {options.map(data => <div>{data}</div>)}
+      {options.map(data => <div className="tag">{data}</div>)}
     </div>
   </div>);
 }

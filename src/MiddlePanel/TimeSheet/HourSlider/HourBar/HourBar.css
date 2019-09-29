@@ -1,0 +1,20 @@
+.timeSection {
+  width: 2.5em;
+  margin: 0 0.4em;
+  flex-direction: column;
+  justify-content: flex-end;
+  display: inline-block;
+  align-items: flex-end;
+  position: relative;
+}
+
+.timeBox {
+  width: 100%;
+  border-top-right-radius: 0.4em;
+  border-top-left-radius: 0.4em;
+}
+
+.timeText p {
+  margin: 0;
+  text-align: center;
+}

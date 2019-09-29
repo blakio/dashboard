@@ -2,6 +2,7 @@ import React from 'react';
 import './TimeSheet.css';
 
 import TimeSheetSideOptions from "./TimeSheetSideOptions";
+import HourSlider from "./HourSlider";
 
 function TimeSheet() {
 
@@ -33,7 +34,7 @@ function TimeSheet() {
       </div>
       <div className="middlePanelMiddleChild flex">
         <div id="outterClockInButton" className="flex">
-          <div id="clockInButton" className="flex">
+          <div id="clockInButton" className="sectionHeading flex">
             <p>clock in</p>
           </div>
         </div>
@@ -45,7 +46,9 @@ function TimeSheet() {
         />
       </div>
     </div>
-    <div id="middlePanelBottom"></div>
+    <div id="middlePanelBottom" className="flex">
+      <HourSlider />
+    </div>
   </div>);
 }
 

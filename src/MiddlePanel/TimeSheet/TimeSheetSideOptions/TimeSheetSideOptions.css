@@ -10,28 +10,6 @@
   width: 100%;
 }
 
-.sideOptionHeading p {
-  font-size: 1em;
-  color: #a39fb6;
-  font-weight: 900;
-  text-transform: uppercase;
-}
-
 .sideOptionBody {
   flex-wrap: wrap;
-}
-
-.sideOptionBody div {
-  background-color: #F1F0F6;
-  padding: 0.4em;
-  border-radius: 0.2em;
-  color: #595667;
-  color: #7d72a9;
-  font-weight: 900;
-  font-size: 1.2em;
-  margin: 0.4em;
-}
-
-.sideOptionBody div.selected {
-  background-color: #DED0F1;
 }
