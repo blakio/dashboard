@@ -5,6 +5,10 @@ body {
   font-family: 'Quicksand', sans-serif;
 }
 
+.invisible-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 .flex {
   display: flex;
   justify-content: center;

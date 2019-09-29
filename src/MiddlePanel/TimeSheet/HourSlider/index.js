@@ -14,7 +14,7 @@ function HourSlider(props) {
     {/*<div id="hourTopBar" className="sectionHeading flex">
       <p>Hour View</p>
     </div>*/}
-    <div id="hourBottom">
+    <div id="hourBottom" className="invisible-scrollbar">
       <div id="horBarLiner">
         {timeData.map(data => <HourBar hours={data.hours} day={data.day} />)}
       </div>

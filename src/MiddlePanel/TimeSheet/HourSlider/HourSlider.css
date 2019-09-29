@@ -20,10 +20,9 @@
   overflow-x: scroll;
   box-sizing: content-box;
   position: relative;
+  overflow-y: hidden;
 }
 
 #horBarLiner {
-  position: absolute;
   height: 100%;
-  bottom: 0;
 }
