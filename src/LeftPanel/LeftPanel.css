@@ -19,3 +19,7 @@
   font-size: 1.72em;
   margin-top: 1.8em;
 }
+
+.sideIcon.selected {
+  color: #7033FF;
+}

@@ -1,0 +1,34 @@
+.rightPanelButton {
+  width: 100%;
+  justify-content: flex-start;
+  margin: 1em 0;
+}
+
+.sideButton {
+  height: 3.6em;
+  width: 3.6em;
+  border-radius: 1em;
+  background-color: #7033FF;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.sideButton i {
+  font-size: 1.72em;
+}
+
+.sideButtonDescription {
+  min-width: 8em;
+  height: 4em;
+  padding-left: 1em;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.sideButtonDescriptionTop p,
+.sideButtonDescriptionBottom p {
+  margin: 0em;
+}
+
+.sideButtonDescriptionTop p {
+  color: #3A3460;
+}

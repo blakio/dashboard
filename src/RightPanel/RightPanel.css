@@ -2,4 +2,11 @@
   height: 100vh;
   width: 24vw;
   background-color: #F6F5FA;
+  flex-direction: column;
+}
+
+#rightPanelLiner {
+  height: 80%;
+  width: 76%;
+  overflow-y: scroll;
 }
