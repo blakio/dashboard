@@ -13,7 +13,7 @@ function TimeSheetSideOptions(props) {
       <p>{title}</p>
     </div>
     <div className="sideOptionBody flex">
-      {options.map(data => <div className="tag">{data}</div>)}
+      {options.map((data, index) => <div key={index} className="tag">{data}</div>)}
     </div>
   </div>);
 }

@@ -11,10 +11,7 @@ function TimeSheet() {
 
   return (<div id="timesheet">
     <div id="middlePanelTop" className="flex">
-      <div id="middlePanelTopLeft" className="flex">
-        <div id="middlePanelTopLeftTop" className="flex">It's time</div>
-        <div id="middlePanelTopLeftBottom" className="flex">to clockin</div>
-      </div>
+      <div id="middlePanelTopLeft" className="flex"></div>
       <div id="middlePanelTopRight" className="flex">
         <div>
           <p className="percentFilter">W</p>

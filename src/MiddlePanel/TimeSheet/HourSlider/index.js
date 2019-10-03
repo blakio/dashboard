@@ -16,7 +16,7 @@ function HourSlider(props) {
     </div>*/}
     <div id="hourBottom" className="invisible-scrollbar">
       <div id="horBarLiner">
-        {timeData.map(data => <HourBar hours={data.hours} day={data.day} />)}
+        {timeData.map((data, index) => <HourBar key={index} hours={data.hours} day={data.day} />)}
       </div>
     </div>
   </div>);

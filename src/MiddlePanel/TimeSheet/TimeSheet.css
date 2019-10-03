@@ -23,6 +23,7 @@
 #middlePanelTopLeft {
   height: 100%;
   flex-direction: column;
+  background-image: url(../../img/cwlogo-new.png);
 }
 
 #middlePanelTopLeftTop,

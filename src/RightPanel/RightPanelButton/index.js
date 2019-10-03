@@ -11,7 +11,7 @@ function RightPanelButton(props) {
 
   return (<div className="rightPanelButton flex">
     <div className="sideButton flex">
-      <i class={iconClass}></i>
+      <i className={iconClass}></i>
     </div>
     <div className="sideButtonDescription flex">
       <div className="sideButtonDescriptionTop sectionHeading">

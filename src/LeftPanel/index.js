@@ -2,7 +2,7 @@ import React from 'react';
 import './LeftPanel.css';
 
 function LeftPanel() {
-  
+
   const icons = [
     { icon: "fas fa-clock" },
     { icon: "fas fa-envelope-open" },
@@ -15,11 +15,11 @@ function LeftPanel() {
     <div id="leftPanelLiner" className="flex">
       {icons.map((data, index) => {
         if(index === 0){
-          return (<div>
+          return (<div key={index}>
             <i className={`${data.icon} sideIcon`} style={{marginTop: "4em"}}></i>
           </div>)
         }
-        return (<div>
+        return (<div key={index}>
           <i className={`${data.icon} sideIcon`}></i>
         </div>)})}
     </div>

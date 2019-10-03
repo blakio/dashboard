@@ -107,7 +107,7 @@ function RightPanel() {
       <p>options</p>
     </div>
     <div id="rightPanelLiner">
-      {sideButtons.map(data => <RightPanelButton {...data}/>)}
+      {sideButtons.map((data, index) => <RightPanelButton key={index} {...data}/>)}
     </div>
   </div>);
 }
