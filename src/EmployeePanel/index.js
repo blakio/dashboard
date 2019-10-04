@@ -9,7 +9,7 @@ const sideButtons = [
     title: "project manager"
   },
   {
-    name: "mitchelle philmore",
+    name: "mitchell philmore",
     title: "chief informations officer"
   },
   {

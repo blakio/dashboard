@@ -1,0 +1,43 @@
+{
+  "connection": "default",
+  "collectionName": "employee",
+  "info": {
+    "name": "employee",
+    "description": "Employee model "
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "employee_id": {
+      "type": "integer"
+    },
+    "clock_in_time": {
+      "type": "date"
+    },
+    "clock_out_time": {
+      "type": "date"
+    },
+    "lunch_start_time": {
+      "type": "date"
+    },
+    "lunch_end_time": {
+      "type": "date"
+    },
+    "is_clocked_in": {
+      "type": "boolean"
+    },
+    "is_taking_lunch": {
+      "type": "boolean"
+    },
+    "job_type": {
+      "type": "json"
+    },
+    "total_hrs": {
+      "type": "integer"
+    }
+  }
+}
