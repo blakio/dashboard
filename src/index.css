@@ -26,10 +26,20 @@ body {
   background-color: #F1F0F6;
   padding: 0.4rem;
   border-radius: 0.2rem;
-  color: #7d72a9;
+  color: #6757A8;
   font-weight: 900;
   font-size: 1.2rem;
-  margin: 0.4rem;
+  margin: 0.1rem;
+  transition: all 0.3s;
+}
+
+.tag.selected {
+  background-color: #6757A8;
+  color: #fff;
+}
+
+.tag:hover {
+  cursor: pointer;
 }
 
 #dashboard {

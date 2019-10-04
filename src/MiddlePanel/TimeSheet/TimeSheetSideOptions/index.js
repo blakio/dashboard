@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './TimeSheetSideOptions.css';
 
 function TimeSheetSideOptions(props) {
 
+  const [selected, setSelected] = useState(null);
+
+  const select = (data) => {
+    if(data !== selected){
+      setSelected(data)
+    } else {
+      setSelected(null)
+    }
+  }
+
   const {
     title,
-    options
+    options,
+    showMore
   } = props;
 
   return (<div className="timeSheetSideOptions flex">
@@ -13,7 +24,12 @@ function TimeSheetSideOptions(props) {
       <p>{title}</p>
     </div>
     <div className="sideOptionBody flex">
-      {options.map((data, index) => <div key={index} className="tag">{data}</div>)}
+      {options.sort().map((data, index) => (
+        <div
+          onClick={() => select(index)}
+          key={index}
+          className={`tag ${(selected === index) && "selected"}`}>{data}</div>
+      ))}
     </div>
   </div>);
 }

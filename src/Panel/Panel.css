@@ -1,12 +1,11 @@
 #leftPanel {
   height: 100vh;
-  width: 8.5vw;
+  width: 12.5vw;
 }
 
 #leftPanelLiner {
-  height: 90%;
+  height: 100%;
   width: 100%;
-  border-right: 0.1em solid #F2F1FA;
 }
 
 #leftPanelLiner {
@@ -18,8 +17,11 @@
   color: #B8B4CC;
   font-size: 1.72em;
   margin-top: 1.8em;
+  transition: all 0.3s;
 }
 
-.sideIcon.selected {
-  color: #7033FF;
+.sideIcon.selected,
+.sideIcon:hover {
+  color: #6757A8;
+  cursor: pointer;
 }
