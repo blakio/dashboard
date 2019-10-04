@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './RightPanel.css';
 
-import RightPanelButton from "./RightPanelButton";
+import EmployeePanelButtons from "./EmployeePanelButtons";
 
 const sideButtons = [
   {
@@ -19,12 +19,23 @@ const sideButtons = [
 ]
 
 function EmployeePanel() {
+
+  const [selected, setSelected] = useState(null);
+
+  const select = name => setSelected((name === selected) ? null : name);
+
   return (<div id="rightPanel" className="flex">
     <div className="sectionHeading">
       <p>employees</p>
     </div>
     <div id="rightPanelLiner">
-      {sideButtons.map((data, index) => <RightPanelButton key={index} {...data}/>)}
+      {sideButtons.map((data, index) => {
+        return <EmployeePanelButtons
+          key={index}
+          {...data}
+          selected={selected === data.name}
+          select={select}/>
+      })}
     </div>
   </div>);
 }

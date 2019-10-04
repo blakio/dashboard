@@ -1,14 +1,18 @@
-import React from 'react';
-import './RightPanelButton.css';
+import React, { useState } from 'react';
+import './EmployeePanel.css';
 
-function RightPanelButton(props) {
+function EmployeePanelButtons(props) {
 
   const {
     name,
-    title
+    title,
+    select,
+    selected
   } = props;
 
-  return (<div className="rightPanelButton flex">
+  return (<div
+    className={`employeeButton flex ${selected && "selected"}`}
+    onClick={() => select(name)}>
     <div className="sideButtonDescription flex">
       <div className="sideButtonDescriptionTop sectionHeading">
         <p>{name}</p>
@@ -20,4 +24,4 @@ function RightPanelButton(props) {
   </div>);
 }
 
-export default RightPanelButton;
+export default EmployeePanelButtons;

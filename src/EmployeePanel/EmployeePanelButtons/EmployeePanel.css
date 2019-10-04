@@ -1,7 +1,12 @@
-.rightPanelButton {
+.employeeButton {
   width: 100%;
   justify-content: flex-start;
   margin: 1em 0;
+  user-select: none;
+}
+
+.employeeButton.selected {
+  background-color: #6757A8;
 }
 
 .sideButtonDescription {
