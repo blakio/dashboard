@@ -2,7 +2,6 @@ import React from 'react';
 import './TimeSheet.css';
 
 import TimeSheetSideOptions from "./TimeSheetSideOptions";
-import HourSlider from "./HourSlider";
 
 import {
   laborTypes,

@@ -5,11 +5,6 @@ function Panel() {
 
   const [selected, setSelected] = useState("clock");
 
-  // const select = (id) => {
-  //   debugger
-  //   setSelected(id)}
-  // }
-
   const hasSelected = (id) => {
     return id === selected
   }
