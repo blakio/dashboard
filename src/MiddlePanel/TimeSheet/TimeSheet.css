@@ -3,84 +3,33 @@
   width: 100%;
 }
 
-#middlePanelTop {
-  height: 25%;
-  width: 80%;
-  justify-content: space-between;
-  margin: 0 auto;
-}
-
 #middlePanelMiddle {
-  height: 50%;
   width: 100%;
+  align-items: flex-start;
+  padding-top: 1em;
 }
 
-#middlePanelBottom {
-  height: 25%;
-  width: 100%;
-}
-
-#middlePanelTopLeft {
+.middlePanelMiddleChildLeft,
+.middlePanelMiddleChildRight {
   height: 100%;
-  flex-direction: column;
-}
-
-#middlePanelTopLeftTop,
-#middlePanelTopLeftBottom {
-  font-size: 2.4em;
-  font-weight: 600;
-  color: #B8B4CC;
-  justify-content: flex-start;
-  width: 6em;
-  text-transform: uppercase;
-}
-
-#middlePanelTopLeftBottom {
-  color: #3A3460;
-}
-
-#middlePanelTopRight {
-  justify-content: flex-end;
-}
-
-.percentFilter {
-  font-size: 1.6em;
-  font-weight: 800;
-  color: #3A3460;
-  margin: 0;
-  padding: 0.2em;
-  text-align: center;
-  margin-right: 0.2em;
-}
-
-.percentFilter.selected {
-  background-color: #3A3460;
-  color: #B8B4CC;
-  border-radius: 0.2em;
-}
-
-#progressPercent {
-  font-size: 4em;
-  font-weight: 600;
-  color: #B8B4CC;
+  width: 33.33%;
 }
 
 .middlePanelMiddleChild {
   height: 100%;
   width: 33.33%;
-  overflow-y: scroll;
 }
 
 #outterClockInButton {
-  height: 15.5em;
-  width: 15.5em;
+  height: 12.5em;
+  width: 12.5em;
   border-radius: 50%;
   background-color: #F1F0F6;
 }
 
 #clockInButton {
-  height: 12.5em;
-  width: 12.5em;
+  height: 9.5em;
+  width: 9.5em;
   border-radius: 50%;
   background-color: #fff;
   border: 1px solid #DED0F1;

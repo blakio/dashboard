@@ -1,13 +1,13 @@
 import React from 'react';
-import LeftPanel from './LeftPanel';
+import Panel from './Panel';
 import MiddlePanel from './MiddlePanel';
-import RightPanel from './RightPanel';
+import EmployeePanel from './EmployeePanel';
 
 function App() {
   return (<div id="dashboard" className="flex">
-    <LeftPanel />
+    <EmployeePanel />
     <MiddlePanel />
-    <RightPanel />
+    <Panel />
   </div>);
 }
 

@@ -1,8 +1,9 @@
 .timeSheetSideOptions {
-  height: 100%;
   flex-direction: column;
   justify-content: flex-start;
-  margin-top: 4em;
+  height: 40em;
+  max-height: 80vh;
+  width: 100%;
   overflow-y: scroll;
 }
 
