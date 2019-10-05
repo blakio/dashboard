@@ -23,19 +23,19 @@ import {
 import {
   createEmployee,
   createLaborType,
-  createJobType,
+  createProjectType,
   createJobNumber,
   getEmployee,
   getLaborType,
-  getJobType,
+  getProjectType,
   getJobNumber,
   updateEmployee,
   updateLaborType,
-  updateJobType,
+  updateProjectType,
   updateJobNumber,
   deleteEmployee,
   deleteLaborType,
-  deleteJobType,
+  deleteProjectType,
   deleteJobNumber,
 } from "./StateFunctions";
 
@@ -46,7 +46,7 @@ export default (state, action) => {
     case CREATE_LABOR_TYPE:
       return createLaborType(action.payload, state);
     case CREATE_PROJECT_TYPE:
-      return createJobType(action.payload, state);
+      return createProjectType(action.payload, state);
     case CREATE_JOB_NUMBER:
       return createJobNumber(action.payload, state);
 
@@ -55,7 +55,7 @@ export default (state, action) => {
     case GET_LABOR_TYPE:
       return getLaborType(action.payload, state);
     case GET_PROJECT_TYPE:
-      return getJobType(action.payload, state);
+      return getProjectType(action.payload, state);
     case GET_JOB_NUMBER:
       return getJobNumber(action.payload, state);
 
@@ -64,7 +64,7 @@ export default (state, action) => {
     case UPDATE_LABOR_TYPE:
       return updateLaborType(action.payload, state);
     case UPDATE_PROJECT_TYPE:
-      return updateJobType(action.payload, state);
+      return updateProjectType(action.payload, state);
     case UPDATE_JOB_NUMBER:
       return updateJobNumber(action.payload, state);
 
@@ -73,7 +73,7 @@ export default (state, action) => {
     case DELETE_LABOR_TYPE:
       return deleteLaborType(action.payload, state);
     case DELETE_PROJECT_TYPE:
-      return deleteJobType(action.payload, state);
+      return deleteProjectType(action.payload, state);
     case DELETE_JOB_NUMBER:
       return deleteJobNumber(action.payload, state);
 

@@ -49,7 +49,7 @@ function App() {
 
   const [state, dispatch] = useReducer(Reducer, initialState);
 
-  return (<TimeSheetContext.Provider value={{...state}}>
+  return (<TimeSheetContext.Provider value={{...state, dispatch}}>
     <div id="dashboard" className="flex">
       <EmployeePanel />
       <MiddlePanel />

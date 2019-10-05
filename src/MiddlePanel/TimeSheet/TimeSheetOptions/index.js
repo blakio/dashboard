@@ -22,7 +22,8 @@ function TimeSheetOptions(props) {
   const {
     title,
     options,
-    showMore
+    action,
+    dispatch
   } = props;
 
   return (<div className="timeSheetSideOptions flex">
@@ -37,7 +38,12 @@ function TimeSheetOptions(props) {
           key={index}
           className={`tag tagLabel ${(selected === index) && "selected"}`}>
           {data}
-          {isAdminMode && <i className="fas fa-minus-circle"></i>}
+          {isAdminMode && <i
+            className="fas fa-minus-circle"
+            onClick={() => dispatch({
+              ...action,
+              payload: data
+            })}></i>}
         </div>
       </div>))}
     </div>

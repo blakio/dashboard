@@ -1,4 +1,4 @@
-export const laborTypes = [
+const laborTypes = [
   "ASSEMBLY",
   "BASE/FRAME",
   "BREAKDOWN",
@@ -26,7 +26,7 @@ export const laborTypes = [
   "WIRE"
 ]
 
-export const projectTypes = [
+const projectTypes = [
   "Booster–Quad",
   "Booster–UV",
   "Booster–Custom",
@@ -44,7 +44,7 @@ export const projectTypes = [
   "FOP Triplex"
 ]
 
-export const jobNumbers = [
+const jobNumbers = [
   "35-702",
   "35-713",
   "35-724",
@@ -77,3 +77,9 @@ export const jobNumbers = [
   "35-995",
   "other"
 ];
+
+export default {
+  laborTypes,
+  projectTypes,
+  jobNumbers
+}

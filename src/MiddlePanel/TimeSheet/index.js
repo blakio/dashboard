@@ -1,19 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './TimeSheet.css';
 
-import TimeSheetOptions from "./TimeSheetOptions";
+import TimeSheetContext from "../../Context/State";
 
+import TimeSheetOptions from "./TimeSheetOptions";
 import {
-  laborTypes,
-  projectTypes,
-  jobNumbers
-} from "./data.js"
+  DELETE_LABOR_TYPE,
+  DELETE_PROJECT_TYPE,
+  DELETE_JOB_NUMBER
+} from "../../Context/Types";
 
 function TimeSheet() {
 
-  const showMore = options => {
-    console.log(options)
-  }
+  const {
+    dispatch,
+    laborTypes,
+    projectTypes,
+    jobNumbers
+  } = useContext(TimeSheetContext);
 
   return (<div id="timesheet">
     <div id="middlePanelMiddle" className="flex">
@@ -22,7 +26,10 @@ function TimeSheet() {
         <TimeSheetOptions
           title="Labor Type"
           options={laborTypes}
-          showMore={showMore}
+          action={{
+            type: DELETE_LABOR_TYPE
+          }}
+          dispatch={dispatch}
         />
       </div>
 
@@ -30,7 +37,10 @@ function TimeSheet() {
         <TimeSheetOptions
           title="Project Type"
           options={projectTypes}
-          showMore={showMore}
+          action={{
+            type: DELETE_PROJECT_TYPE
+          }}
+          dispatch={dispatch}
         />
       </div>
 
@@ -38,7 +48,10 @@ function TimeSheet() {
         <TimeSheetOptions
           title="Job Number"
           options={jobNumbers}
-          showMore={showMore}
+          action={{
+            type: DELETE_JOB_NUMBER
+          }}
+          dispatch={dispatch}
         />
       </div>
 

@@ -1,63 +1,102 @@
-const createEmployee = (payload, state) => {
+const breakRefAndCopy = (obj) => JSON.parse(JSON.stringify(obj));
+
+export const createEmployee = (payload, state) => {
   return state;
 }
 
-const createLaborType = (payload, state) => {
+export const createLaborType = (payload, state) => {
   return state;
 }
 
-const createJobType = (payload, state) => {
+export const createProjectType = (payload, state) => {
   return state;
 }
 
-const createJobNumber = (payload, state) => {
+export const createJobNumber = (payload, state) => {
   return state;
 }
 
-const getEmployee = (payload, state) => {
+export const getEmployee = (payload, state) => {
   return state;
 }
 
-const getLaborType = (payload, state) => {
+export const getLaborType = (payload, state) => {
   return state;
 }
 
-const getJobType = (payload, state) => {
+export const getProjectType = (payload, state) => {
   return state;
 }
 
-const getJobNumber = (payload, state) => {
+export const getJobNumber = (payload, state) => {
   return state;
 }
 
-const updateEmployee = (payload, state) => {
+export const updateEmployee = (payload, state) => {
   return state;
 }
 
-const updateLaborType = (payload, state) => {
+export const updateLaborType = (payload, state) => {
   return state;
 }
 
-const updateJobType = (payload, state) => {
+export const updateProjectType = (payload, state) => {
   return state;
 }
 
-const updateJobNumber = (payload, state) => {
+export const updateJobNumber = (payload, state) => {
   return state;
 }
 
-const deleteEmployee = (payload, state) => {
+export const deleteEmployee = (payload, state) => {
   return state;
 }
 
-const deleteLaborType = (payload, state) => {
-  return state;
+export const deleteLaborType = (payload, state) => {
+  const currentState = breakRefAndCopy(state);
+  const { laborTypes } = currentState;
+  let indexOfPayload;
+  laborTypes.forEach((data, index) => {
+    if(data.toLowerCase() === payload.toLowerCase()){
+      indexOfPayload = index
+    }
+  })
+  laborTypes.splice(indexOfPayload, 1);
+  return {
+    ...state,
+    laborTypes
+  };
 }
 
-const deleteJobType = (payload, state) => {
-  return state;
+export const deleteProjectType = (payload, state) => {
+  const currentState = breakRefAndCopy(state);
+  const { projectTypes } = currentState;
+  debugger
+  let indexOfPayload;
+  projectTypes.forEach((data, index) => {
+    if(data.toLowerCase() === payload.toLowerCase()){
+      indexOfPayload = index
+    }
+  })
+  projectTypes.splice(indexOfPayload, 1);
+  return {
+    ...state,
+    projectTypes
+  };
 }
 
-const deleteJobNumber = (payload, state) => {
-  return state;
+export const deleteJobNumber = (payload, state) => {
+  const currentState = breakRefAndCopy(state);
+  const { jobNumbers } = currentState;
+  let indexOfPayload;
+  jobNumbers.forEach((data, index) => {
+    if(data.toLowerCase() === payload.toLowerCase()){
+      indexOfPayload = index
+    }
+  })
+  jobNumbers.splice(indexOfPayload, 1);
+  return {
+    ...state,
+    jobNumbers
+  };
 }
