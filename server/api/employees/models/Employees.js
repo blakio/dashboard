@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Lifecycle callbacks for the `Employee` model.
+ * Lifecycle callbacks for the `Employees` model.
  */
 
 module.exports = {
