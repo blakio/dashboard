@@ -67,7 +67,19 @@ export const updateJobNumber = (payload, state) => {
 }
 
 export const deleteEmployee = (payload, state) => {
-  return state;
+  const currentState = breakRefAndCopy(state);
+  const { employees } = currentState;
+  let indexOfPayload;
+  employees.forEach((data, index) => {
+    if(data.id === payload){
+      indexOfPayload = index
+    }
+  })
+  employees.splice(indexOfPayload, 1);
+  return {
+    ...state,
+    employees
+  };
 }
 
 export const deleteLaborType = (payload, state) => {
@@ -89,7 +101,6 @@ export const deleteLaborType = (payload, state) => {
 export const deleteProjectType = (payload, state) => {
   const currentState = breakRefAndCopy(state);
   const { projectTypes } = currentState;
-  debugger
   let indexOfPayload;
   projectTypes.forEach((data, index) => {
     if(data.toLowerCase() === payload.toLowerCase()){

@@ -78,8 +78,27 @@ const jobNumbers = [
   "other"
 ];
 
+const employees = [
+  {
+    id: 1,
+    name: "courtney rochelle",
+    title: "project manager"
+  },
+  {
+    id: 2,
+    name: "mitchell philmore",
+    title: "chief informations officer"
+  },
+  {
+    id: 3,
+    name: "isaiah harrison",
+    title: "chief executive officer"
+  }
+]
+
 export default {
   laborTypes,
   projectTypes,
-  jobNumbers
+  jobNumbers,
+  employees
 }

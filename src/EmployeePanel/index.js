@@ -1,26 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './RightPanel.css';
+
+import TimeSheetContext from "../Context/State";
 
 import EmployeePanelButtons from "./EmployeePanelButtons";
 
-const sideButtons = [
-  {
-    name: "courtney rochelle",
-    title: "project manager"
-  },
-  {
-    name: "mitchell philmore",
-    title: "chief informations officer"
-  },
-  {
-    name: "isaiah harrison",
-    title: "chief executive officer"
-  }
-]
+import {
+  CREATE_EMPLOYEE,
+  DELETE_EMPLOYEE
+} from "../Context/Types";
 
 function EmployeePanel() {
 
   const [selected, setSelected] = useState(null);
+
+  const {
+    dispatch,
+    employees,
+    isAdminMode
+  } = useContext(TimeSheetContext);
 
   const select = name => setSelected((name === selected) ? null : name);
 
@@ -29,9 +27,13 @@ function EmployeePanel() {
       <p>employees</p>
     </div>
     <div id="rightPanelLiner">
-      {sideButtons.map((data, index) => {
+      {employees.map((data, index) => {
         return <EmployeePanelButtons
           key={index}
+          dispatch={dispatch}
+          createActionType={CREATE_EMPLOYEE}
+          deleteActionType={DELETE_EMPLOYEE}
+          isAdminMode={isAdminMode}
           {...data}
           selected={selected === data.name}
           select={select}/>
