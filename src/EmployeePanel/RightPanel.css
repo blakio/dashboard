@@ -3,6 +3,7 @@
   width: 20vw;
   background-color: #F6F5FA;
   flex-direction: column;
+  min-width: 16em;
 }
 
 #rightPanelLiner {

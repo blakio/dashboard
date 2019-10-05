@@ -1,7 +1,7 @@
 import React from 'react';
 import './TimeSheet.css';
 
-import TimeSheetSideOptions from "./TimeSheetSideOptions";
+import TimeSheetOptions from "./TimeSheetOptions";
 
 import {
   laborTypes,
@@ -18,24 +18,24 @@ function TimeSheet() {
   return (<div id="timesheet">
     <div id="middlePanelMiddle" className="flex">
 
-      <div className="middlePanelMiddleChildLeft">
-        <TimeSheetSideOptions
+      <div className="middlePanelMiddleChild">
+        <TimeSheetOptions
           title="Labor Type"
           options={laborTypes}
           showMore={showMore}
         />
       </div>
 
-      <div className="middlePanelMiddleChildRight">
-        <TimeSheetSideOptions
+      <div className="middlePanelMiddleChild">
+        <TimeSheetOptions
           title="Project Type"
           options={projectTypes}
           showMore={showMore}
         />
       </div>
 
-      <div className="middlePanelMiddleChildRight">
-        <TimeSheetSideOptions
+      <div className="middlePanelMiddleChild">
+        <TimeSheetOptions
           title="Job Number"
           options={jobNumbers}
           showMore={showMore}

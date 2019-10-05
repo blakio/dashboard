@@ -2,6 +2,7 @@
   height: 100vh;
   width: 67.5vw;
   flex-direction: column;
+  overflow-y: scroll;
 }
 
 #middlePanelLiner {

@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { TimeSheetContext } from "../../../State";
 
-import './TimeSheetSideOptions.css';
+import './TimeSheetOptions.css';
 
-function TimeSheetSideOptions(props) {
+function TimeSheetOptions(props) {
 
   const {
     isAdminMode
@@ -44,4 +44,4 @@ function TimeSheetSideOptions(props) {
   </div>);
 }
 
-export default TimeSheetSideOptions;
+export default TimeSheetOptions;

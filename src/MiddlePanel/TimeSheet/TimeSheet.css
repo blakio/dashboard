@@ -7,17 +7,13 @@
   width: 100%;
   align-items: flex-start;
   padding-top: 1em;
-}
-
-.middlePanelMiddleChildLeft,
-.middlePanelMiddleChildRight {
-  height: 100%;
-  width: 33.33%;
+  flex-wrap: wrap;
 }
 
 .middlePanelMiddleChild {
   height: 100%;
   width: 33.33%;
+  min-width: 18em;
 }
 
 #outterClockInButton {

@@ -1,12 +1,21 @@
 .employeeButton {
-  width: 100%;
+  border: 1px solid transparent;
+  width: 98%;
   justify-content: flex-start;
   margin: 1em 0;
   user-select: none;
+  border-radius: 0.2rem;
+  border: 1px solid #e4ddff;
 }
 
 .employeeButton.selected {
+  color: #fff !important;
   background-color: #6757A8;
+}
+
+.employeeButton.selected .sideButtonDescription .sideButtonDescriptionTop p,
+.employeeButton.selected .sideButtonDescription .sideButtonDescriptionBottom p {
+  color: #fff;
 }
 
 .sideButtonDescription {
