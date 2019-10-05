@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './RightPanel.css';
+<<<<<<< HEAD
 import RightPanelButton from "./RightPanelButton";
 import Strapi from 'strapi-sdk-javascript'
 //Sample API Request
@@ -7,6 +8,9 @@ const strapi = new Strapi('http://localhost:1337');
 
 
 
+=======
+
+import EmployeePanelButtons from "./EmployeePanelButtons";
 
 const sideButtons = [
   {
@@ -45,12 +49,23 @@ const sideButtons = [
 
 
 function EmployeePanel() {
+
+  const [selected, setSelected] = useState(null);
+
+  const select = name => setSelected((name === selected) ? null : name);
+
   return (<div id="rightPanel" className="flex">
     <div className="sectionHeading">
       <p>employees</p>
     </div>
     <div id="rightPanelLiner">
-      {sideButtons.map((data, index) => <RightPanelButton key={index} {...data}/>)}
+      {sideButtons.map((data, index) => {
+        return <EmployeePanelButtons
+          key={index}
+          {...data}
+          selected={selected === data.name}
+          select={select}/>
+      })}
     </div>
   </div>);
 }
