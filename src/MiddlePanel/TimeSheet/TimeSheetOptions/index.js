@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { TimeSheetContext } from "../../../State";
+import TimeSheetContext from "../../../Context/State";
 
 import './TimeSheetOptions.css';
 

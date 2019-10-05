@@ -1,10 +1,13 @@
-import React from 'react';
-import { TimeSheetContext } from "./State";
+import React, { useReducer } from 'react';
 import Panel from './Panel';
 import MiddlePanel from './MiddlePanel';
 import EmployeePanel from './EmployeePanel';
 import Strapi from 'strapi-sdk-javascript';
 import { stringTypeAnnotation } from '@babel/types';
+
+import TimeSheetContext from "./Context/State";
+import Reducer from "./Context/Reducer";
+import initialState from "./Context/InitialState";
 
 //Sample API Request
 
@@ -40,10 +43,13 @@ strapi.request('POST','/graphql',{
   }
 }).then(({data:{currentjobs}})=>console.log(currentjobs.map(job=>job.jobnumber)))
 
-const isAdminMode = false;
+const isAdminMode = true;
 
 function App() {
-  return (<TimeSheetContext.Provider value={{isAdminMode}}>
+
+  const [state, dispatch] = useReducer(Reducer, initialState);
+
+  return (<TimeSheetContext.Provider value={{...state}}>
     <div id="dashboard" className="flex">
       <EmployeePanel />
       <MiddlePanel />
