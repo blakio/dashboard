@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { TimeSheetContext } from "../../../State";
+
 import './TimeSheetSideOptions.css';
 
 function TimeSheetSideOptions(props) {
+
+  const {
+    isAdminMode
+  } = useContext(TimeSheetContext);
 
   const [selected, setSelected] = useState(null);
 
@@ -22,14 +28,18 @@ function TimeSheetSideOptions(props) {
   return (<div className="timeSheetSideOptions flex">
     <div className="sideOptionHeading sectionHeading flex">
       <p>{title}</p>
+      {isAdminMode && <i className="fas fa-plus-circle"></i>}
     </div>
     <div className="sideOptionBody flex">
-      {options.sort().map((data, index) => (
+      {options.sort().map((data, index) => (<div>
         <div
           onClick={() => select(index)}
           key={index}
-          className={`tag ${(selected === index) && "selected"}`}>{data}</div>
-      ))}
+          className={`tag tagLabel ${(selected === index) && "selected"}`}>
+          {data}
+          {isAdminMode && <i className="fas fa-minus-circle"></i>}
+        </div>
+      </div>))}
     </div>
   </div>);
 }

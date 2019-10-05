@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { TimeSheetContext } from "../State";
+
 import './Panel.css';
 
 function Panel() {
+
+  const {
+    isAdminMode
+  } = useContext(TimeSheetContext);
 
   const [selected, setSelected] = useState("clock");
 
@@ -11,9 +17,14 @@ function Panel() {
 
   const icons = [
     { icon: "fas fa-clock", id: "clock" },
-    { icon: "fas fa-cloud-download-alt", id: "download" },
     { icon: "fas fa-address-book", id: "directory" }
   ];
+
+  if(isAdminMode){
+    icons.push({ icon: "fas fa-cloud-download-alt", id: "download" })
+    icons.push({ icon: "fas fa-list-alt", id: "edit" })
+  }
+
 
   return (<div id="leftPanel" className="flex">
     <div id="leftPanelLiner" className="flex">

@@ -12,6 +12,26 @@
   width: 100%;
 }
 
+.sideOptionHeading i {
+  margin: 4px;
+  color: #40bd40;
+  font-size: 1.4em;
+}
+
 .sideOptionBody {
   flex-wrap: wrap;
+}
+
+.tagLabel {
+  position: relative;
+}
+
+.tagLabel i {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+}
+
+.tagLabel i {
+  color: #ff6565;
 }

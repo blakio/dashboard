@@ -26,7 +26,7 @@ export const laborTypes = [
   "WIRE"
 ]
 
-export const projectType = [
+export const projectTypes = [
   "Booster–Quad",
   "Booster–UV",
   "Booster–Custom",

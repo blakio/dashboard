@@ -5,7 +5,7 @@ import TimeSheetSideOptions from "./TimeSheetSideOptions";
 
 import {
   laborTypes,
-  projectType,
+  projectTypes,
   jobNumbers
 } from "./data.js"
 
@@ -29,7 +29,7 @@ function TimeSheet() {
       <div className="middlePanelMiddleChildRight">
         <TimeSheetSideOptions
           title="Project Type"
-          options={projectType}
+          options={projectTypes}
           showMore={showMore}
         />
       </div>
