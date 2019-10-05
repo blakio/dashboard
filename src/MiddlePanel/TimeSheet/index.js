@@ -5,6 +5,9 @@ import TimeSheetContext from "../../Context/State";
 
 import TimeSheetOptions from "./TimeSheetOptions";
 import {
+  CREATE_LABOR_TYPE,
+  CREATE_PROJECT_TYPE,
+  CREATE_JOB_NUMBER,
   DELETE_LABOR_TYPE,
   DELETE_PROJECT_TYPE,
   DELETE_JOB_NUMBER
@@ -26,9 +29,8 @@ function TimeSheet() {
         <TimeSheetOptions
           title="Labor Type"
           options={laborTypes}
-          action={{
-            type: DELETE_LABOR_TYPE
-          }}
+          createActionType={ CREATE_LABOR_TYPE }
+          deleteActionType={ DELETE_LABOR_TYPE }
           dispatch={dispatch}
         />
       </div>
@@ -37,9 +39,8 @@ function TimeSheet() {
         <TimeSheetOptions
           title="Project Type"
           options={projectTypes}
-          action={{
-            type: DELETE_PROJECT_TYPE
-          }}
+          createActionType={ CREATE_PROJECT_TYPE }
+          deleteActionType={ DELETE_PROJECT_TYPE }
           dispatch={dispatch}
         />
       </div>
@@ -48,9 +49,8 @@ function TimeSheet() {
         <TimeSheetOptions
           title="Job Number"
           options={jobNumbers}
-          action={{
-            type: DELETE_JOB_NUMBER
-          }}
+          createActionType={ CREATE_JOB_NUMBER }
+          deleteActionType={ DELETE_JOB_NUMBER }
           dispatch={dispatch}
         />
       </div>

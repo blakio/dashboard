@@ -5,15 +5,33 @@ export const createEmployee = (payload, state) => {
 }
 
 export const createLaborType = (payload, state) => {
-  return state;
+  const currentState = breakRefAndCopy(state);
+  const { laborTypes } = currentState;
+  if(laborTypes.indexOf(payload) === -1) laborTypes.push(payload.toUpperCase())
+  return {
+    ...state,
+    laborTypes
+  };
 }
 
 export const createProjectType = (payload, state) => {
-  return state;
+  const currentState = breakRefAndCopy(state);
+  const { projectTypes } = currentState;
+  if(projectTypes.indexOf(payload) === -1) projectTypes.push(payload.toUpperCase())
+  return {
+    ...state,
+    projectTypes
+  };
 }
 
 export const createJobNumber = (payload, state) => {
-  return state;
+  const currentState = breakRefAndCopy(state);
+  const { jobNumbers } = currentState;
+  if(jobNumbers.indexOf(payload) === -1) jobNumbers.push(payload.toUpperCase())
+  return {
+    ...state,
+    jobNumbers
+  };
 }
 
 export const getEmployee = (payload, state) => {

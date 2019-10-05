@@ -5,6 +5,8 @@ import './TimeSheetOptions.css';
 
 function TimeSheetOptions(props) {
 
+  const [inputValue, setInputValue] = useState(null);
+
   const {
     isAdminMode
   } = useContext(TimeSheetContext);
@@ -22,14 +24,31 @@ function TimeSheetOptions(props) {
   const {
     title,
     options,
-    action,
+    createActionType,
+    deleteActionType,
     dispatch
   } = props;
 
   return (<div className="timeSheetSideOptions flex">
     <div className="sideOptionHeading sectionHeading flex">
-      <p>{title}</p>
-      {isAdminMode && <i className="fas fa-plus-circle"></i>}
+      {isAdminMode ?
+        <input
+          className="addInput tag"
+          placeHolder={`add ${title}`}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}/> :
+        <p>{title}</p>
+      }
+
+      {isAdminMode && <i
+        className="fas fa-plus-circle"
+        onClick={() => {
+          dispatch({
+            type: createActionType,
+            payload: inputValue
+          });
+          setInputValue("");
+        }}></i>}
     </div>
     <div className="sideOptionBody flex">
       {options.sort().map((data, index) => (<div>
@@ -41,7 +60,7 @@ function TimeSheetOptions(props) {
           {isAdminMode && <i
             className="fas fa-minus-circle"
             onClick={() => dispatch({
-              ...action,
+              type: deleteActionType,
               payload: data
             })}></i>}
         </div>
