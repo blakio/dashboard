@@ -13,6 +13,8 @@ import {
 function EmployeePanel() {
 
   const [selected, setSelected] = useState(null);
+  const [fullName, setFullName] = useState("");
+  const [jobTitle, setJobTitle] = useState("");
 
   const {
     dispatch,
@@ -22,10 +24,37 @@ function EmployeePanel() {
 
   const select = name => setSelected((name === selected) ? null : name);
 
+  const submit = () => {
+    if(fullName && jobTitle && fullName.length && jobTitle.length){
+      dispatch({
+        type: CREATE_EMPLOYEE,
+        payload: {
+          name: fullName.toUpperCase(),
+          title: jobTitle.toUpperCase()
+        }
+      });
+      setFullName("");
+      setJobTitle("");
+    }
+  }
+
   return (<div id="rightPanel" className="flex">
     <div className="sectionHeading">
       <p>employees</p>
     </div>
+    {isAdminMode && <div className="employeeAdditionForm flex">
+      <i class="fas fa-plus-circle" onClick={submit}></i>
+      <input
+        class="addInput tag"
+        placeholder="Full Name"
+        value={fullName}
+        onChange={e => setFullName(e.target.value)}/>
+      <input
+        class="addInput tag"
+        placeholder="Job Title"
+        value={jobTitle}
+        onChange={e => setJobTitle(e.target.value)}/>
+    </div>}
     <div id="rightPanelLiner">
       {employees.map((data, index) => {
         return <EmployeePanelButtons

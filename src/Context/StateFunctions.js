@@ -1,7 +1,16 @@
 const breakRefAndCopy = (obj) => JSON.parse(JSON.stringify(obj));
 
 export const createEmployee = (payload, state) => {
-  return state;
+  const currentState = breakRefAndCopy(state);
+  const { employees } = currentState;
+  employees.push({
+    id: (employees.length + 1),
+    ...payload
+  })
+  return {
+    ...state,
+    employees
+  };
 }
 
 export const createLaborType = (payload, state) => {
