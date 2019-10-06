@@ -3,10 +3,28 @@
   width: 100%;
 }
 
+#topbar {
+  height: 4em;
+  width: 100%;
+  justify-content: flex-start;
+  padding-left: 4em;
+}
+
+.topBarButton {
+  height: 3em;
+  width: 3em;
+  border-radius: 0.2em;
+  margin: 0.5em;
+}
+
+.topBarButton i {
+  font-size: 1.3em;
+  color: #fff;
+}
+
 #middlePanelMiddle {
   width: 100%;
   align-items: flex-start;
-  padding-top: 1em;
   flex-wrap: wrap;
 }
 

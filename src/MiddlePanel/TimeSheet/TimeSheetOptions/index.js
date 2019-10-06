@@ -1,33 +1,82 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import TimeSheetContext from "../../../Context/State";
 
 import './TimeSheetOptions.css';
 
 function TimeSheetOptions(props) {
 
-  const [inputValue, setInputValue] = useState(null);
-
   const {
-    isAdminMode
+    isAdminMode,
+    dispatch,
+    deletions
   } = useContext(TimeSheetContext);
-
-  const [selected, setSelected] = useState(null);
-
-  const select = (data) => {
-    if(data !== selected){
-      setSelected(data)
-    } else {
-      setSelected(null)
-    }
-  }
 
   const {
     title,
     options,
     createActionType,
-    deleteActionType,
-    dispatch
+    type,
+    name
   } = props;
+
+  const [inputValue, setInputValue] = useState(null);
+  const [selected, setSelected] = useState([null]);
+
+  useEffect(() => {
+    if(!Object.keys(deletions[name]).length){
+      setSelected([null])
+    }
+  }, [deletions])
+
+  const select = (index, data) => {
+    if(isAdminMode){
+      if(selected.includes(index)){
+        const newSelected = [...selected];
+        newSelected.splice(selected.indexOf(index), 1);
+        setSelected(newSelected);
+        dispatch({
+          type,
+          payload: {
+            type: "remove",
+            name,
+            data
+          }
+        })
+      } else {
+        setSelected([...selected, index])
+        dispatch({
+          type,
+          payload: {
+            type: "add",
+            name,
+            data
+          }
+        })
+      }
+    } else {
+      if(!selected.includes(index)){
+        setSelected([index])
+        dispatch({
+          type,
+          payload: {
+            type: "add",
+            name,
+            data
+          }
+        })
+      } else {
+        setSelected([])
+        dispatch({
+          type,
+          payload: {
+            type: "remove",
+            name,
+            data
+          }
+        })
+      }
+    }
+  }
 
   return (<div className="timeSheetSideOptions flex">
     <div className="sideOptionHeading sectionHeading flex">
@@ -39,31 +88,14 @@ function TimeSheetOptions(props) {
           onChange={(e) => setInputValue(e.target.value)}/> :
         <p className="timesheetTitle">{title}</p>
       }
-
-      {isAdminMode && <i
-        className="fas fa-plus-circle"
-        onClick={() => {
-          dispatch({
-            type: createActionType,
-            payload: inputValue
-          });
-          setInputValue("");
-        }}></i>}
     </div>
     <div className="sideOptionBody flex">
       {options.sort().map((data, index) => (<div>
         <div
-          onClick={() => select(index)}
+          onClick={() => select(index, data)}
           key={index}
-          style={{paddingRight: isAdminMode ? "3.3em" : "auto"}}
-          className={`tag tagLabel ${(selected === index) && "selected"}`}>
+          className={`tag tagLabel ${(selected.includes(index)) && "selected"}`}>
           {data}
-          {isAdminMode && <i
-            className="fas fa-times-circle"
-            onClick={() => dispatch({
-              type: deleteActionType,
-              payload: data
-            })}></i>}
         </div>
       </div>))}
     </div>

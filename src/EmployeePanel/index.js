@@ -43,7 +43,6 @@ function EmployeePanel() {
       <p className="timesheetTitle">employees</p>
     </div>
     {isAdminMode && <div className="employeeAdditionForm flex">
-      <i class="fas fa-plus-circle" onClick={submit}></i>
       <input
         class="addInput tag"
         placeholder="Full Name"

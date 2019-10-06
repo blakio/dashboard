@@ -138,3 +138,46 @@ export const deleteJobNumber = (payload, state) => {
     jobNumbers
   };
 }
+
+export const bulkDelete = (payload, state) => {
+  const currentState = breakRefAndCopy(state);
+  for(let i in currentState.deletions){
+    state.deletions[i].forEach(data => {
+      const index = currentState[i].indexOf(data);
+      currentState[i].splice(index, 1);
+      const index2 = currentState.deletions[i].indexOf(data);
+      currentState.deletions[i].splice(index2, 1);
+    })
+  }
+  return currentState
+}
+
+export const updateDeletions = (payload, state) => {
+  const currentState = breakRefAndCopy(state);
+  const deletions = currentState.deletions;
+  if(payload.type === "remove"){
+    deletions[payload.name].splice(state.deletions[payload.name].indexOf(payload.data), 1);
+  } else if(payload.type === "add"){
+    deletions[payload.name].push(payload.data)
+  }
+  return {
+    ...state,
+    deletions
+  };
+}
+
+export const clickIn = (payload, state) => {
+  return state;
+}
+
+export const clockOut = (payload, state) => {
+  return state;
+}
+
+export const toLunch = (payload, state) => {
+  return state;
+}
+
+export const fromLunch = (payload, state) => {
+  return state;
+}

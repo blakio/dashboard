@@ -17,7 +17,14 @@ import {
   DELETE_EMPLOYEE,
   DELETE_LABOR_TYPE,
   DELETE_PROJECT_TYPE,
-  DELETE_JOB_NUMBER
+  DELETE_JOB_NUMBER,
+
+  BULK_DELETE,
+  UPDATE_DELETIONS,
+  CLOCK_IN,
+  CLOCK_OUT,
+  GO_TO_LUNCH,
+  BACK_FROM_LUNCH
 } from "./Types";
 
 import {
@@ -37,6 +44,12 @@ import {
   deleteLaborType,
   deleteProjectType,
   deleteJobNumber,
+  bulkDelete,
+  updateDeletions,
+  clickIn,
+  clockOut,
+  toLunch,
+  fromLunch
 } from "./StateFunctions";
 
 export default (state, action) => {
@@ -76,6 +89,19 @@ export default (state, action) => {
       return deleteProjectType(action.payload, state);
     case DELETE_JOB_NUMBER:
       return deleteJobNumber(action.payload, state);
+
+    case BULK_DELETE:
+      return bulkDelete(action.payload, state);
+    case UPDATE_DELETIONS:
+      return updateDeletions(action.payload, state);
+    case CLOCK_IN:
+      return clickIn(action.payload, state);
+    case CLOCK_OUT:
+      return clockOut(action.payload, state);
+    case GO_TO_LUNCH:
+      return toLunch(action.payload, state);
+    case BACK_FROM_LUNCH:
+      return fromLunch(action.payload, state);
 
     default:
     return state;

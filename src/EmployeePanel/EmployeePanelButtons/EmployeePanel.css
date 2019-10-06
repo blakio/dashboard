@@ -36,11 +36,3 @@
 .sideButtonDescriptionTop p {
   color: #3A3460;
 }
-
-.sideButtonDescription i {
-  color: #ff6565;
-  position: absolute;
-  top: -6px;
-  right: 0;
-  font-size: 1.4em;
-}

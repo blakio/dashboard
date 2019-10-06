@@ -10,8 +10,7 @@ function EmployeePanelButtons(props) {
     select,
     selected,
     isAdminMode,
-    dispatch,
-    deleteActionType
+    dispatch
   } = props;
 
   return (<div
@@ -24,12 +23,6 @@ function EmployeePanelButtons(props) {
       <div className="sideButtonDescriptionBottom sectionHeading">
         <p>{title}</p>
       </div>
-      {isAdminMode && <i
-        className="fas fa-times-circle"
-        onClick={() => dispatch({
-          type: deleteActionType,
-          payload: id
-        })}></i>}
     </div>
   </div>);
 }

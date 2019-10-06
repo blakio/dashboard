@@ -16,11 +16,3 @@
   position: relative;
   flex-direction: column;
 }
-
-.employeeAdditionForm i {
-  position: absolute;
-  top: -1em;
-  right: 0;
-  color: #40bd40;
-  font-size: 1.4em;
-}
