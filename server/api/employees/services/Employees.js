@@ -1,9 +1,9 @@
 'use strict';
 
-/* global Employee */
+/* global Employees */
 
 /**
- * Employee.js service
+ * Employees.js service
  *
  * @description: A set of functions similar to controller's actions to avoid code duplication.
  */
@@ -22,32 +22,32 @@ module.exports = {
 
   fetchAll: (params, populate) => {
     const filters = convertRestQueryParams(params);
-    const populateOpt = populate || Employee.associations
+    const populateOpt = populate || Employees.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias)
 
     return buildQuery({
-      model: Employee,
+      model: Employees,
       filters,
       populate: populateOpt,
     });
   },
 
   /**
-   * Promise to fetch a/an employee.
+   * Promise to fetch a/an employees.
    *
    * @return {Promise}
    */
 
   fetch: (params) => {
     // Select field to populate.
-    const populate = Employee.associations
+    const populate = Employees.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias)
       .join(' ');
 
-    return Employee
-      .findOne(_.pick(params, _.keys(Employee.schema.paths)))
+    return Employees
+      .findOne(_.pick(params, _.keys(Employees.schema.paths)))
       .populate(populate);
   },
 
@@ -61,64 +61,64 @@ module.exports = {
     const filters = convertRestQueryParams(params);
 
     return buildQuery({
-      model: Employee,
+      model: Employees,
       filters: { where: filters.where },
     })
       .count()
   },
 
   /**
-   * Promise to add a/an employee.
+   * Promise to add a/an employees.
    *
    * @return {Promise}
    */
 
   add: async (values) => {
     // Extract values related to relational data.
-    const relations = _.pick(values, Employee.associations.map(ast => ast.alias));
-    const data = _.omit(values, Employee.associations.map(ast => ast.alias));
+    const relations = _.pick(values, Employees.associations.map(ast => ast.alias));
+    const data = _.omit(values, Employees.associations.map(ast => ast.alias));
 
     // Create entry with no-relational data.
-    const entry = await Employee.create(data);
+    const entry = await Employees.create(data);
 
     // Create relational data and return the entry.
-    return Employee.updateRelations({ _id: entry.id, values: relations });
+    return Employees.updateRelations({ _id: entry.id, values: relations });
   },
 
   /**
-   * Promise to edit a/an employee.
+   * Promise to edit a/an employees.
    *
    * @return {Promise}
    */
 
   edit: async (params, values) => {
     // Extract values related to relational data.
-    const relations = _.pick(values, Employee.associations.map(a => a.alias));
-    const data = _.omit(values, Employee.associations.map(a => a.alias));
+    const relations = _.pick(values, Employees.associations.map(a => a.alias));
+    const data = _.omit(values, Employees.associations.map(a => a.alias));
 
     // Update entry with no-relational data.
-    const entry = await Employee.updateOne(params, data, { multi: true });
+    const entry = await Employees.updateOne(params, data, { multi: true });
 
     // Update relational data and return the entry.
-    return Employee.updateRelations(Object.assign(params, { values: relations }));
+    return Employees.updateRelations(Object.assign(params, { values: relations }));
   },
 
   /**
-   * Promise to remove a/an employee.
+   * Promise to remove a/an employees.
    *
    * @return {Promise}
    */
 
   remove: async params => {
     // Select field to populate.
-    const populate = Employee.associations
+    const populate = Employees.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias)
       .join(' ');
 
     // Note: To get the full response of Mongo, use the `remove()` method
     // or add spent the parameter `{ passRawResult: true }` as second argument.
-    const data = await Employee
+    const data = await Employees
       .findOneAndRemove(params, {})
       .populate(populate);
 
@@ -127,7 +127,7 @@ module.exports = {
     }
 
     await Promise.all(
-      Employee.associations.map(async association => {
+      Employees.associations.map(async association => {
         if (!association.via || !data._id || association.dominant) {
           return true;
         }
@@ -148,22 +148,22 @@ module.exports = {
   },
 
   /**
-   * Promise to search a/an employee.
+   * Promise to search a/an employees.
    *
    * @return {Promise}
    */
 
   search: async (params) => {
     // Convert `params` object to filters compatible with Mongo.
-    const filters = strapi.utils.models.convertParams('employee', params);
+    const filters = strapi.utils.models.convertParams('employees', params);
     // Select field to populate.
-    const populate = Employee.associations
+    const populate = Employees.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias)
       .join(' ');
 
-    const $or = Object.keys(Employee.attributes).reduce((acc, curr) => {
-      switch (Employee.attributes[curr].type) {
+    const $or = Object.keys(Employees.attributes).reduce((acc, curr) => {
+      switch (Employees.attributes[curr].type) {
         case 'integer':
         case 'float':
         case 'decimal':
@@ -187,7 +187,7 @@ module.exports = {
       }
     }, []);
 
-    return Employee
+    return Employees
       .find({ $or })
       .sort(filters.sort)
       .skip(filters.start)

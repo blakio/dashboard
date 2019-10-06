@@ -1,5 +1,9 @@
 import React, { useState, useContext } from 'react';
 import './RightPanel.css';
+import RightPanelButton from "./RightPanelButton";
+import Strapi from 'strapi-sdk-javascript'
+//Sample API Request
+const strapi = new Strapi('http://localhost:1337');
 
 import TimeSheetContext from "../Context/State";
 
@@ -9,6 +13,26 @@ import {
   CREATE_EMPLOYEE,
   DELETE_EMPLOYEE
 } from "../Context/Types";
+
+// Sample Request to pull all employee names and job titles
+
+// strapi.request('POST','/graphql',{
+//   data:{
+//     query:
+//      `
+//      query{
+//       employees{
+//         name
+//         job_title
+        
+//       }
+//     }
+    
+//     `
+//   }
+// }).then(({data:{employees}})=>console.log(employees))
+
+
 
 function EmployeePanel() {
 

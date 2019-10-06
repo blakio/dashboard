@@ -43,6 +43,8 @@ strapi.request('POST','/graphql',{
   }
 }).then(({data:{currentjobs}})=>console.log(currentjobs.map(job=>job.jobnumber)))
 
+
+
 const isAdminMode = true;
 
 function App() {

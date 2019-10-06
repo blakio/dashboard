@@ -2,7 +2,7 @@
   "connection": "default",
   "collectionName": "employee",
   "info": {
-    "name": "employee",
+    "name": "employees",
     "description": "Employee model "
   },
   "options": {
@@ -11,9 +11,6 @@
   "attributes": {
     "name": {
       "type": "string"
-    },
-    "employee_id": {
-      "type": "integer"
     },
     "clock_in_time": {
       "type": "date"
@@ -33,10 +30,22 @@
     "is_taking_lunch": {
       "type": "boolean"
     },
-    "job_type": {
+    "job_data": {
       "type": "json"
     },
     "total_hrs": {
+      "type": "integer"
+    },
+    "historial_data": {
+      "type": "json"
+    },
+    "is_contractor": {
+      "type": "boolean"
+    },
+    "job_title": {
+      "type": "string"
+    },
+    "job_number": {
       "type": "integer"
     }
   }

@@ -6,12 +6,12 @@ type createCurrentjobsPayload {
   currentjob: Currentjobs
 }
 
-input createEmployeeInput {
-  data: EmployeeInput
+input createEmployeesInput {
+  data: EmployeesInput
 }
 
-type createEmployeePayload {
-  employee: Employee
+type createEmployeesPayload {
+  employee: Employees
 }
 
 input createRoleInput {
@@ -128,12 +128,12 @@ type deleteCurrentjobsPayload {
   currentjob: Currentjobs
 }
 
-input deleteEmployeeInput {
+input deleteEmployeesInput {
   where: InputID
 }
 
-type deleteEmployeePayload {
-  employee: Employee
+type deleteEmployeesPayload {
+  employee: Employees
 }
 
 input deleteRoleInput {
@@ -157,17 +157,20 @@ input editCurrentjobsInput {
   budget: String
 }
 
-input editEmployeeInput {
+input editEmployeesInput {
   name: String
-  employee_id: Int
   clock_in_time: DateTime
   clock_out_time: DateTime
   lunch_start_time: DateTime
   lunch_end_time: DateTime
   is_clocked_in: Boolean
   is_taking_lunch: Boolean
-  job_type: JSON
+  job_data: JSON
   total_hrs: Int
+  historial_data: JSON
+  is_contractor: Boolean
+  job_title: String
+  job_number: Int
 }
 
 input editFileInput {
@@ -203,156 +206,180 @@ input editUserInput {
 }
 
 """Employee model """
-type Employee {
+type Employees {
   _id: ID!
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
   name: String
-  employee_id: Int
   clock_in_time: DateTime
   clock_out_time: DateTime
   lunch_start_time: DateTime
   lunch_end_time: DateTime
   is_clocked_in: Boolean
   is_taking_lunch: Boolean
-  job_type: JSON
+  job_data: JSON
   total_hrs: Int
+  historial_data: JSON
+  is_contractor: Boolean
+  job_title: String
+  job_number: Int
 }
 
-type EmployeeAggregator {
+type EmployeesAggregator {
   count: Int
   totalCount: Int
-  sum: EmployeeAggregatorSum
-  avg: EmployeeAggregatorAvg
-  min: EmployeeAggregatorMin
-  max: EmployeeAggregatorMax
+  sum: EmployeesAggregatorSum
+  avg: EmployeesAggregatorAvg
+  min: EmployeesAggregatorMin
+  max: EmployeesAggregatorMax
 }
 
-type EmployeeAggregatorAvg {
-  employee_id: Float
+type EmployeesAggregatorAvg {
   total_hrs: Float
+  job_number: Float
 }
 
-type EmployeeAggregatorMax {
-  employee_id: Float
+type EmployeesAggregatorMax {
   total_hrs: Float
+  job_number: Float
 }
 
-type EmployeeAggregatorMin {
-  employee_id: Float
+type EmployeesAggregatorMin {
   total_hrs: Float
+  job_number: Float
 }
 
-type EmployeeAggregatorSum {
-  employee_id: Float
+type EmployeesAggregatorSum {
   total_hrs: Float
+  job_number: Float
 }
 
-type EmployeeConnection {
-  values: [Employee]
-  groupBy: EmployeeGroupBy
-  aggregate: EmployeeAggregator
+type EmployeesConnection {
+  values: [Employees]
+  groupBy: EmployeesGroupBy
+  aggregate: EmployeesAggregator
 }
 
-type EmployeeConnection_id {
+type EmployeesConnection_id {
   key: ID
-  connection: EmployeeConnection
+  connection: EmployeesConnection
 }
 
-type EmployeeConnectionClock_in_time {
+type EmployeesConnectionClock_in_time {
   key: DateTime
-  connection: EmployeeConnection
+  connection: EmployeesConnection
 }
 
-type EmployeeConnectionClock_out_time {
+type EmployeesConnectionClock_out_time {
   key: DateTime
-  connection: EmployeeConnection
+  connection: EmployeesConnection
 }
 
-type EmployeeConnectionCreatedAt {
+type EmployeesConnectionCreatedAt {
   key: DateTime
-  connection: EmployeeConnection
+  connection: EmployeesConnection
 }
 
-type EmployeeConnectionEmployee_id {
-  key: Int
-  connection: EmployeeConnection
-}
-
-type EmployeeConnectionId {
-  key: ID
-  connection: EmployeeConnection
-}
-
-type EmployeeConnectionIs_clocked_in {
-  key: Boolean
-  connection: EmployeeConnection
-}
-
-type EmployeeConnectionIs_taking_lunch {
-  key: Boolean
-  connection: EmployeeConnection
-}
-
-type EmployeeConnectionJob_type {
+type EmployeesConnectionHistorial_data {
   key: JSON
-  connection: EmployeeConnection
+  connection: EmployeesConnection
 }
 
-type EmployeeConnectionLunch_end_time {
-  key: DateTime
-  connection: EmployeeConnection
+type EmployeesConnectionId {
+  key: ID
+  connection: EmployeesConnection
 }
 
-type EmployeeConnectionLunch_start_time {
-  key: DateTime
-  connection: EmployeeConnection
+type EmployeesConnectionIs_clocked_in {
+  key: Boolean
+  connection: EmployeesConnection
 }
 
-type EmployeeConnectionName {
-  key: String
-  connection: EmployeeConnection
+type EmployeesConnectionIs_contractor {
+  key: Boolean
+  connection: EmployeesConnection
 }
 
-type EmployeeConnectionTotal_hrs {
+type EmployeesConnectionIs_taking_lunch {
+  key: Boolean
+  connection: EmployeesConnection
+}
+
+type EmployeesConnectionJob_data {
+  key: JSON
+  connection: EmployeesConnection
+}
+
+type EmployeesConnectionJob_number {
   key: Int
-  connection: EmployeeConnection
+  connection: EmployeesConnection
 }
 
-type EmployeeConnectionUpdatedAt {
+type EmployeesConnectionJob_title {
+  key: String
+  connection: EmployeesConnection
+}
+
+type EmployeesConnectionLunch_end_time {
   key: DateTime
-  connection: EmployeeConnection
+  connection: EmployeesConnection
 }
 
-type EmployeeGroupBy {
-  _id: [EmployeeConnection_id]
-  id: [EmployeeConnectionId]
-  createdAt: [EmployeeConnectionCreatedAt]
-  updatedAt: [EmployeeConnectionUpdatedAt]
-  name: [EmployeeConnectionName]
-  employee_id: [EmployeeConnectionEmployee_id]
-  clock_in_time: [EmployeeConnectionClock_in_time]
-  clock_out_time: [EmployeeConnectionClock_out_time]
-  lunch_start_time: [EmployeeConnectionLunch_start_time]
-  lunch_end_time: [EmployeeConnectionLunch_end_time]
-  is_clocked_in: [EmployeeConnectionIs_clocked_in]
-  is_taking_lunch: [EmployeeConnectionIs_taking_lunch]
-  job_type: [EmployeeConnectionJob_type]
-  total_hrs: [EmployeeConnectionTotal_hrs]
+type EmployeesConnectionLunch_start_time {
+  key: DateTime
+  connection: EmployeesConnection
 }
 
-input EmployeeInput {
+type EmployeesConnectionName {
+  key: String
+  connection: EmployeesConnection
+}
+
+type EmployeesConnectionTotal_hrs {
+  key: Int
+  connection: EmployeesConnection
+}
+
+type EmployeesConnectionUpdatedAt {
+  key: DateTime
+  connection: EmployeesConnection
+}
+
+type EmployeesGroupBy {
+  _id: [EmployeesConnection_id]
+  id: [EmployeesConnectionId]
+  createdAt: [EmployeesConnectionCreatedAt]
+  updatedAt: [EmployeesConnectionUpdatedAt]
+  name: [EmployeesConnectionName]
+  clock_in_time: [EmployeesConnectionClock_in_time]
+  clock_out_time: [EmployeesConnectionClock_out_time]
+  lunch_start_time: [EmployeesConnectionLunch_start_time]
+  lunch_end_time: [EmployeesConnectionLunch_end_time]
+  is_clocked_in: [EmployeesConnectionIs_clocked_in]
+  is_taking_lunch: [EmployeesConnectionIs_taking_lunch]
+  job_data: [EmployeesConnectionJob_data]
+  total_hrs: [EmployeesConnectionTotal_hrs]
+  historial_data: [EmployeesConnectionHistorial_data]
+  is_contractor: [EmployeesConnectionIs_contractor]
+  job_title: [EmployeesConnectionJob_title]
+  job_number: [EmployeesConnectionJob_number]
+}
+
+input EmployeesInput {
   name: String
-  employee_id: Int
   clock_in_time: DateTime
   clock_out_time: DateTime
   lunch_start_time: DateTime
   lunch_end_time: DateTime
   is_clocked_in: Boolean
   is_taking_lunch: Boolean
-  job_type: JSON
+  job_data: JSON
   total_hrs: Int
+  historial_data: JSON
+  is_contractor: Boolean
+  job_title: String
+  job_number: Int
 }
 
 input FileInput {
@@ -380,15 +407,15 @@ scalar JSON
 """The `Long` scalar type represents 52-bit integers"""
 scalar Long
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Currentjobs | createCurrentjobsPayload | updateCurrentjobsPayload | deleteCurrentjobsPayload | CurrentjobsConnection | CurrentjobsAggregator | CurrentjobsAggregatorSum | CurrentjobsAggregatorAvg | CurrentjobsAggregatorMin | CurrentjobsAggregatorMax | CurrentjobsGroupBy | CurrentjobsConnection_id | CurrentjobsConnectionId | CurrentjobsConnectionCreatedAt | CurrentjobsConnectionUpdatedAt | CurrentjobsConnectionJobnumber | CurrentjobsConnectionBudget | Employee | createEmployeePayload | updateEmployeePayload | deleteEmployeePayload | EmployeeConnection | EmployeeAggregator | EmployeeAggregatorSum | EmployeeAggregatorAvg | EmployeeAggregatorMin | EmployeeAggregatorMax | EmployeeGroupBy | EmployeeConnection_id | EmployeeConnectionId | EmployeeConnectionCreatedAt | EmployeeConnectionUpdatedAt | EmployeeConnectionName | EmployeeConnectionEmployee_id | EmployeeConnectionClock_in_time | EmployeeConnectionClock_out_time | EmployeeConnectionLunch_start_time | EmployeeConnectionLunch_end_time | EmployeeConnectionIs_clocked_in | EmployeeConnectionIs_taking_lunch | EmployeeConnectionJob_type | EmployeeConnectionTotal_hrs | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileGroupBy | UploadFileConnection_id | UploadFileConnectionId | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionHash | UploadFileConnectionSha256 | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionProvider | UploadFileConnectionPublic_id | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Currentjobs | createCurrentjobsPayload | updateCurrentjobsPayload | deleteCurrentjobsPayload | CurrentjobsConnection | CurrentjobsAggregator | CurrentjobsAggregatorSum | CurrentjobsAggregatorAvg | CurrentjobsAggregatorMin | CurrentjobsAggregatorMax | CurrentjobsGroupBy | CurrentjobsConnection_id | CurrentjobsConnectionId | CurrentjobsConnectionCreatedAt | CurrentjobsConnectionUpdatedAt | CurrentjobsConnectionJobnumber | CurrentjobsConnectionBudget | Employees | createEmployeesPayload | updateEmployeesPayload | deleteEmployeesPayload | EmployeesConnection | EmployeesAggregator | EmployeesAggregatorSum | EmployeesAggregatorAvg | EmployeesAggregatorMin | EmployeesAggregatorMax | EmployeesGroupBy | EmployeesConnection_id | EmployeesConnectionId | EmployeesConnectionCreatedAt | EmployeesConnectionUpdatedAt | EmployeesConnectionName | EmployeesConnectionClock_in_time | EmployeesConnectionClock_out_time | EmployeesConnectionLunch_start_time | EmployeesConnectionLunch_end_time | EmployeesConnectionIs_clocked_in | EmployeesConnectionIs_taking_lunch | EmployeesConnectionJob_data | EmployeesConnectionTotal_hrs | EmployeesConnectionHistorial_data | EmployeesConnectionIs_contractor | EmployeesConnectionJob_title | EmployeesConnectionJob_number | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileGroupBy | UploadFileConnection_id | UploadFileConnectionId | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionHash | UploadFileConnectionSha256 | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionProvider | UploadFileConnectionPublic_id | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole
 
 type Mutation {
   createCurrentjobs(input: createCurrentjobsInput): createCurrentjobsPayload
   updateCurrentjobs(input: updateCurrentjobsInput): updateCurrentjobsPayload
   deleteCurrentjobs(input: deleteCurrentjobsInput): deleteCurrentjobsPayload
-  createEmployee(input: createEmployeeInput): createEmployeePayload
-  updateEmployee(input: updateEmployeeInput): updateEmployeePayload
-  deleteEmployee(input: deleteEmployeeInput): deleteEmployeePayload
+  createEmployees(input: createEmployeesInput): createEmployeesPayload
+  updateEmployees(input: updateEmployeesInput): updateEmployeesPayload
+  deleteEmployees(input: deleteEmployeesInput): deleteEmployeesPayload
 
   """Create a new role"""
   createRole(input: createRoleInput): createRolePayload
@@ -414,9 +441,9 @@ type Query {
   currentjob(id: ID!): Currentjobs
   currentjobs(sort: String, limit: Int, start: Int, where: JSON): [Currentjobs]
   currentjobsConnection(sort: String, limit: Int, start: Int, where: JSON): CurrentjobsConnection
-  employee(id: ID!): Employee
-  employees(sort: String, limit: Int, start: Int, where: JSON): [Employee]
-  employeesConnection(sort: String, limit: Int, start: Int, where: JSON): EmployeeConnection
+  employee(id: ID!): Employees
+  employees(sort: String, limit: Int, start: Int, where: JSON): [Employees]
+  employeesConnection(sort: String, limit: Int, start: Int, where: JSON): EmployeesConnection
   files(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
   filesConnection(sort: String, limit: Int, start: Int, where: JSON): UploadFileConnection
   role(id: ID!): UsersPermissionsRole
@@ -449,13 +476,13 @@ type updateCurrentjobsPayload {
   currentjob: Currentjobs
 }
 
-input updateEmployeeInput {
+input updateEmployeesInput {
   where: InputID
-  data: editEmployeeInput
+  data: editEmployeesInput
 }
 
-type updateEmployeePayload {
-  employee: Employee
+type updateEmployeesPayload {
+  employee: Employees
 }
 
 input updateRoleInput {
