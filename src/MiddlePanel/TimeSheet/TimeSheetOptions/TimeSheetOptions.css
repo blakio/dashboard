@@ -27,10 +27,12 @@
 }
 
 .tagLabel i {
-  position: absolute;
-  top: -6px;
-  right: -6px;
   color: #ff6565;
+  margin-left: 0.6rem;
+  font-size: 3.4em;
+  position: absolute;
+  top: -.140em;
+  right: -0.2em;
 }
 
 .addInput {

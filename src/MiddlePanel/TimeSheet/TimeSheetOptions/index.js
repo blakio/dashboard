@@ -55,10 +55,11 @@ function TimeSheetOptions(props) {
         <div
           onClick={() => select(index)}
           key={index}
+          style={{paddingRight: isAdminMode ? "3.3em" : "auto"}}
           className={`tag tagLabel ${(selected === index) && "selected"}`}>
           {data}
           {isAdminMode && <i
-            className="fas fa-minus-circle"
+            className="fas fa-times-circle"
             onClick={() => dispatch({
               type: deleteActionType,
               payload: data

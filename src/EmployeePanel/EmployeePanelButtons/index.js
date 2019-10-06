@@ -25,7 +25,7 @@ function EmployeePanelButtons(props) {
         <p>{title}</p>
       </div>
       {isAdminMode && <i
-        className="fas fa-minus-circle"
+        className="fas fa-times-circle"
         onClick={() => dispatch({
           type: deleteActionType,
           payload: id

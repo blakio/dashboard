@@ -34,6 +34,7 @@ body {
   user-select: none;
   border: 1px solid #e4ddff;
   text-transform: uppercase;
+  overflow: hidden;
 }
 
 .tag.selected {
