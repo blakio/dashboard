@@ -20,8 +20,10 @@
   transition: all 0.3s;
 }
 
-.sideIcon.selected,
-.sideIcon:hover {
+.sideIcon.selected {
   color: #6757A8;
+}
+
+.sideIcon:hover {
   cursor: pointer;
 }

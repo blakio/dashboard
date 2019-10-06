@@ -37,7 +37,7 @@ function TimeSheetOptions(props) {
           placeHolder={`add ${title}`}
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}/> :
-        <p>{title}</p>
+        <p className="timesheetTitle">{title}</p>
       }
 
       {isAdminMode && <i
