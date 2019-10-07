@@ -23,16 +23,16 @@ body {
 }
 
 .tag {
-  background-color: #F1F0F6;
+  background-color: #ece9fa;
   padding: 0.6rem;
   border-radius: 0.2rem;
-  color: #6757A8;
+  color: #5943b2;
   font-weight: 500;
   font-size: 1em;
   margin: 0.1rem;
   transition: all 0.3s;
   user-select: none;
-  border: 1px solid #e4ddff;
+  border: 1px solid #c5b8f7;
   text-transform: uppercase;
   overflow: hidden;
 }

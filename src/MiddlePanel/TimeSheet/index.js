@@ -31,7 +31,8 @@ function TimeSheet() {
 
   const topButtons = [
     {
-      style: { backgroundColor: "red" },
+      text: "trash",
+      style: { backgroundColor: "#c60000" },
       icon: "fas fa-trash-alt",
       function: () => dispatch({
         type: BULK_DELETE,
@@ -39,7 +40,8 @@ function TimeSheet() {
       })
     },
     {
-      style: { backgroundColor: "#00cc00" },
+      text: "clock in",
+      style: { backgroundColor: "#009e00" },
       icon: "fas fa-door-open",
       function: () => dispatch({
         type: CLOCK_IN,
@@ -47,8 +49,9 @@ function TimeSheet() {
       })
     },
     {
+      text: "clock out",
       style: {
-        backgroundColor: "#00cc00"
+        backgroundColor: "#009e00"
       },
       icon: "fas fa-door-closed",
       function: () => dispatch({
@@ -57,8 +60,9 @@ function TimeSheet() {
       })
     },
     {
+      text: "to lunch",
       style: {
-        backgroundColor: "#009999"
+        backgroundColor: "#007777"
       },
       icon: "fas fa-drumstick-bite",
       function: () => dispatch({
@@ -67,8 +71,9 @@ function TimeSheet() {
       })
     },
     {
+      text: "from lunch",
       style: {
-        backgroundColor: "#009999"
+        backgroundColor: "#007777"
       },
       icon: "fas fa-bone",
       function: () => dispatch({
@@ -80,14 +85,15 @@ function TimeSheet() {
 
   return (<div id="timesheet">
     {isAdminMode && <div id="topbar" className="flex">
-      {topButtons.map(data => (
+      {topButtons.map(data => (<div>
         <div
           className="topBarButton flex"
           style={data.style}
           onClick={data.function}>
           <i class={data.icon}></i>
         </div>
-      ))}
+        <p className="topBarText">{data.text}</p>
+      </div>))}
     </div>}
     <div id="middlePanelMiddle" className="flex">
 

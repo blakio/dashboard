@@ -4,22 +4,28 @@
 }
 
 #topbar {
-  height: 4em;
   width: 100%;
   justify-content: flex-start;
   padding-left: 4em;
+  flex-wrap: wrap;
 }
 
 .topBarButton {
-  height: 3em;
-  width: 3em;
+  height: 4em;
+  width: 4em;
   border-radius: 0.2em;
-  margin: 0.5em;
+  margin: 0.5em 1.4em 0 1.4em;
 }
 
 .topBarButton i {
-  font-size: 1.3em;
+  font-size: 2em;
   color: #fff;
+  opacity: 0.6;
+}
+
+.topBarText {
+  margin: 0;
+  text-align: center;
 }
 
 #middlePanelMiddle {

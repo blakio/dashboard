@@ -1,7 +1,7 @@
 import data from "./data";
 
 const initialState = {
-  isAdminMode: true,
+  isAdminMode: false,
   deletions: {
     laborTypes: [],
     projectTypes: [],
