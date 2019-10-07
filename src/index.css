@@ -18,7 +18,7 @@ body {
 .sectionHeading p {
   font-size: 1rem;
   color: #6757A8;
-  font-weight: 400;
+  font-weight: bold;
   text-transform: uppercase;
 }
 
@@ -27,7 +27,7 @@ body {
   padding: 0.6rem;
   border-radius: 0.2rem;
   color: #5943b2;
-  font-weight: 500;
+  font-weight: bold;
   font-size: 1em;
   margin: 0.1rem;
   transition: all 0.3s;
@@ -55,5 +55,5 @@ body {
   letter-spacing: 3px;
   font-size: 1.4em !important;
   margin: 0;
-  font-weight: 100 !important;
+  font-weight: bold !important;
 }

@@ -7,7 +7,8 @@ import EmployeePanelButtons from "./EmployeePanelButtons";
 
 import {
   CREATE_EMPLOYEE,
-  DELETE_EMPLOYEE
+  DELETE_EMPLOYEE,
+  TOGGLE_TYPE
 } from "../Context/Types";
 
 function EmployeePanel() {
@@ -22,7 +23,21 @@ function EmployeePanel() {
     isAdminMode
   } = useContext(TimeSheetContext);
 
-  const select = name => setSelected((name === selected) ? null : name);
+  const select = (name) => {
+    if(name === selected){
+      setSelected(null)
+      dispatch({
+        type: TOGGLE_TYPE,
+        payload: { type: "remove", name: "employees" }
+      });
+    } else {
+      setSelected(name)
+      dispatch({
+        type: TOGGLE_TYPE,
+        payload: { type: "add", name: "employees" }
+      });
+    }
+  }
 
   const submit = () => {
     if(fullName && jobTitle && fullName.length && jobTitle.length){
@@ -64,7 +79,8 @@ function EmployeePanel() {
           isAdminMode={isAdminMode}
           {...data}
           selected={selected === data.name}
-          select={select}/>
+          select={select}
+          toggleType={TOGGLE_TYPE}/>
       })}
     </div>
   </div>);

@@ -24,7 +24,8 @@ import {
   CLOCK_IN,
   CLOCK_OUT,
   GO_TO_LUNCH,
-  BACK_FROM_LUNCH
+  BACK_FROM_LUNCH,
+  TOGGLE_TYPE
 } from "./Types";
 
 import {
@@ -49,59 +50,64 @@ import {
   clickIn,
   clockOut,
   toLunch,
-  fromLunch
+  fromLunch,
+  toggleType
 } from "./StateFunctions";
 
 export default (state, action) => {
+  const { payload } = action;
+
   switch(action.type){
     case CREATE_EMPLOYEE:
-      return createEmployee(action.payload, state);
+      return createEmployee(payload, state);
     case CREATE_LABOR_TYPE:
-      return createLaborType(action.payload, state);
+      return createLaborType(payload, state);
     case CREATE_PROJECT_TYPE:
-      return createProjectType(action.payload, state);
+      return createProjectType(payload, state);
     case CREATE_JOB_NUMBER:
-      return createJobNumber(action.payload, state);
+      return createJobNumber(payload, state);
 
     case GET_EMPLOYEE:
-      return getEmployee(action.payload, state);
+      return getEmployee(payload, state);
     case GET_LABOR_TYPE:
-      return getLaborType(action.payload, state);
+      return getLaborType(payload, state);
     case GET_PROJECT_TYPE:
-      return getProjectType(action.payload, state);
+      return getProjectType(payload, state);
     case GET_JOB_NUMBER:
-      return getJobNumber(action.payload, state);
+      return getJobNumber(payload, state);
 
     case UPDATE_EMPLOYEE:
-      return updateEmployee(action.payload, state);
+      return updateEmployee(payload, state);
     case UPDATE_LABOR_TYPE:
-      return updateLaborType(action.payload, state);
+      return updateLaborType(payload, state);
     case UPDATE_PROJECT_TYPE:
-      return updateProjectType(action.payload, state);
+      return updateProjectType(payload, state);
     case UPDATE_JOB_NUMBER:
-      return updateJobNumber(action.payload, state);
+      return updateJobNumber(payload, state);
 
     case DELETE_EMPLOYEE:
-      return deleteEmployee(action.payload, state);
+      return deleteEmployee(payload, state);
     case DELETE_LABOR_TYPE:
-      return deleteLaborType(action.payload, state);
+      return deleteLaborType(payload, state);
     case DELETE_PROJECT_TYPE:
-      return deleteProjectType(action.payload, state);
+      return deleteProjectType(payload, state);
     case DELETE_JOB_NUMBER:
-      return deleteJobNumber(action.payload, state);
+      return deleteJobNumber(payload, state);
 
     case BULK_DELETE:
-      return bulkDelete(action.payload, state);
+      return bulkDelete(payload, state);
     case UPDATE_DELETIONS:
-      return updateDeletions(action.payload, state);
+      return updateDeletions(payload, state);
     case CLOCK_IN:
-      return clickIn(action.payload, state);
+      return clickIn(payload, state);
     case CLOCK_OUT:
-      return clockOut(action.payload, state);
+      return clockOut(payload, state);
     case GO_TO_LUNCH:
-      return toLunch(action.payload, state);
+      return toLunch(payload, state);
     case BACK_FROM_LUNCH:
-      return fromLunch(action.payload, state);
+      return fromLunch(payload, state);
+    case TOGGLE_TYPE:
+      return toggleType(payload, state);
 
     default:
     return state;

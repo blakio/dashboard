@@ -16,7 +16,8 @@ function TimeSheetOptions(props) {
     options,
     createActionType,
     type,
-    name
+    name,
+    toggleType
   } = props;
 
   const [inputValue, setInputValue] = useState(null);
@@ -55,25 +56,17 @@ function TimeSheetOptions(props) {
       }
     } else {
       if(!selected.includes(index)){
-        setSelected([index])
+        setSelected([index]);
         dispatch({
-          type,
-          payload: {
-            type: "add",
-            name,
-            data
-          }
-        })
+          type: toggleType,
+          payload: { type: "add", name }
+        });
       } else {
-        setSelected([])
+        setSelected([]);
         dispatch({
-          type,
-          payload: {
-            type: "remove",
-            name,
-            data
-          }
-        })
+          type: toggleType,
+          payload: { type: "remove", name }
+        });
       }
     }
   }

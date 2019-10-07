@@ -30,3 +30,4 @@ export const CLOCK_IN = "CLOCK_IN";
 export const CLOCK_OUT = "CLOCK_OUT";
 export const GO_TO_LUNCH = "GO_TO_LUNCH";
 export const BACK_FROM_LUNCH = "BACK_FROM_LUNCH";
+export const TOGGLE_TYPE = "TOGGLE_TYPE";

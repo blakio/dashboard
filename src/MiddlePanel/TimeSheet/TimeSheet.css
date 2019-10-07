@@ -10,11 +10,17 @@
   flex-wrap: wrap;
 }
 
+#topbar p {
+  color: #6757A8
+}
+
 .topBarButton {
   height: 4em;
   width: 4em;
   border-radius: 0.2em;
   margin: 0.5em 1.4em 0 1.4em;
+  border: 1px solid #c5b8f7;
+  transition: all 0.3s;
 }
 
 .topBarButton i {
