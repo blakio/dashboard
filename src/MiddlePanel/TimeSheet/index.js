@@ -31,6 +31,7 @@ function TimeSheet() {
 
   const topButtons = [
     {
+      isAdminButton: true,
       text: "trash",
       style: { backgroundColor: "#c60000" },
       icon: "fas fa-trash-alt",
@@ -40,6 +41,7 @@ function TimeSheet() {
       })
     },
     {
+      isAdminButton: false,
       text: "clock in",
       style: { backgroundColor: "#009e00" },
       icon: "fas fa-door-open",
@@ -49,6 +51,7 @@ function TimeSheet() {
       })
     },
     {
+      isAdminButton: false,
       text: "clock out",
       style: {
         backgroundColor: "#009e00"
@@ -60,6 +63,7 @@ function TimeSheet() {
       })
     },
     {
+      isAdminButton: false,
       text: "to lunch",
       style: {
         backgroundColor: "#007777"
@@ -71,6 +75,7 @@ function TimeSheet() {
       })
     },
     {
+      isAdminButton: false,
       text: "from lunch",
       style: {
         backgroundColor: "#007777"
@@ -84,17 +89,22 @@ function TimeSheet() {
   ]
 
   return (<div id="timesheet">
-    {isAdminMode && <div id="topbar" className="flex">
-      {topButtons.map(data => (<div>
-        <div
-          className="topBarButton flex"
-          style={data.style}
-          onClick={data.function}>
-          <i class={data.icon}></i>
-        </div>
-        <p className="topBarText">{data.text}</p>
-      </div>))}
-    </div>}
+    <div id="topbar" className="flex">
+      {topButtons.map(data => {
+        if(data.isAdminButton && !isAdminMode){
+          return <div></div>
+        }
+        return (<div>
+          <div
+            className="topBarButton flex"
+            style={data.style}
+            onClick={data.function}>
+            <i class={data.icon}></i>
+          </div>
+          <p className="topBarText">{data.text}</p>
+        </div>)
+      })}
+    </div>
     <div id="middlePanelMiddle" className="flex">
 
       <div className="middlePanelMiddleChild">
