@@ -16,18 +16,18 @@ export const UPDATE_EMPLOYEE = "UPDATE_EMPLOYEE";
 export const UPDATE_LABOR_TYPE = "UPDATE_LABOR_TYPE";
 export const UPDATE_PROJECT_TYPE = "UPDATE_PROJECT_TYPE";
 export const UPDATE_JOB_NUMBER = "UPDATE_JOB_NUMBER";
+export const CLOCK_IN = "CLOCK_IN";
+export const CLOCK_OUT = "CLOCK_OUT";
+export const GO_TO_LUNCH = "GO_TO_LUNCH";
+export const BACK_FROM_LUNCH = "BACK_FROM_LUNCH";
 
 // DELETE
 export const DELETE_EMPLOYEE = "DELETE_EMPLOYEE";
 export const DELETE_LABOR_TYPE = "DELETE_LABOR_TYPE";
 export const DELETE_PROJECT_TYPE = "DELETE_PROJECT_TYPE";
 export const DELETE_JOB_NUMBER = "DELETE_JOB_NUMBER";
-
-// general
 export const BULK_DELETE = "BULK_DELETE";
+
+// OTHER
 export const UPDATE_DELETIONS = "UPDATE_DELETIONS";
-export const CLOCK_IN = "CLOCK_IN";
-export const CLOCK_OUT = "CLOCK_OUT";
-export const GO_TO_LUNCH = "GO_TO_LUNCH";
-export const BACK_FROM_LUNCH = "BACK_FROM_LUNCH";
 export const TOGGLE_TYPE = "TOGGLE_TYPE";

@@ -58,6 +58,7 @@ export default (state, action) => {
   const { payload } = action;
 
   switch(action.type){
+    // CREATE
     case CREATE_EMPLOYEE:
       return createEmployee(payload, state);
     case CREATE_LABOR_TYPE:
@@ -67,6 +68,7 @@ export default (state, action) => {
     case CREATE_JOB_NUMBER:
       return createJobNumber(payload, state);
 
+    // READ
     case GET_EMPLOYEE:
       return getEmployee(payload, state);
     case GET_LABOR_TYPE:
@@ -76,6 +78,7 @@ export default (state, action) => {
     case GET_JOB_NUMBER:
       return getJobNumber(payload, state);
 
+    // UPDATE
     case UPDATE_EMPLOYEE:
       return updateEmployee(payload, state);
     case UPDATE_LABOR_TYPE:
@@ -84,20 +87,6 @@ export default (state, action) => {
       return updateProjectType(payload, state);
     case UPDATE_JOB_NUMBER:
       return updateJobNumber(payload, state);
-
-    case DELETE_EMPLOYEE:
-      return deleteEmployee(payload, state);
-    case DELETE_LABOR_TYPE:
-      return deleteLaborType(payload, state);
-    case DELETE_PROJECT_TYPE:
-      return deleteProjectType(payload, state);
-    case DELETE_JOB_NUMBER:
-      return deleteJobNumber(payload, state);
-
-    case BULK_DELETE:
-      return bulkDelete(payload, state);
-    case UPDATE_DELETIONS:
-      return updateDeletions(payload, state);
     case CLOCK_IN:
       return clickIn(payload, state);
     case CLOCK_OUT:
@@ -106,6 +95,22 @@ export default (state, action) => {
       return toLunch(payload, state);
     case BACK_FROM_LUNCH:
       return fromLunch(payload, state);
+
+    // DELETE
+    case DELETE_EMPLOYEE:
+      return deleteEmployee(payload, state);
+    case DELETE_LABOR_TYPE:
+      return deleteLaborType(payload, state);
+    case DELETE_PROJECT_TYPE:
+      return deleteProjectType(payload, state);
+    case DELETE_JOB_NUMBER:
+      return deleteJobNumber(payload, state);
+    case BULK_DELETE:
+      return bulkDelete(payload, state);
+
+    // OTHER
+    case UPDATE_DELETIONS:
+      return updateDeletions(payload, state);
     case TOGGLE_TYPE:
       return toggleType(payload, state);
 
