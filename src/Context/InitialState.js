@@ -1,7 +1,7 @@
 import data from "./data";
 
 const initialState = {
-  isAdminMode: false,
+  isAdminMode: true,
   isClockedIn: false,
   isAtLunch: false,
   deletions: {

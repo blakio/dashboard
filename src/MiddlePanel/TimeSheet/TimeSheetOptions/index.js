@@ -78,7 +78,17 @@ function TimeSheetOptions(props) {
           className="addInput tag"
           placeHolder={`add ${title}`}
           value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}/> :
+          onChange={e => {
+            setInputValue(e.target.value);
+          }}
+          onKeyPress={e => {
+            if(e.key === "Enter" && inputValue.trim().length){
+              dispatch({
+                type: createActionType,
+                payload: inputValue.toUpperCase()
+              })
+            }
+          }}/> :
         <p className="timesheetTitle">{title}</p>
       }
     </div>

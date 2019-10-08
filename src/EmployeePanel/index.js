@@ -62,12 +62,38 @@ function EmployeePanel() {
         class="addInput tag"
         placeholder="Full Name"
         value={fullName}
-        onChange={e => setFullName(e.target.value)}/>
+        onChange={e => setFullName(e.target.value)}
+        onKeyPress={e => {
+          if(e.key === "Enter" &&
+            fullName.trim().length &&
+            jobTitle.trim().length){
+            dispatch({
+              type: CREATE_EMPLOYEE,
+              payload: {
+                name: fullName.toUpperCase(),
+                title: jobTitle.toUpperCase()
+              }
+            })
+          }
+        }}/>
       <input
         class="addInput tag"
         placeholder="Job Title"
         value={jobTitle}
-        onChange={e => setJobTitle(e.target.value)}/>
+        onChange={e => setJobTitle(e.target.value)}
+        onKeyPress={e => {
+          if(e.key === "Enter" &&
+            fullName.trim().length &&
+            jobTitle.trim().length){
+            dispatch({
+              type: CREATE_EMPLOYEE,
+              payload: {
+                name: fullName.toUpperCase(),
+                title: jobTitle.toUpperCase()
+              }
+            })
+          }
+        }}/>
     </div>}
     <div id="rightPanelLiner">
       {employees.map((data, index) => {
