@@ -2,7 +2,8 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Lato', sans-serif;
+  background-color: #21253F;
 }
 
 .invisible-scrollbar::-webkit-scrollbar {
@@ -23,23 +24,24 @@ body {
 }
 
 .tag {
-  background-color: #ece9fa;
+  background-color: #f8f8f8;
   padding: 0.6rem;
   border-radius: 0.2rem;
-  color: #5943b2;
+  color: rgba(33, 37, 63, 0.7);
   font-weight: bold;
   font-size: 1em;
   margin: 0.1rem;
   transition: all 0.3s;
   user-select: none;
-  border: 1px solid #c5b8f7;
   text-transform: uppercase;
+  border: 1px solid transparent;
   overflow: hidden;
 }
 
 .tag.selected {
-  background-color: #6757A8;
-  color: #fff;
+  background-color: #E1F5F4;
+  color: #008280;
+  border-color: #008280;
 }
 
 .tag:hover {
@@ -52,8 +54,7 @@ body {
 }
 
 .timesheetTitle {
-  letter-spacing: 3px;
-  font-size: 1.4em !important;
+  font-size: 1.5em !important;
   margin: 0;
-  font-weight: bold !important;
+  font-weight: 400 !important;
 }

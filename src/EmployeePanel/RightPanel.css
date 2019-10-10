@@ -1,14 +1,14 @@
 #rightPanel {
   height: 100vh;
   width: 20vw;
-  background-color: #E3DEF9;
   flex-direction: column;
   min-width: 16em;
+  align-items: flex-end;
 }
 
 #rightPanelLiner {
   height: 80%;
-  width: 76%;
+  width: 80%;
   overflow-y: scroll;
 }
 

@@ -50,7 +50,7 @@ function TimeSheet() {
     {
       isAdminButton: true,
       text: "trash",
-      style: { backgroundColor: (activeButtons.includes("trash")) ? "#c60000" : "#ece9fa" },
+      style: { backgroundColor: (activeButtons.includes("trash")) ? "#c60000" : "#f8f8f8" },
       icon: "fas fa-trash-alt",
       function: () => dispatch({
         type: BULK_DELETE,
@@ -60,7 +60,7 @@ function TimeSheet() {
     {
       isAdminButton: false,
       text: "clock in",
-      style: { backgroundColor: (activeButtons.includes("clock in")) ? "#009e00" : "#ece9fa" },
+      style: { backgroundColor: (activeButtons.includes("clock in")) ? "#008280" : "#f8f8f8" },
       icon: "fas fa-door-open",
       function: () => dispatch({
         type: CLOCK_IN,
@@ -70,7 +70,7 @@ function TimeSheet() {
     {
       isAdminButton: false,
       text: "clock out",
-      style: { backgroundColor: (activeButtons.includes("clock out")) ? "#009e00" : "#ece9fa" },
+      style: { backgroundColor: (activeButtons.includes("clock out")) ? "#008280" : "#f8f8f8" },
       icon: "fas fa-door-closed",
       function: () => dispatch({
         type: CLOCK_OUT,
@@ -80,7 +80,7 @@ function TimeSheet() {
     {
       isAdminButton: false,
       text: "to lunch",
-      style: { backgroundColor: (activeButtons.includes("to lunch")) ? "#007777" : "#ece9fa" },
+      style: { backgroundColor: (activeButtons.includes("to lunch")) ? "#008280" : "#f8f8f8" },
       icon: "fas fa-drumstick-bite",
       function: () => dispatch({
         type: GO_TO_LUNCH,
@@ -90,7 +90,7 @@ function TimeSheet() {
     {
       isAdminButton: false,
       text: "from lunch",
-      style: { backgroundColor: (activeButtons.includes("from lunch")) ? "#007777" : "#ece9fa" },
+      style: { backgroundColor: (activeButtons.includes("from lunch")) ? "#008280" : "#f8f8f8" },
       icon: "fas fa-bone",
       function: () => dispatch({
         type: BACK_FROM_LUNCH,

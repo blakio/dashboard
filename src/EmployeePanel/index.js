@@ -55,7 +55,7 @@ function EmployeePanel() {
 
   return (<div id="rightPanel" className="flex">
     <div className="sectionHeading">
-      <p className="timesheetTitle">employees</p>
+      <p className="timesheetEmployeeSectionTitle">employees</p>
     </div>
     {isAdminMode && <div className="employeeAdditionForm flex">
       <input

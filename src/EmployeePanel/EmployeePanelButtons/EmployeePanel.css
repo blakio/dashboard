@@ -5,17 +5,14 @@
   margin: 1em 0;
   user-select: none;
   border-radius: 0.2rem;
-  border: 1px solid #e4ddff;
 }
 
-.employeeButton.selected {
-  color: #fff !important;
-  background-color: #6757A8;
+.employeeButton p {
+  transition: all 0.5s;
 }
 
-.employeeButton.selected .sideButtonDescription .sideButtonDescriptionTop p,
-.employeeButton.selected .sideButtonDescription .sideButtonDescriptionBottom p {
-  color: #fff;
+.employeeButton.selected p {
+  color: #008280;
 }
 
 .sideButtonDescription {
@@ -31,8 +28,16 @@
 .sideButtonDescriptionTop p,
 .sideButtonDescriptionBottom p {
   margin: 0em;
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .sideButtonDescriptionTop p {
-  color: #3A3460;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+p.timesheetEmployeeSectionTitle {
+  margin-bottom: 0;
+  margin-right: 0.4em;
+  color: #eaeaea;
+  font-size: 3em;
 }
