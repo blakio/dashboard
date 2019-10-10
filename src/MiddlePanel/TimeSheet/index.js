@@ -50,7 +50,6 @@ function TimeSheet() {
     {
       isAdminButton: true,
       text: "trash",
-      style: { backgroundColor: (activeButtons.includes("trash")) ? "#c60000" : "#f8f8f8" },
       icon: "fas fa-trash-alt",
       function: () => dispatch({
         type: BULK_DELETE,
@@ -60,8 +59,7 @@ function TimeSheet() {
     {
       isAdminButton: false,
       text: "clock in",
-      style: { backgroundColor: (activeButtons.includes("clock in")) ? "#008280" : "#f8f8f8" },
-      icon: "fas fa-door-open",
+      icon: "fas fa-clock",
       function: () => dispatch({
         type: CLOCK_IN,
         payload: null
@@ -70,8 +68,7 @@ function TimeSheet() {
     {
       isAdminButton: false,
       text: "clock out",
-      style: { backgroundColor: (activeButtons.includes("clock out")) ? "#008280" : "#f8f8f8" },
-      icon: "fas fa-door-closed",
+      icon: "fas fa-clock",
       function: () => dispatch({
         type: CLOCK_OUT,
         payload: null
@@ -80,7 +77,6 @@ function TimeSheet() {
     {
       isAdminButton: false,
       text: "to lunch",
-      style: { backgroundColor: (activeButtons.includes("to lunch")) ? "#008280" : "#f8f8f8" },
       icon: "fas fa-drumstick-bite",
       function: () => dispatch({
         type: GO_TO_LUNCH,
@@ -90,7 +86,6 @@ function TimeSheet() {
     {
       isAdminButton: false,
       text: "from lunch",
-      style: { backgroundColor: (activeButtons.includes("from lunch")) ? "#008280" : "#f8f8f8" },
       icon: "fas fa-bone",
       function: () => dispatch({
         type: BACK_FROM_LUNCH,
@@ -116,10 +111,20 @@ function TimeSheet() {
           removeFromLunchButton){
           return <div></div>
         }
+
+        const isActive = (text) => {
+          return (
+            (activeButtons.includes("trash") && text === "trash") ||
+            (activeButtons.includes("clock in") && text === "clock in") ||
+            (activeButtons.includes("clock out") && text === "clock out") ||
+            (activeButtons.includes("to lunch") && text === "to lunch") ||
+            (activeButtons.includes("from lunch") && text === "from lunch")
+          )
+        }
+
         return (<div>
           <div
-            className="topBarButton flex"
-            style={data.style}
+            className={`topBarButton flex ${(isActive(data.text) && "active")}`}
             onClick={data.function}>
             <i class={data.icon}></i>
           </div>

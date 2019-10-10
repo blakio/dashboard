@@ -20,12 +20,22 @@
   border-radius: 0.2em;
   margin: 0.5em 1.4em 0 1.4em;
   transition: all 0.3s;
+  background-color: #f8f8f8;
+}
+
+.topBarButton.active {
+  background-color:  #008280;
 }
 
 .topBarButton i {
   font-size: 2em;
   color: #a7a7a7;
   opacity: 0.6;
+}
+
+.topBarButton.active i {
+  color: #fff;
+  opacity: 1;
 }
 
 .topBarText {
