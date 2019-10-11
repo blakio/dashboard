@@ -32,14 +32,15 @@ function Panel() {
         if(index === 0){
           return (<div
             key={index}
-            className="iconContainer flex"
-            onClick={() => setSelected(data.id)}>
-            <i className={`${data.icon} sideIcon ${hasSelected(data.id) && "selected"}`} style={{marginTop: "4em"}}></i>
+            className={`iconContainer flex ${hasSelected(data.id) && "selected"}`}
+            onClick={() => setSelected(data.id)}
+            style={{ marginTop: "8em" }}>
+            <i className={`${data.icon} sideIcon`}></i>
           </div>)
         }
         return (<div
           key={index}
-          className="iconContainer flex"
+          className={`iconContainer flex ${hasSelected(data.id) && "selected"}`}
           onClick={() => setSelected(data.id)}>
           <i className={`${data.icon} sideIcon ${hasSelected(data.id) && "selected"}`}></i>
         </div>)})}

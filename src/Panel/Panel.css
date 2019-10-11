@@ -14,20 +14,23 @@
 }
 
 .iconContainer {
-  width: 4em;
+  height: 2.2em;
+  width: 2.2em;
+  border-radius: 0.6em;
+  margin-top: 3em;
+  transition: all 0.3s;
+}
+
+.iconContainer.selected {
+  background-color: #0f6665;
+  padding: 0.4em;
+  border-radius: 0.6em;
 }
 
 .sideIcon {
   color: #fff;
   font-size: 1.72em;
-  margin-top: 1.8em;
   transition: all 0.3s;
-}
-
-.sideIcon.selected {
-  background-color: #272c4a;
-  padding: 0.4em;
-  border-radius: 0.6em;
 }
 
 .sideIcon:hover {
