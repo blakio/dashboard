@@ -24,7 +24,7 @@ function TimeSheetOptions(props) {
   const [selected, setSelected] = useState([null]);
 
   useEffect(() => {
-    if(!Object.keys(deletions[name]).length){
+    if(name && !Object.keys(deletions[name]).length){
       setSelected([null])
     }
   }, [deletions])

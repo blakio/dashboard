@@ -13,6 +13,10 @@
   justify-content: flex-start;
 }
 
+.iconContainer {
+  width: 4em;
+}
+
 .sideIcon {
   color: #fff;
   font-size: 1.72em;

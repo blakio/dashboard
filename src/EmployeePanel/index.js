@@ -39,20 +39,6 @@ function EmployeePanel() {
     }
   }
 
-  const submit = () => {
-    if(fullName && jobTitle && fullName.length && jobTitle.length){
-      dispatch({
-        type: CREATE_EMPLOYEE,
-        payload: {
-          name: fullName.toUpperCase(),
-          title: jobTitle.toUpperCase()
-        }
-      });
-      setFullName("");
-      setJobTitle("");
-    }
-  }
-
   return (<div id="rightPanel" className="flex">
     <div className="sectionHeading">
       <p className="timesheetEmployeeSectionTitle">employees</p>

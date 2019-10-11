@@ -2,7 +2,7 @@ import data from "./data";
 
 const initialState = {
   isAdminMode: false,
-  isClockedIn: false,
+  isClockedIn: true,
   isAtLunch: false,
   deletions: {
     laborTypes: [],

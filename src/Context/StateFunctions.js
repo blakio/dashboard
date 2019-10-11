@@ -184,7 +184,7 @@ export const fromLunch = (payload, state) => {
 
 export const toggleType = ({type, name}, state) => {
   const currentState = breakRefAndCopy(state);
-  if(type === "add"){
+  if(type === "add" && !currentState.clickedTypes.includes(name)){
     currentState.clickedTypes.push(name);
   } else if (type === "remove"){
     currentState.clickedTypes.splice(state.clickedTypes.indexOf(name), 1);

@@ -30,21 +30,40 @@ function TimeSheet() {
     laborTypes,
     projectTypes,
     jobNumbers,
-    clickedTypes
+    clickedTypes,
+    deletions
   } = useContext(TimeSheetContext);
 
-  const [activeButtons, setActiveButtons] = useState([null]);
+  const [activeButtons, setActiveButtons] = useState(["to lunch", "from lunch"]);
 
   useEffect(() => {
-    const numberOfFieldsBeforeClockIn = 4;
-    if(clickedTypes.length === numberOfFieldsBeforeClockIn){
+    if(clickedTypes.includes("employees") && !activeButtons.includes("clock in")
+    && !isClockedIn){
       setActiveButtons([...activeButtons, "clock in"])
-    } else {
+    } else if(clickedTypes.includes("employees") && !activeButtons.includes("clock out")
+    && isClockedIn){
+      setActiveButtons([...activeButtons, "clock out"])
+    } else if(!clickedTypes.includes("employees") && activeButtons.includes("clock in")) {
       const newActiveButtons = JSON.parse(JSON.stringify(activeButtons));
       newActiveButtons.splice(activeButtons.indexOf("clock in"), 1);
       setActiveButtons(newActiveButtons);
+    } else if(!clickedTypes.includes("employees") && activeButtons.includes("clock out")){
+      const newActiveButtons = JSON.parse(JSON.stringify(activeButtons));
+      newActiveButtons.splice(activeButtons.indexOf("clock out"), 1);
+      setActiveButtons(newActiveButtons);
     }
-  }, [clickedTypes])
+
+    const activeDeletion = deletions.laborTypes.length || deletions.projectTypes.length || deletions.jobNumbers.length || deletions.employees.length;
+    if(activeDeletion && !activeButtons.includes("trash")){
+      setActiveButtons([...activeButtons, "trash"])
+    } else if (!activeDeletion && activeButtons.includes("trash")) {
+      const newActiveButtons = JSON.parse(JSON.stringify(activeButtons));
+      newActiveButtons.splice(activeButtons.indexOf("trash"), 1);
+      setActiveButtons(newActiveButtons);
+    }
+  }, [clickedTypes, deletions])
+
+  console.log(activeButtons)
 
   const topButtons = [
     {
@@ -96,7 +115,7 @@ function TimeSheet() {
 
   return (<div id="timesheet">
     <div id="topbar" className="flex">
-      {topButtons.map(data => {
+      {topButtons.map((data, index) => {
 
         const isAdminButtonButNotOnAdminMode = data.isAdminButton && !isAdminMode;
         const removeClockedInButton = (data.text === "clock in") && (isClockedIn || isAtLunch);
@@ -109,7 +128,7 @@ function TimeSheet() {
           removeClockedOutButton ||
           removeToLunchButton ||
           removeFromLunchButton){
-          return <div></div>
+          return <div key={index}></div>
         }
 
         const isActive = (text) => {
@@ -122,11 +141,11 @@ function TimeSheet() {
           )
         }
 
-        return (<div>
+        return (<div key={index}>
           <div
             className={`topBarButton flex ${(isActive(data.text) && "active")}`}
             onClick={data.function}>
-            <i class={data.icon}></i>
+            <i className={data.icon}></i>
           </div>
           <p className="topBarText">{data.text}</p>
         </div>)
@@ -178,12 +197,3 @@ function TimeSheet() {
 }
 
 export default TimeSheet;
-
-
-// <div className="middlePanelMiddleChild flex">
-//   <div id="outterClockInButton" className="flex">
-//     <div id="clockInButton" className="sectionHeading flex">
-//       <p>clock in</p>
-//     </div>
-//   </div>
-// </div>

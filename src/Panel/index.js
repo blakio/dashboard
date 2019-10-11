@@ -22,7 +22,7 @@ function Panel() {
 
   if(isAdminMode){
     icons.push({ icon: "fas fa-cloud-download-alt", id: "download" })
-    icons.push({ icon: "fas fa-list-alt", id: "edit" })
+    icons.push({ icon: "fas fa-exclamation", id: "notifications" })
   }
 
 
@@ -30,11 +30,17 @@ function Panel() {
     <div id="leftPanelLiner" className="flex">
       {icons.map((data, index) => {
         if(index === 0){
-          return (<div key={index} onClick={() => setSelected(data.id)}>
+          return (<div
+            key={index}
+            className="iconContainer flex"
+            onClick={() => setSelected(data.id)}>
             <i className={`${data.icon} sideIcon ${hasSelected(data.id) && "selected"}`} style={{marginTop: "4em"}}></i>
           </div>)
         }
-        return (<div key={index} onClick={() => setSelected(data.id)}>
+        return (<div
+          key={index}
+          className="iconContainer flex"
+          onClick={() => setSelected(data.id)}>
           <i className={`${data.icon} sideIcon ${hasSelected(data.id) && "selected"}`}></i>
         </div>)})}
     </div>
