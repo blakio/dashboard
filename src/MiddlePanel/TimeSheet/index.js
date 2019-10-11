@@ -34,7 +34,7 @@ function TimeSheet() {
     deletions
   } = useContext(TimeSheetContext);
 
-  const [activeButtons, setActiveButtons] = useState(["to lunch", "from lunch"]);
+  const [activeButtons, setActiveButtons] = useState(["to lunch", "from lunch", "message"]);
 
   useEffect(() => {
     if(clickedTypes.includes("employees") && !activeButtons.includes("clock in")
@@ -110,6 +110,12 @@ function TimeSheet() {
         type: BACK_FROM_LUNCH,
         payload: null
       })
+    },
+    {
+      isAdminButton: false,
+      text: "message",
+      icon: "fas fa-envelope-open-text",
+      function: () => dispatch({})
     }
   ]
 
@@ -137,7 +143,8 @@ function TimeSheet() {
             (activeButtons.includes("clock in") && text === "clock in") ||
             (activeButtons.includes("clock out") && text === "clock out") ||
             (activeButtons.includes("to lunch") && text === "to lunch") ||
-            (activeButtons.includes("from lunch") && text === "from lunch")
+            (activeButtons.includes("from lunch") && text === "from lunch") ||
+            (activeButtons.includes("message") && text === "message")
           )
         }
 
