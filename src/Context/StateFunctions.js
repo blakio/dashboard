@@ -23,16 +23,6 @@ export const createLaborType = (payload, state) => {
   };
 }
 
-export const createProjectType = (payload, state) => {
-  const currentState = breakRefAndCopy(state);
-  const { projectTypes } = currentState;
-  if(projectTypes.indexOf(payload) === -1) projectTypes.push(payload.toUpperCase())
-  return {
-    ...state,
-    projectTypes
-  };
-}
-
 export const createJobNumber = (payload, state) => {
   const currentState = breakRefAndCopy(state);
   const { jobNumbers } = currentState;
@@ -51,10 +41,6 @@ export const getLaborType = (payload, state) => {
   return state;
 }
 
-export const getProjectType = (payload, state) => {
-  return state;
-}
-
 export const getJobNumber = (payload, state) => {
   return state;
 }
@@ -64,10 +50,6 @@ export const updateEmployee = (payload, state) => {
 }
 
 export const updateLaborType = (payload, state) => {
-  return state;
-}
-
-export const updateProjectType = (payload, state) => {
   return state;
 }
 
@@ -104,22 +86,6 @@ export const deleteLaborType = (payload, state) => {
   return {
     ...state,
     laborTypes
-  };
-}
-
-export const deleteProjectType = (payload, state) => {
-  const currentState = breakRefAndCopy(state);
-  const { projectTypes } = currentState;
-  let indexOfPayload;
-  projectTypes.forEach((data, index) => {
-    if(data.toLowerCase() === payload.toLowerCase()){
-      indexOfPayload = index
-    }
-  })
-  projectTypes.splice(indexOfPayload, 1);
-  return {
-    ...state,
-    projectTypes
   };
 }
 

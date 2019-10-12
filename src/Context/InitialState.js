@@ -6,7 +6,6 @@ const initialState = {
   isAtLunch: false,
   deletions: {
     laborTypes: [],
-    projectTypes: [],
     jobNumbers: [],
     employees: []
   },

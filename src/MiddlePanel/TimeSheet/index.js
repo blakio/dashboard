@@ -6,10 +6,8 @@ import TimeSheetContext from "../../Context/State";
 import TimeSheetOptions from "./TimeSheetOptions";
 import {
   CREATE_LABOR_TYPE,
-  CREATE_PROJECT_TYPE,
   CREATE_JOB_NUMBER,
   DELETE_LABOR_TYPE,
-  DELETE_PROJECT_TYPE,
   DELETE_JOB_NUMBER,
   BULK_DELETE,
   UPDATE_DELETIONS,
@@ -28,7 +26,6 @@ function TimeSheet() {
     isAtLunch,
     dispatch,
     laborTypes,
-    projectTypes,
     jobNumbers,
     clickedTypes,
     deletions
@@ -53,7 +50,7 @@ function TimeSheet() {
       setActiveButtons(newActiveButtons);
     }
 
-    const activeDeletion = deletions.laborTypes.length || deletions.projectTypes.length || deletions.jobNumbers.length || deletions.employees.length;
+    const activeDeletion = deletions.laborTypes.length || deletions.jobNumbers.length || deletions.employees.length;
     if(activeDeletion && !activeButtons.includes("trash")){
       setActiveButtons([...activeButtons, "trash"])
     } else if (!activeDeletion && activeButtons.includes("trash")) {
@@ -167,19 +164,6 @@ function TimeSheet() {
           createActionType={ CREATE_LABOR_TYPE }
           deleteActionType={ DELETE_LABOR_TYPE }
           name={"laborTypes"}
-          type={UPDATE_DELETIONS}
-          toggleType={TOGGLE_TYPE}
-          dispatch={dispatch}
-        />
-      </div>
-
-      <div className="middlePanelMiddleChild">
-        <TimeSheetOptions
-          title="Project Type"
-          options={projectTypes}
-          createActionType={ CREATE_PROJECT_TYPE }
-          deleteActionType={ DELETE_PROJECT_TYPE }
-          name={"projectTypes"}
           type={UPDATE_DELETIONS}
           toggleType={TOGGLE_TYPE}
           dispatch={dispatch}

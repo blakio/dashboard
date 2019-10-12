@@ -26,24 +26,6 @@ const laborTypes = [
   "WIRE"
 ]
 
-const projectTypes = [
-  "Booster–Quad",
-  "Booster–UV",
-  "Booster–Custom",
-  "Boilers",
-  "Air compressor buildings",
-  "Air compressor assembly",
-  "Glycol",
-  "Heat Transfer",
-  "FillPort",
-  "Fill Box",
-  "Filter",
-  "Filter Cabinet",
-  "FOP Simplex",
-  "FOP Duplex",
-  "FOP Triplex"
-]
-
 const jobNumbers = [
   "35-702",
   "35-713",
@@ -98,7 +80,6 @@ const employees = [
 
 export default {
   laborTypes,
-  projectTypes,
   jobNumbers,
   employees
 }

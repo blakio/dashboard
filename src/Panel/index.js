@@ -34,7 +34,7 @@ function Panel() {
             key={index}
             className={`iconContainer flex ${hasSelected(data.id) && "selected"}`}
             onClick={() => setSelected(data.id)}
-            style={{ marginTop: "8em" }}>
+            style={{ marginTop: "10em" }}>
             <i className={`${data.icon} sideIcon`}></i>
           </div>)
         }

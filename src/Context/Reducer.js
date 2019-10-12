@@ -1,22 +1,18 @@
 import {
   CREATE_EMPLOYEE,
   CREATE_LABOR_TYPE,
-  CREATE_PROJECT_TYPE,
   CREATE_JOB_NUMBER,
 
   GET_EMPLOYEE,
   GET_LABOR_TYPE,
-  GET_PROJECT_TYPE,
   GET_JOB_NUMBER,
 
   UPDATE_EMPLOYEE,
   UPDATE_LABOR_TYPE,
-  UPDATE_PROJECT_TYPE,
   UPDATE_JOB_NUMBER,
 
   DELETE_EMPLOYEE,
   DELETE_LABOR_TYPE,
-  DELETE_PROJECT_TYPE,
   DELETE_JOB_NUMBER,
 
   BULK_DELETE,
@@ -31,19 +27,15 @@ import {
 import {
   createEmployee,
   createLaborType,
-  createProjectType,
   createJobNumber,
   getEmployee,
   getLaborType,
-  getProjectType,
   getJobNumber,
   updateEmployee,
   updateLaborType,
-  updateProjectType,
   updateJobNumber,
   deleteEmployee,
   deleteLaborType,
-  deleteProjectType,
   deleteJobNumber,
   bulkDelete,
   updateDeletions,
@@ -63,8 +55,6 @@ export default (state, action) => {
       return createEmployee(payload, state);
     case CREATE_LABOR_TYPE:
       return createLaborType(payload, state);
-    case CREATE_PROJECT_TYPE:
-      return createProjectType(payload, state);
     case CREATE_JOB_NUMBER:
       return createJobNumber(payload, state);
 
@@ -73,8 +63,6 @@ export default (state, action) => {
       return getEmployee(payload, state);
     case GET_LABOR_TYPE:
       return getLaborType(payload, state);
-    case GET_PROJECT_TYPE:
-      return getProjectType(payload, state);
     case GET_JOB_NUMBER:
       return getJobNumber(payload, state);
 
@@ -83,8 +71,6 @@ export default (state, action) => {
       return updateEmployee(payload, state);
     case UPDATE_LABOR_TYPE:
       return updateLaborType(payload, state);
-    case UPDATE_PROJECT_TYPE:
-      return updateProjectType(payload, state);
     case UPDATE_JOB_NUMBER:
       return updateJobNumber(payload, state);
     case CLOCK_IN:
@@ -101,8 +87,6 @@ export default (state, action) => {
       return deleteEmployee(payload, state);
     case DELETE_LABOR_TYPE:
       return deleteLaborType(payload, state);
-    case DELETE_PROJECT_TYPE:
-      return deleteProjectType(payload, state);
     case DELETE_JOB_NUMBER:
       return deleteJobNumber(payload, state);
     case BULK_DELETE:
