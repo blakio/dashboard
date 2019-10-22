@@ -1,4 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import Axios from "../Axios";
+
 import './RightPanel.css';
 
 import TimeSheetContext from "../Context/State";
@@ -12,6 +14,10 @@ import {
 } from "../Context/Types";
 
 function EmployeePanel() {
+
+  useEffect(() => {
+    Axios.get("employees", null, response => console.log(response));
+  }, []);
 
   const [selected, setSelected] = useState(null);
   const [fullName, setFullName] = useState("");

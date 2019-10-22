@@ -17,7 +17,8 @@ function Panel() {
 
   const icons = [
     { icon: "fas fa-clock", id: "clock" },
-    { icon: "fas fa-address-book", id: "directory" }
+    { icon: "fas fa-cloud-download-alt", id: "download" }
+    // { icon: "fas fa-address-book", id: "directory" }
   ];
 
   if(isAdminMode){
@@ -41,7 +42,11 @@ function Panel() {
         return (<div
           key={index}
           className={`iconContainer flex ${hasSelected(data.id) && "selected"}`}
-          onClick={() => setSelected(data.id)}>
+          onClick={() => {
+            return (
+              (data.id !== "download") ? setSelected(data.id) : console.log("email excel")
+            );
+          }}>
           <i className={`${data.icon} sideIcon ${hasSelected(data.id) && "selected"}`}></i>
         </div>)})}
     </div>

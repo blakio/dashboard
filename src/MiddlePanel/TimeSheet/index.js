@@ -60,60 +60,76 @@ function TimeSheet() {
     }
   }, [clickedTypes, deletions])
 
-  console.log(activeButtons)
-
   const topButtons = [
     {
       isAdminButton: true,
       text: "trash",
       icon: "fas fa-trash-alt",
-      function: () => dispatch({
-        type: BULK_DELETE,
-        payload: null
-      })
+      function: (isActive) => {
+        if(!isActive) return;
+        dispatch({
+          type: BULK_DELETE,
+          payload: null
+        })
+      }
     },
     {
       isAdminButton: false,
       text: "clock in",
       icon: "fas fa-clock",
-      function: () => dispatch({
-        type: CLOCK_IN,
-        payload: null
-      })
+      function: (isActive) => {
+        if(!isActive) return;
+        dispatch({
+          type: CLOCK_IN,
+          payload: null
+        })
+      }
     },
     {
       isAdminButton: false,
       text: "clock out",
       icon: "fas fa-clock",
-      function: () => dispatch({
-        type: CLOCK_OUT,
-        payload: null
-      })
+      function: (isActive) => {
+        if(!isActive) return;
+        dispatch({
+          type: CLOCK_OUT,
+          payload: null
+        })
+      }
     },
     {
       isAdminButton: false,
       text: "to lunch",
       icon: "fas fa-drumstick-bite",
-      function: () => dispatch({
-        type: GO_TO_LUNCH,
-        payload: null
-      })
+      function: (isActive) => {
+        if(!isActive) return;
+        dispatch({
+          type: GO_TO_LUNCH,
+          payload: null
+        })
+      }
     },
     {
       isAdminButton: false,
       text: "from lunch",
       icon: "fas fa-bone",
-      function: () => dispatch({
-        type: BACK_FROM_LUNCH,
-        payload: null
-      })
+      function: (isActive) => {
+        if(!isActive) return;
+        dispatch({
+          type: BACK_FROM_LUNCH,
+          payload: null
+        })
+      }
     },
-    {
-      isAdminButton: false,
-      text: "message",
-      icon: "fas fa-envelope-open-text",
-      function: () => dispatch({})
-    }
+    // {
+    //   isAdminButton: false,
+    //   text: "message",
+    //   icon: "fas fa-envelope-open-text",
+    //   function: (isActive) => {
+    //     if(!isActive) return;
+    //     dispatch({})
+    //   }
+    // }
   ]
 
   return (<div id="timesheet">
@@ -147,8 +163,8 @@ function TimeSheet() {
 
         return (<div key={index}>
           <div
-            className={`topBarButton flex ${(isActive(data.text) && "active")}`}
-            onClick={data.function}>
+            className={`topBarButton flex ${isActive(data.text) && "active"}`}
+            onClick={() => data.function(isActive(data.text))}>
             <i className={data.icon}></i>
           </div>
           <p className="topBarText">{data.text}</p>

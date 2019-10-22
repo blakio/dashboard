@@ -93,10 +93,9 @@ function TimeSheetOptions(props) {
       }
     </div>
     <div className="sideOptionBody flex">
-      {options.sort().map((data, index) => (<div>
+      {options.sort().map((data, index) => (<div key={index}>
         <div
           onClick={() => select(index, data)}
-          key={index}
           className={`tag tagLabel ${(selected.includes(index)) && "selected"}`}>
           {data}
         </div>

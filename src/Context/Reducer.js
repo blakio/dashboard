@@ -48,6 +48,7 @@ import {
 
 export default (state, action) => {
   const { payload } = action;
+  console.table(action)
 
   switch(action.type){
     // CREATE
