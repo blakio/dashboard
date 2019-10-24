@@ -10,13 +10,14 @@ import EmployeePanelButtons from "./EmployeePanelButtons";
 import {
   CREATE_EMPLOYEE,
   DELETE_EMPLOYEE,
-  TOGGLE_TYPE
+  TOGGLE_TYPE,
+  Types
 } from "../Context/Types";
 
 function EmployeePanel() {
 
   useEffect(() => {
-    Axios.get("employees", null, response => console.log(response));
+    Axios.get("employees", null, response => setState(response));
   }, []);
 
   const [selected, setSelected] = useState(null);
@@ -28,6 +29,22 @@ function EmployeePanel() {
     employees,
     isAdminMode
   } = useContext(TimeSheetContext);
+
+  const setState = (response) => {
+    const { data } = response;
+    const payload = [];
+    data.forEach(data => {
+      payload.push({
+        id: data.id,
+        name: data.name,
+        title: data.jobTitle
+      })
+    });
+    dispatch({
+      type: Types.SET_EMPLOYEES,
+      payload
+    })
+  }
 
   const select = (name) => {
     if(name === selected){

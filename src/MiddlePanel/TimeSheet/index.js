@@ -2,8 +2,9 @@ import React, { useState, useEffect, useContext } from 'react';
 import './TimeSheet.css';
 
 import TimeSheetContext from "../../Context/State";
-
 import TimeSheetOptions from "./TimeSheetOptions";
+import Axios from "../../Axios";
+
 import {
   CREATE_LABOR_TYPE,
   CREATE_JOB_NUMBER,
@@ -15,10 +16,16 @@ import {
   CLOCK_OUT,
   GO_TO_LUNCH,
   BACK_FROM_LUNCH,
-  TOGGLE_TYPE
+  TOGGLE_TYPE,
+  Types
 } from "../../Context/Types";
 
 function TimeSheet() {
+
+  useEffect(() => {
+    Axios.get("labortypes", null, response => setLabor(response));
+    Axios.get("jobs", null, response => setJobs(response));
+  }, []);
 
   const {
     isAdminMode,
@@ -30,6 +37,26 @@ function TimeSheet() {
     clickedTypes,
     deletions
   } = useContext(TimeSheetContext);
+
+  const setJobs = (response) => {
+    const { data } = response;
+    const payload = [];
+    data.forEach(data => payload.push(data.number))
+    dispatch({
+      type: Types.SET_JOB_NUMBERS,
+      payload: payload
+    });
+  }
+
+  const setLabor = (response) => {
+    const { data } = response;
+    const payload = [];
+    data.forEach(data => payload.push(data.name))
+    dispatch({
+      type: Types.SET_LABOR_TYPES,
+      payload
+    })
+  }
 
   const [activeButtons, setActiveButtons] = useState(["to lunch", "from lunch", "message"]);
 

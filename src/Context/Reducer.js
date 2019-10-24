@@ -1,4 +1,6 @@
 import {
+  Types,
+
   CREATE_EMPLOYEE,
   CREATE_LABOR_TYPE,
   CREATE_JOB_NUMBER,
@@ -43,7 +45,11 @@ import {
   clockOut,
   toLunch,
   fromLunch,
-  toggleType
+  toggleType,
+
+  setEmployees,
+  setJobNumbers,
+  setLaborTypes
 } from "./StateFunctions";
 
 export default (state, action) => {
@@ -51,6 +57,14 @@ export default (state, action) => {
   console.table(action)
 
   switch(action.type){
+    // SET
+    case Types.SET_EMPLOYEES:
+      return setEmployees(payload, state);
+    case Types.SET_JOB_NUMBERS:
+      return setJobNumbers(payload, state)
+    case Types.SET_LABOR_TYPES:
+      return setLaborTypes(payload, state)
+
     // CREATE
     case CREATE_EMPLOYEE:
       return createEmployee(payload, state);

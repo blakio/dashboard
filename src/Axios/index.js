@@ -9,38 +9,38 @@ export default {
   get: async (path, params, fn) => {
     await instance.get(path, { params })
       .then(function (response) {
-        console.log(response);
+        if(fn) fn(response);
       })
       .catch(function (error) {
         console.log(error);
       })
       .then(function () {
         // always executed
-        if(fn) fn();
+        // if(fn) fn();
      });
   },
-  post: async (path, obj) => {
+  post: async (path, obj, fn) => {
     await instance.post(path, obj)
       .then(function (response) {
-        console.log(response);
+        if(fn) fn(response);
       })
       .catch(function (error) {
         console.log(error);
       });
   },
-  put: async (path, obj) => {
+  put: async (path, obj, fn) => {
     await instance.put(path, obj)
       .then(function (response) {
-        console.log(response);
+        if(fn) fn(response);
       })
       .catch(function (error) {
         console.log(error);
       });
   },
-  delete: async (path, obj) => {
+  delete: async (path, obj, fn) => {
     await instance.delete(path, obj)
       .then(function (response) {
-        console.log(response);
+        if(fn) fn(response);
       })
       .catch(function (error) {
         console.log(error);

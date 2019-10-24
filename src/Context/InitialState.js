@@ -1,5 +1,3 @@
-import data from "./data";
-
 const initialState = {
   isAdminMode: false,
   isClockedIn: false,
@@ -10,7 +8,9 @@ const initialState = {
     employees: []
   },
   clickedTypes: [],
-  ...data
+  laborTypes: [],
+  jobNumbers: [],
+  employees: []
 };
 
 export default initialState;

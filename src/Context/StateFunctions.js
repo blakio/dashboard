@@ -1,5 +1,26 @@
 const breakRefAndCopy = (obj) => JSON.parse(JSON.stringify(obj));
 
+export const setJobNumbers = (payload, state) => {
+  return {
+    ...state,
+    jobNumbers: payload
+  }
+}
+
+export const setLaborTypes = (payload, state) => {
+  return {
+    ...state,
+    laborTypes: payload
+  }
+}
+
+export const setEmployees = (payload, state) => {
+  return {
+    ...state,
+    employees: payload
+  }
+}
+
 export const createEmployee = (payload, state) => {
   const currentState = breakRefAndCopy(state);
   const { employees } = currentState;
