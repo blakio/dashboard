@@ -7,12 +7,7 @@ import TimeSheetContext from "../Context/State";
 
 import EmployeePanelButtons from "./EmployeePanelButtons";
 
-import {
-  CREATE_EMPLOYEE,
-  DELETE_EMPLOYEE,
-  TOGGLE_TYPE,
-  Types
-} from "../Context/Types";
+import Types from "../Context/Types";
 
 function EmployeePanel() {
 
@@ -50,13 +45,13 @@ function EmployeePanel() {
     if(name === selected){
       setSelected(null)
       dispatch({
-        type: TOGGLE_TYPE,
+        type: Types.TOGGLE_TYPE,
         payload: { type: "remove", name: "employees" }
       });
     } else {
       setSelected(name)
       dispatch({
-        type: TOGGLE_TYPE,
+        type: Types.TOGGLE_TYPE,
         payload: { type: "add", name: "employees" }
       });
     }
@@ -77,7 +72,7 @@ function EmployeePanel() {
             fullName.trim().length &&
             jobTitle.trim().length){
             dispatch({
-              type: CREATE_EMPLOYEE,
+              type: Types.CREATE_EMPLOYEE,
               payload: {
                 name: fullName.toUpperCase(),
                 title: jobTitle.toUpperCase()
@@ -91,16 +86,19 @@ function EmployeePanel() {
         value={jobTitle}
         onChange={e => setJobTitle(e.target.value)}
         onKeyPress={e => {
-          if(e.key === "Enter" &&
-            fullName.trim().length &&
-            jobTitle.trim().length){
-            dispatch({
-              type: CREATE_EMPLOYEE,
-              payload: {
-                name: fullName.toUpperCase(),
-                title: jobTitle.toUpperCase()
-              }
-            })
+          if(e.key === "Enter" && fullName.trim().length && jobTitle.trim().length){
+            Axios.post("employees", {
+              clockInTime: null,
+              clockOutTime: null,
+              isContractor: null,
+              jobNumber: null,
+              jobTitle: jobTitle.toUpperCase(),
+              laborType: null,
+              name: fullName.toUpperCase(),
+              totalHrs: null
+            }, obj => {
+              Axios.get("employees", null, response => setState(response));
+            });
           }
         }}/>
     </div>}
@@ -109,13 +107,13 @@ function EmployeePanel() {
         return <EmployeePanelButtons
           key={index}
           dispatch={dispatch}
-          createActionType={CREATE_EMPLOYEE}
-          deleteActionType={DELETE_EMPLOYEE}
+          createActionType={Types.CREATE_EMPLOYEE}
+          deleteActionType={Types.DELETE_EMPLOYEE}
           isAdminMode={isAdminMode}
           {...data}
           selected={selected === data.name}
           select={select}
-          toggleType={TOGGLE_TYPE}/>
+          toggleType={Types.TOGGLE_TYPE}/>
       })}
     </div>
   </div>);

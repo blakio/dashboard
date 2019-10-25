@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import TimeSheetContext from "../../../Context/State";
+import Axios from "../../../Axios";
 
 import './TimeSheetOptions.css';
 
@@ -17,7 +18,10 @@ function TimeSheetOptions(props) {
     createActionType,
     type,
     name,
-    toggleType
+    toggleType,
+    route,
+    setFunction,
+    field
   } = props;
 
   const [inputValue, setInputValue] = useState(null);
@@ -83,9 +87,10 @@ function TimeSheetOptions(props) {
           }}
           onKeyPress={e => {
             if(e.key === "Enter" && inputValue.trim().length){
-              dispatch({
-                type: createActionType,
-                payload: inputValue.toUpperCase()
+              Axios.post(route, {
+                name: inputValue.toUpperCase()
+              }, () => {
+                Axios.get(route, null, response => setFunction(response));
               })
             }
           }}/> :
@@ -93,11 +98,11 @@ function TimeSheetOptions(props) {
       }
     </div>
     <div className="sideOptionBody flex">
-      {options.sort().map((data, index) => (<div key={index}>
+      {options.map((data, index) => (<div key={index}>
         <div
           onClick={() => select(index, data)}
           className={`tag tagLabel ${(selected.includes(index)) && "selected"}`}>
-          {data}
+          {data[field]}
         </div>
       </div>))}
     </div>

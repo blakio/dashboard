@@ -5,20 +5,7 @@ import TimeSheetContext from "../../Context/State";
 import TimeSheetOptions from "./TimeSheetOptions";
 import Axios from "../../Axios";
 
-import {
-  CREATE_LABOR_TYPE,
-  CREATE_JOB_NUMBER,
-  DELETE_LABOR_TYPE,
-  DELETE_JOB_NUMBER,
-  BULK_DELETE,
-  UPDATE_DELETIONS,
-  CLOCK_IN,
-  CLOCK_OUT,
-  GO_TO_LUNCH,
-  BACK_FROM_LUNCH,
-  TOGGLE_TYPE,
-  Types
-} from "../../Context/Types";
+import Types from "../../Context/Types";
 
 function TimeSheet() {
 
@@ -40,21 +27,17 @@ function TimeSheet() {
 
   const setJobs = (response) => {
     const { data } = response;
-    const payload = [];
-    data.forEach(data => payload.push(data.number))
     dispatch({
       type: Types.SET_JOB_NUMBERS,
-      payload: payload
+      payload: data
     });
   }
 
   const setLabor = (response) => {
     const { data } = response;
-    const payload = [];
-    data.forEach(data => payload.push(data.name))
     dispatch({
       type: Types.SET_LABOR_TYPES,
-      payload
+      payload: data
     })
   }
 
@@ -95,7 +78,7 @@ function TimeSheet() {
       function: (isActive) => {
         if(!isActive) return;
         dispatch({
-          type: BULK_DELETE,
+          type: Types.BULK_DELETE,
           payload: null
         })
       }
@@ -107,7 +90,7 @@ function TimeSheet() {
       function: (isActive) => {
         if(!isActive) return;
         dispatch({
-          type: CLOCK_IN,
+          type: Types.CLOCK_IN,
           payload: null
         })
       }
@@ -119,7 +102,7 @@ function TimeSheet() {
       function: (isActive) => {
         if(!isActive) return;
         dispatch({
-          type: CLOCK_OUT,
+          type: Types.CLOCK_OUT,
           payload: null
         })
       }
@@ -131,7 +114,7 @@ function TimeSheet() {
       function: (isActive) => {
         if(!isActive) return;
         dispatch({
-          type: GO_TO_LUNCH,
+          type: Types.GO_TO_LUNCH,
           payload: null
         })
       }
@@ -143,7 +126,7 @@ function TimeSheet() {
       function: (isActive) => {
         if(!isActive) return;
         dispatch({
-          type: BACK_FROM_LUNCH,
+          type: Types.BACK_FROM_LUNCH,
           payload: null
         })
       }
@@ -204,12 +187,15 @@ function TimeSheet() {
         <TimeSheetOptions
           title="Labor Type"
           options={laborTypes}
-          createActionType={ CREATE_LABOR_TYPE }
-          deleteActionType={ DELETE_LABOR_TYPE }
+          createActionType={ Types.CREATE_LABOR_TYPE }
+          deleteActionType={ Types.DELETE_LABOR_TYPE }
           name={"laborTypes"}
-          type={UPDATE_DELETIONS}
-          toggleType={TOGGLE_TYPE}
+          type={Types.UPDATE_DELETIONS}
+          toggleType={Types.TOGGLE_TYPE}
           dispatch={dispatch}
+          route="labortypes"
+          setFunction={setLabor}
+          field="name"
         />
       </div>
 
@@ -217,12 +203,15 @@ function TimeSheet() {
         <TimeSheetOptions
           title="Job Number"
           options={jobNumbers}
-          createActionType={ CREATE_JOB_NUMBER }
-          deleteActionType={ DELETE_JOB_NUMBER }
+          createActionType={ Types.CREATE_JOB_NUMBER }
+          deleteActionType={ Types.DELETE_JOB_NUMBER }
           name={"jobNumbers"}
-          type={UPDATE_DELETIONS}
-          toggleType={TOGGLE_TYPE}
+          type={Types.UPDATE_DELETIONS}
+          toggleType={Types.TOGGLE_TYPE}
           dispatch={dispatch}
+          route="jobs"
+          setFunction={setJobs}
+          field="number"
         />
       </div>
 

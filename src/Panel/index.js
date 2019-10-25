@@ -22,8 +22,7 @@ function Panel() {
   ];
 
   if(isAdminMode){
-    icons.push({ icon: "fas fa-cloud-download-alt", id: "download" })
-    icons.push({ icon: "fas fa-exclamation", id: "notifications" })
+    // icons.push({ icon: "fas fa-exclamation", id: "notifications" })
   }
 
 
