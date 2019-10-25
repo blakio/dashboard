@@ -138,5 +138,14 @@ export default {
       ...state,
       clickedTypes: [...currentState.clickedTypes]
     };
-  }
+  },
+
+  toggleAdminMode: (payload, state) => {
+    const currentState = breakRefAndCopy(state);
+    currentState.isAdminMode = !currentState.isAdminMode;
+    return {
+      ...state,
+      isAdminMode: currentState.isAdminMode
+    };
+  },
 }

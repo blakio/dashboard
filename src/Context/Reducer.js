@@ -47,6 +47,8 @@ export default (state, action) => {
       return StateFunctions.updateDeletions(payload, state);
     case Types.TOGGLE_TYPE:
       return StateFunctions.toggleType(payload, state);
+    case Types.TOGGLE_ADMIN_MODE:
+      return StateFunctions.toggleAdminMode(payload, state);
 
     default:
     return state;

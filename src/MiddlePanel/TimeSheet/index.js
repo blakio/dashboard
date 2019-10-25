@@ -16,6 +16,7 @@ function TimeSheet() {
 
   const {
     isAdminMode,
+    isAdminLoggedIn,
     isClockedIn,
     isAtLunch,
     dispatch,
@@ -172,6 +173,25 @@ function TimeSheet() {
         }
 
         return (<div key={index}>
+          {isAdminLoggedIn && <div style={{
+            position: "absolute",
+            top: 20,
+            right: 20
+          }} onClick={() => dispatch({
+            type: Types.TOGGLE_ADMIN_MODE
+          })}>
+            {isAdminMode ? <i
+              style={{
+                fontSize: "2em",
+                color: "#008280",
+                opacity: 0.6
+              }}
+              className="fas fa-toggle-on"></i> : <i style={{
+              fontSize: "2em",
+              color: "#a7a7a7",
+              opacity: 0.6
+            }} className="fas fa-toggle-off"></i>}
+          </div>}
           <div
             className={`topBarButton flex ${isActive(data.text) && "active"}`}
             onClick={() => data.function(isActive(data.text))}>
