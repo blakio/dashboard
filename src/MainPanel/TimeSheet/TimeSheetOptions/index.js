@@ -81,7 +81,7 @@ function TimeSheetOptions(props) {
       {(isAdminMode && isAdminLoggedIn) ?
         <input
           className="addInput tag"
-          placeHolder={`add ${title}`}
+          placeholder={`add ${title}`}
           value={inputValue}
           onChange={e => {
             setInputValue(e.target.value);
@@ -91,6 +91,7 @@ function TimeSheetOptions(props) {
               Axios.post(route, {
                 [field]: inputValue.toUpperCase()
               }, () => {
+                setInputValue("");
                 Axios.get(route, null, response => setFunction(response));
               })
             }

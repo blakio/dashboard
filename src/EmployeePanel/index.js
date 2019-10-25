@@ -84,7 +84,7 @@ function EmployeePanel() {
     </div>
     {isAdminMode && isAdminLoggedIn && <div className="employeeAdditionForm flex">
       <input
-        class="addInput tag"
+        className="addInput tag"
         placeholder="Full Name"
         value={fullName}
         onChange={e => setFullName(e.target.value)}
@@ -102,7 +102,7 @@ function EmployeePanel() {
           }
         }}/>
       <input
-        class="addInput tag"
+        className="addInput tag"
         placeholder="Job Title"
         value={jobTitle}
         onChange={e => setJobTitle(e.target.value)}
