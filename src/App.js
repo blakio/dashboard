@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import Panel from './Panel';
-import MiddlePanel from './MiddlePanel';
+import MainPanel from './MainPanel';
 import EmployeePanel from './EmployeePanel';
 import { stringTypeAnnotation } from '@babel/types';
 
@@ -16,7 +16,7 @@ function App() {
     <div id="dashboard" className="flex">
       <Panel />
       <EmployeePanel />
-      <MiddlePanel />
+      <MainPanel />
     </div>
   </TimeSheetContext.Provider>);
 }

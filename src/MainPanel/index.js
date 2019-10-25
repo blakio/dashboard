@@ -1,9 +1,9 @@
 import React from 'react';
-import './MiddlePanel.css';
+import './MainPanel.css';
 
 import TimeSheet from "./TimeSheet";
 
-function MiddlePanel() {
+function MainPanel() {
   return (<div id="middlePanel" className="flex">
     <div id="middlePanelLiner">
       <TimeSheet />
@@ -11,4 +11,4 @@ function MiddlePanel() {
   </div>);
 }
 
-export default MiddlePanel;
+export default MainPanel;
