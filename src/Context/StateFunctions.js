@@ -94,9 +94,7 @@ export default {
       const route = routes[i];
       if(state.deletions[i].length){
         state.deletions[i].forEach(data => {
-          Axios.delete(route, {
-            id: data.id
-          })
+          Axios.delete(`${route}/${data.id}`)
         })
       }
     }

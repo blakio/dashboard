@@ -22,7 +22,8 @@ function EmployeePanel() {
   const {
     dispatch,
     employees,
-    isAdminMode
+    isAdminMode,
+    isAdminLoggedIn
   } = useContext(TimeSheetContext);
 
   const setState = (response) => {
@@ -41,19 +42,39 @@ function EmployeePanel() {
     })
   }
 
-  const select = (name) => {
-    if(name === selected){
+  const select = (data) => {
+    if(selected && (data.name === selected.name)){
       setSelected(null)
       dispatch({
         type: Types.TOGGLE_TYPE,
         payload: { type: "remove", name: "employees" }
       });
+      if(isAdminMode && isAdminLoggedIn){
+        dispatch({
+          type: Types.UPDATE_DELETIONS,
+          payload: {
+            type: "remove",
+            name: "employees",
+            data: data
+          }
+        })
+      }
     } else {
-      setSelected(name)
+      setSelected(data)
       dispatch({
         type: Types.TOGGLE_TYPE,
         payload: { type: "add", name: "employees" }
       });
+      if(isAdminMode && isAdminLoggedIn){
+        dispatch({
+          type: Types.UPDATE_DELETIONS,
+          payload: {
+            type: "add",
+            name: "employees",
+            data: data
+          }
+        })
+      }
     }
   }
 
@@ -61,7 +82,7 @@ function EmployeePanel() {
     <div className="sectionHeading">
       <p className="timesheetEmployeeSectionTitle">employees</p>
     </div>
-    {isAdminMode && <div className="employeeAdditionForm flex">
+    {isAdminMode && isAdminLoggedIn && <div className="employeeAdditionForm flex">
       <input
         class="addInput tag"
         placeholder="Full Name"
@@ -109,9 +130,9 @@ function EmployeePanel() {
           dispatch={dispatch}
           createActionType={Types.CREATE_EMPLOYEE}
           deleteActionType={Types.DELETE_EMPLOYEE}
-          isAdminMode={isAdminMode}
+          isAdminMode={isAdminMode && isAdminLoggedIn}
           {...data}
-          selected={selected === data.name}
+          selected={selected && (selected.name === data.name)}
           select={select}
           toggleType={Types.TOGGLE_TYPE}/>
       })}

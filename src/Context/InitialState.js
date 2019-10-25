@@ -1,5 +1,6 @@
 const initialState = {
   isAdminMode: false,
+  isAdminLoggedIn: true,
   isClockedIn: false,
   isAtLunch: false,
   deletions: {

@@ -13,12 +13,13 @@ function EmployeePanelButtons(props) {
     select,
     selected,
     isAdminMode,
+    isAdminLoggedIn,
     dispatch
   } = props;
 
   return (<div
     className={`employeeButton flex ${selected && "selected"}`}
-    onClick={() => select(name)}>
+    onClick={() => select({name, id})}>
     <div className="sideButtonDescription flex">
       <div className="sideButtonDescriptionTop sectionHeading">
         <p>{name}</p>

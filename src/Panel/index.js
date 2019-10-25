@@ -6,7 +6,8 @@ import './Panel.css';
 function Panel() {
 
   const {
-    isAdminMode
+    isAdminMode,
+    isAdminLoggedIn
   } = useContext(TimeSheetContext);
 
   const [selected, setSelected] = useState("clock");
@@ -21,7 +22,7 @@ function Panel() {
     // { icon: "fas fa-address-book", id: "directory" }
   ];
 
-  if(isAdminMode){
+  if(isAdminMode && isAdminLoggedIn){
     // icons.push({ icon: "fas fa-exclamation", id: "notifications" })
   }
 

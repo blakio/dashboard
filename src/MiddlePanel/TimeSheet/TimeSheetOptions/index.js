@@ -8,6 +8,7 @@ function TimeSheetOptions(props) {
 
   const {
     isAdminMode,
+    isAdminLoggedIn,
     dispatch,
     deletions
   } = useContext(TimeSheetContext);
@@ -34,7 +35,7 @@ function TimeSheetOptions(props) {
   }, [deletions])
 
   const select = (index, data) => {
-    if(isAdminMode){
+    if(isAdminMode && isAdminLoggedIn){
       if(selected.includes(index)){
         const newSelected = [...selected];
         newSelected.splice(selected.indexOf(index), 1);
@@ -77,7 +78,7 @@ function TimeSheetOptions(props) {
 
   return (<div className="timeSheetSideOptions flex">
     <div className="sideOptionHeading sectionHeading flex">
-      {isAdminMode ?
+      {(isAdminMode && isAdminLoggedIn) ?
         <input
           className="addInput tag"
           placeHolder={`add ${title}`}
@@ -88,7 +89,7 @@ function TimeSheetOptions(props) {
           onKeyPress={e => {
             if(e.key === "Enter" && inputValue.trim().length){
               Axios.post(route, {
-                name: inputValue.toUpperCase()
+                [field]: inputValue.toUpperCase()
               }, () => {
                 Axios.get(route, null, response => setFunction(response));
               })
