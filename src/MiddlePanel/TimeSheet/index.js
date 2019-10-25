@@ -191,6 +191,7 @@ function TimeSheet() {
               color: "#a7a7a7",
               opacity: 0.6
             }} className="fas fa-toggle-off"></i>}
+            <p className="topBarText">toggle admin</p>
           </div>}
           <div
             className={`topBarButton flex ${isActive(data.text) && "active"}`}
