@@ -36,9 +36,9 @@ function EmployeePanelButtons(props) {
         id
       })}>
         <i style={{
-          fontSize: "2em",
+          fontSize: "2.4em",
           color: "#008280"
-        }} className="fas fa-edit"></i>
+        }} className="fas fa-pen-square"></i>
     </div>}
   </div>);
 }
