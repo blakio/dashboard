@@ -143,6 +143,12 @@ function EmployeePanel() {
     {isAdminMode && isAdminLoggedIn && <div className="employeeAdditionForm flex">
       <input
         className="addInput tag"
+        style={{
+          fontWeight: 500,
+          fontSize: "1.2rem",
+          border: "none",
+          borderRadius: 0
+        }}
         placeholder="Full Name"
         value={fullName}
         onChange={e => setFullName(e.target.value)}
@@ -153,6 +159,12 @@ function EmployeePanel() {
         }}/>
       <input
         className="addInput tag"
+        style={{
+          fontWeight: 500,
+          fontSize: "1.2rem",
+          border: "none",
+          borderRadius: 0
+        }}
         placeholder="Job Title"
         value={jobTitle}
         onChange={e => setJobTitle(e.target.value)}
