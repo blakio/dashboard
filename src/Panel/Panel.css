@@ -1,6 +1,7 @@
 #leftPanel {
   height: 100vh;
-  width: 12.5vw;
+  width: 8vw;
+  min-width: 6em;
 }
 
 #leftPanelLiner {

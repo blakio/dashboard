@@ -152,8 +152,7 @@ function EmployeePanel() {
       <input
         className="addInput tag"
         style={{
-          fontWeight: 500,
-          fontSize: "1.2rem",
+          fontWeight: 400,
           border: "none",
           borderRadius: 0
         }}
@@ -168,8 +167,7 @@ function EmployeePanel() {
       <input
         className="addInput tag"
         style={{
-          fontWeight: 500,
-          fontSize: "1.2rem",
+          fontWeight: 400,
           border: "none",
           borderRadius: 0
         }}

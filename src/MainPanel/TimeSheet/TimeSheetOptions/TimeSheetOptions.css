@@ -23,4 +23,5 @@
 .addInput {
   text-align: center;
   border: 1px solid #dbdbdb;
+  border-radius: 0;
 }

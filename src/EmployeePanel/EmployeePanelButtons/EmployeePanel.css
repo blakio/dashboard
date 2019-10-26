@@ -18,7 +18,6 @@
 .sideButtonDescription {
   min-width: 8em;
   height: 4em;
-  padding-left: 1em;
   flex-direction: column;
   align-items: flex-start;
   position: relative;
@@ -39,5 +38,6 @@ p.timesheetEmployeeSectionTitle {
   margin-bottom: 0;
   margin-right: 0.4em;
   color: #eaeaea;
-  font-size: 3em;
+  font-size: 1.8em;
+  font-weight: 300;
 }

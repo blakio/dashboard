@@ -166,8 +166,18 @@ function TimeSheet() {
     })
   }
 
+  const toggleButton = isAdminLoggedIn ? (<Toogle
+    onClick={onClickToggle}
+    parentStlyes={{ position: "absolute", top: "1.4em", right: "1.4em", display: "flex", alignItems: "ceneter", justifyContent: "ceneter", flexDirection: "column", width: "6em" }}
+    onStlyes={{ fontSize: "2em", color: "#008280", opacity: 0.6, textAlign: "center" }}
+    offStlyes={{ fontSize: "2em", color: "#a7a7a7", opacity: 0.6, textAlign: "center" }}
+    text="Edit"
+    isOn={isAdminMode}
+  />) : (<div></div>);
+
   return (<div id="timesheet">
     <div id="topbar" className="flex">
+      {toggleButton}
       {topButtons.map((data, index) => {
 
         const isAdminButtonButNotOnAdminMode = data.isAdminButton && !isAdminMode;
@@ -197,17 +207,7 @@ function TimeSheet() {
 
         if(isAdminMode && !data.isAdminButton) return null;
 
-        const toggleButton = isAdminLoggedIn ? (<Toogle
-          onClick={onClickToggle}
-          parentStlyes={{ position: "absolute", top: 28, right: 28, display: "flex", alignItems: "ceneter", justifyContent: "ceneter", flexDirection: "column", width: "6em" }}
-          onStlyes={{ fontSize: "2em", color: "#008280", opacity: 0.6, textAlign: "center" }}
-          offStlyes={{ fontSize: "2em", color: "#a7a7a7", opacity: 0.6, textAlign: "center" }}
-          text="Edit"
-          isOn={isAdminMode}
-          />) : (<div></div>);
-
         return (<div key={index}>
-          {toggleButton}
           <div
             className={`topBarButton flex ${isActive(data.text) && "active"}`}
             onClick={() => data.function(isActive(data.text))}>

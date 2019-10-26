@@ -84,8 +84,7 @@ function TimeSheetOptions(props) {
           placeholder={`add ${title}`}
           value={inputValue}
           style={{
-            fontWeight: 500,
-            fontSize: "1.2rem"
+            fontWeight: 400
           }}
           onChange={e => {
             setInputValue(e.target.value);

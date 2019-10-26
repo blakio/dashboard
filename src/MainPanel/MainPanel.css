@@ -1,10 +1,10 @@
 #middlePanel {
   height: 100vh;
-  width: 67.5vw;
+  width: 78vw;
   flex-direction: column;
   overflow-y: scroll;
   background-color: #fff;
-  border-left: 2.5em solid #272c4a;
+  border-left: 4vw solid #272c4a;
   box-sizing: border-box;
 }
 
