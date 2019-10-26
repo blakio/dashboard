@@ -14,6 +14,7 @@ function EmployeePanel() {
   const [selected, setSelected] = useState(null);
   const [fullName, setFullName] = useState("");
   const [jobTitle, setJobTitle] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
 
   const {
     deletions,
@@ -89,6 +90,52 @@ function EmployeePanel() {
     }
   }
 
+  const editEmployee = data => {
+    setFullName(data.name);
+    setJobTitle(data.jobTitle);
+    setIsEditing({
+      id: data.id
+    })
+  }
+
+  const edit = () => {
+    dispatch({
+      type: Types.UPDATE_EMPLOYEE,
+      payload: {
+        id: isEditing.id,
+        name: fullName.toUpperCase(),
+        jobTitle: jobTitle.toUpperCase(),
+        fn: () => {
+          dispatch({
+            type: Types.GET_EMPLOYEES,
+            payload: {
+              fn: obj => {
+                dispatch({
+                  type: Types.SET_EMPLOYEES,
+                  payload: obj.data
+                })
+              }
+            }
+          })
+        }
+      }
+    })
+    setIsEditing(false);
+    setFullName("");
+    setJobTitle("");
+  }
+
+  const add = () => {
+    Axios.post("employees", {
+      jobTitle: jobTitle.toUpperCase(),
+      name: fullName.toUpperCase(),
+    }, obj => {
+      Axios.get("employees", null, response => setState(response));
+    });
+    setFullName("");
+    setJobTitle("");
+  }
+
   return (<div id="rightPanel" className="flex">
     <div className="sectionHeading">
       <p className="timesheetEmployeeSectionTitle">employees</p>
@@ -100,18 +147,8 @@ function EmployeePanel() {
         value={fullName}
         onChange={e => setFullName(e.target.value)}
         onKeyPress={e => {
-          if(e.key === "Enter" &&
-            fullName.trim().length &&
-            jobTitle.trim().length){
-            dispatch({
-              type: Types.CREATE_EMPLOYEE,
-              payload: {
-                name: fullName.toUpperCase(),
-                title: jobTitle.toUpperCase()
-              }
-            })
-            setFullName("");
-            setJobTitle("");
+          if(e.key === "Enter" && fullName.trim().length && jobTitle.trim().length){
+            (isEditing) ? edit() : add();
           }
         }}/>
       <input
@@ -121,20 +158,7 @@ function EmployeePanel() {
         onChange={e => setJobTitle(e.target.value)}
         onKeyPress={e => {
           if(e.key === "Enter" && fullName.trim().length && jobTitle.trim().length){
-            Axios.post("employees", {
-              clockInTime: null,
-              clockOutTime: null,
-              isContractor: null,
-              jobNumber: null,
-              jobTitle: jobTitle.toUpperCase(),
-              laborType: null,
-              name: fullName.toUpperCase(),
-              totalHrs: null
-            }, obj => {
-              Axios.get("employees", null, response => setState(response));
-            });
-            setFullName("");
-            setJobTitle("");
+            (isEditing) ? edit() : add();
           }
         }}/>
     </div>}
@@ -149,7 +173,8 @@ function EmployeePanel() {
           {...data}
           selected={selected && (selected.name === data.name)}
           select={select}
-          toggleType={Types.TOGGLE_TYPE}/>
+          toggleType={Types.TOGGLE_TYPE}
+          editEmployee={editEmployee}/>
       })}
     </div>
   </div>);

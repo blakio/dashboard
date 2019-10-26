@@ -35,6 +35,10 @@ export default (state, action) => {
     case Types.BACK_FROM_LUNCH:
       return StateFunctions.fromLunch(payload, state);
 
+    // UPDATE
+    case Types.UPDATE_EMPLOYEE:
+      return StateFunctions.updateEmployee(payload, state);
+
     // DELETE
     case Types.DELETE_EMPLOYEE:
       return StateFunctions.deleteEmployee(payload, state);

@@ -14,7 +14,8 @@ function EmployeePanelButtons(props) {
     selected,
     isAdminMode,
     isAdminLoggedIn,
-    dispatch
+    dispatch,
+    editEmployee
   } = props;
 
   return (<div
@@ -28,6 +29,17 @@ function EmployeePanelButtons(props) {
         <p>{jobTitle}</p>
       </div>
     </div>
+    {isAdminMode && <div
+      onClick={() => editEmployee({
+        name,
+        jobTitle,
+        id
+      })}>
+        <i style={{
+          fontSize: "2em",
+          color: "#008280"
+        }} className="fas fa-edit"></i>
+    </div>}
   </div>);
 }
 

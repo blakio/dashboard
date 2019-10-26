@@ -45,6 +45,20 @@ export default {
     };
   },
 
+  updateEmployee: (payload, state) => {
+    const {
+      name,
+      jobTitle,
+      id,
+      fn
+    } = payload;
+    Axios.put(`employees/${id}`, {
+      name,
+      jobTitle
+    }, data => fn(data))
+    return state;
+  },
+
   deleteEmployee: (payload, state) => {
     const currentState = breakRefAndCopy(state);
     const { employees } = currentState;
