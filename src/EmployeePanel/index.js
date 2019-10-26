@@ -11,7 +11,7 @@ import Types from "../Context/Types";
 
 function EmployeePanel() {
 
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState([]);
   const [fullName, setFullName] = useState("");
   const [jobTitle, setJobTitle] = useState("");
   const [isEditing, setIsEditing] = useState(false);
@@ -55,8 +55,13 @@ function EmployeePanel() {
   }
 
   const select = (data) => {
-    if(selected && (data.name === selected.name)){
-      setSelected(null)
+    if(selected && (selected.includes(data.name))){
+
+      const indexOfName = selected.indexOf(data.name);
+      const newSelected = [...selected];
+      newSelected.splice(indexOfName, 1);
+      setSelected(newSelected);
+
       dispatch({
         type: Types.TOGGLE_TYPE,
         payload: { type: "remove", name: "employees" }
@@ -72,7 +77,10 @@ function EmployeePanel() {
         })
       }
     } else {
-      setSelected(data)
+
+      const newSelected = (!selected.includes(data.name) && isAdminMode) ? [...selected, data.name] : [data.name];
+      setSelected(newSelected);
+
       dispatch({
         type: Types.TOGGLE_TYPE,
         payload: { type: "add", name: "employees" }
@@ -183,7 +191,7 @@ function EmployeePanel() {
           deleteActionType={Types.DELETE_EMPLOYEE}
           isAdminMode={isAdminMode && isAdminLoggedIn}
           {...data}
-          selected={selected && (selected.name === data.name)}
+          selected={selected && (selected.includes(data.name))}
           select={select}
           toggleType={Types.TOGGLE_TYPE}
           editEmployee={editEmployee}/>
