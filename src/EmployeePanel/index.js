@@ -11,20 +11,31 @@ import Types from "../Context/Types";
 
 function EmployeePanel() {
 
-  useEffect(() => {
-    Axios.get("employees", null, response => setState(response));
-  }, []);
-
   const [selected, setSelected] = useState(null);
   const [fullName, setFullName] = useState("");
   const [jobTitle, setJobTitle] = useState("");
 
   const {
+    deletions,
     dispatch,
     employees,
     isAdminMode,
     isAdminLoggedIn
   } = useContext(TimeSheetContext);
+
+  useEffect(() => {
+    dispatch({
+      type: Types.GET_EMPLOYEES,
+      payload: {
+        fn: obj => {
+          dispatch({
+            type: Types.SET_EMPLOYEES,
+            payload: obj.data
+          })
+        }
+      }
+    })
+  }, [])
 
   const setState = (response) => {
     const { data } = response;
@@ -33,7 +44,7 @@ function EmployeePanel() {
       payload.push({
         id: data.id,
         name: data.name,
-        title: data.jobTitle
+        jobTitle: data.jobTitle
       })
     });
     dispatch({
@@ -99,6 +110,8 @@ function EmployeePanel() {
                 title: jobTitle.toUpperCase()
               }
             })
+            setFullName("");
+            setJobTitle("");
           }
         }}/>
       <input
@@ -120,11 +133,13 @@ function EmployeePanel() {
             }, obj => {
               Axios.get("employees", null, response => setState(response));
             });
+            setFullName("");
+            setJobTitle("");
           }
         }}/>
     </div>}
     <div id="rightPanelLiner">
-      {employees.map((data, index) => {
+      {employees && employees.map((data, index) => {
         return <EmployeePanelButtons
           key={index}
           dispatch={dispatch}

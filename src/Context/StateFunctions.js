@@ -1,8 +1,14 @@
 import Axios from "../Axios";
+import initialState from "./InitialState";
 
 const breakRefAndCopy = (obj) => JSON.parse(JSON.stringify(obj));
 
 export default {
+  getEmployees: (payload, state) => {
+    Axios.get("employees", null, payload.fn);
+    return state;
+  },
+
   setJobNumbers: (payload, state) => ({ ...state, jobNumbers: payload }),
   setLaborTypes: (payload, state) => ({ ...state, laborTypes: payload }),
   setEmployees: (payload, state) =>  ({ ...state, employees: payload }),
@@ -90,15 +96,22 @@ export default {
       jobNumbers: "jobs",
       laborTypes: "labortypes"
     }
+    const deletions = [];
     for(let i in state.deletions){
       const route = routes[i];
       if(state.deletions[i].length){
         state.deletions[i].forEach(data => {
-          Axios.delete(`${route}/${data.id}`)
+          deletions.push(Axios.delete(`${route}/${data.id}`));
         })
       }
     }
-    return state;
+    Promise.all(deletions)
+          .then(obj => payload.fn())
+          .catch(e => console.log(e))
+    return {
+      ...state,
+      deletions: breakRefAndCopy(initialState.deletions)
+    };
   },
   updateDeletions: (payload, state) => {
     const currentState = breakRefAndCopy(state);
@@ -145,7 +158,8 @@ export default {
     currentState.isAdminMode = !currentState.isAdminMode;
     return {
       ...state,
-      isAdminMode: currentState.isAdminMode
+      isAdminMode: currentState.isAdminMode,
+      clickedTypes: []
     };
   },
 }

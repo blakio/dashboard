@@ -8,7 +8,7 @@ function EmployeePanelButtons(props) {
 
   const {
     name,
-    title,
+    jobTitle,
     id,
     select,
     selected,
@@ -25,7 +25,7 @@ function EmployeePanelButtons(props) {
         <p>{name}</p>
       </div>
       <div className="sideButtonDescriptionBottom sectionHeading">
-        <p>{title}</p>
+        <p>{jobTitle}</p>
       </div>
     </div>
   </div>);

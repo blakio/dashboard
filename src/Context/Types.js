@@ -1,4 +1,6 @@
 export default {
+  // GET
+  GET_EMPLOYEES: "GET_EMPLOYEES",
 
   // SET
   SET_EMPLOYEES: "SET_EMPLOYEES",

@@ -6,6 +6,9 @@ export default (state, action) => {
   console.table(action)
 
   switch(action.type){
+    // GET
+    case Types.GET_EMPLOYEES:
+      return StateFunctions.getEmployees(payload, state);
 
     // SET
     case Types.SET_EMPLOYEES:

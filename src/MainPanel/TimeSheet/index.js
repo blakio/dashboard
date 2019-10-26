@@ -9,11 +9,6 @@ import Types from "../../Context/Types";
 
 function TimeSheet() {
 
-  useEffect(() => {
-    Axios.get("labortypes", null, response => setLabor(response));
-    Axios.get("jobs", null, response => setJobs(response));
-  }, []);
-
   const {
     isAdminMode,
     isAdminLoggedIn,
@@ -25,6 +20,11 @@ function TimeSheet() {
     clickedTypes,
     deletions
   } = useContext(TimeSheetContext);
+
+  useEffect(() => {
+    Axios.get("labortypes", null, response => setLabor(response));
+    Axios.get("jobs", null, response => setJobs(response));
+  }, []);
 
   const setJobs = (response) => {
     const { data } = response;
@@ -80,7 +80,23 @@ function TimeSheet() {
         if(!isActive) return;
         dispatch({
           type: Types.BULK_DELETE,
-          payload: null
+          payload: {
+            fn: () => {
+              dispatch({
+                type: Types.GET_EMPLOYEES,
+                payload: {
+                  fn: obj => {
+                    dispatch({
+                      type: Types.SET_EMPLOYEES,
+                      payload: obj.data
+                    })
+                  }
+                }
+              })
+              Axios.get("labortypes", null, response => setLabor(response));
+              Axios.get("jobs", null, response => setJobs(response));
+            }
+          },
         })
       }
     },
