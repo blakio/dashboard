@@ -1,6 +1,6 @@
 import React from "react";
 
-const Toggle = (props) => {
+const Toogle = (props) => {
 
   const {
     isOn,
@@ -19,4 +19,4 @@ const Toggle = (props) => {
   </div>)
 }
 
-export default Toggle;
+export default Toogle;

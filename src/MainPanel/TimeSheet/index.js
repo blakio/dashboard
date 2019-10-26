@@ -4,7 +4,7 @@ import './TimeSheet.css';
 import TimeSheetContext from "../../Context/State";
 import TimeSheetOptions from "./TimeSheetOptions";
 import Axios from "../../Axios";
-import Toggle from "./Toggle";
+import Toogle from "./Toogle";
 
 import Types from "../../Context/Types";
 
@@ -196,7 +196,7 @@ function TimeSheet() {
         }
 
         return (<div key={index}>
-          {isAdminLoggedIn && <Toggle
+          {isAdminLoggedIn && <Toogle
             onClick={onClickToggle}
             parentStlyes={{ position: "absolute", top: 28, right: 28, display: "flex", alignItems: "ceneter", justifyContent: "ceneter", flexDirection: "column", width: "6em" }}
             onStlyes={{ fontSize: "2em", color: "#008280", opacity: 0.6, textAlign: "center" }}
