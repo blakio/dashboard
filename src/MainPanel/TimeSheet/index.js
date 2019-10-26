@@ -4,6 +4,7 @@ import './TimeSheet.css';
 import TimeSheetContext from "../../Context/State";
 import TimeSheetOptions from "./TimeSheetOptions";
 import Axios from "../../Axios";
+import Toggle from "./Toggle";
 
 import Types from "../../Context/Types";
 
@@ -159,6 +160,12 @@ function TimeSheet() {
     // }
   ]
 
+  const onClickToggle = () => {
+    dispatch({
+      type: Types.TOGGLE_ADMIN_MODE
+    })
+  }
+
   return (<div id="timesheet">
     <div id="topbar" className="flex">
       {topButtons.map((data, index) => {
@@ -189,26 +196,14 @@ function TimeSheet() {
         }
 
         return (<div key={index}>
-          {isAdminLoggedIn && <div style={{
-            position: "absolute",
-            top: 20,
-            right: 20
-          }} onClick={() => dispatch({
-            type: Types.TOGGLE_ADMIN_MODE
-          })}>
-            {isAdminMode ? <i
-              style={{
-                fontSize: "2em",
-                color: "#008280",
-                opacity: 0.6
-              }}
-              className="fas fa-toggle-on"></i> : <i style={{
-              fontSize: "2em",
-              color: "#a7a7a7",
-              opacity: 0.6
-            }} className="fas fa-toggle-off"></i>}
-            <p className="topBarText">toggle admin</p>
-          </div>}
+          {isAdminLoggedIn && <Toggle
+            onClick={onClickToggle}
+            parentStlyes={{ position: "absolute", top: 28, right: 28, display: "flex", alignItems: "ceneter", justifyContent: "ceneter", flexDirection: "column", width: "6em" }}
+            onStlyes={{ fontSize: "2em", color: "#008280", opacity: 0.6, textAlign: "center" }}
+            offStlyes={{ fontSize: "2em", color: "#a7a7a7", opacity: 0.6, textAlign: "center" }}
+            text="Edit"
+            isOn={isAdminMode}
+            />}
           <div
             className={`topBarButton flex ${isActive(data.text) && "active"}`}
             onClick={() => data.function(isActive(data.text))}>
