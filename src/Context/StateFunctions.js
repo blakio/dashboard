@@ -142,6 +142,9 @@ export default {
   },
 
   clickIn: (payload, state) => {
+    console.log(state.selectedEmployee);
+    console.log(state.selectedLaborType);
+    console.log(state.selectedJobNumber);
     return state;
   },
   clockOut: (payload, state) => {
@@ -176,4 +179,30 @@ export default {
       clickedTypes: []
     };
   },
+
+  selectEmployee: (payload, state) => {
+    return {
+      ...state,
+      selectedEmployee: payload
+    };
+  },
+  selectLaborType: (payload, state) => {
+    return {
+      ...state,
+      selectedLaborType: payload
+    };
+  },
+  selectJobNumber: (payload, state) => {
+    return {
+      ...state,
+      selectedJobNumber: payload
+    };
+  },
+
+  setActiveButtons: (payload, state) => {
+    return {
+      ...state,
+      activeButtonsList: payload
+    }
+  }
 }

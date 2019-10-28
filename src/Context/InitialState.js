@@ -11,7 +11,11 @@ const initialState = {
   clickedTypes: [],
   laborTypes: [],
   jobNumbers: [],
-  employees: []
+  employees: [],
+  selectedEmployee: "",
+  selectedLaborType: "",
+  selectedJobNumber: "",
+  activeButtonsList: []
 };
 
 export default initialState;

@@ -22,11 +22,20 @@ function TimeSheetOptions(props) {
     toggleType,
     route,
     setFunction,
-    field
+    field,
+    updateType
   } = props;
 
   const [inputValue, setInputValue] = useState(null);
-  const [selected, setSelected] = useState([null]);
+  const [selected, setSelected] = useState([""]);
+  const [selectedId, setSelectedId] = useState("");
+
+  useEffect(() => {
+    dispatch({
+      type: updateType,
+      payload: selectedId
+    })
+  }, [selected])
 
   useEffect(() => {
     if(name && !Object.keys(deletions[name]).length){
@@ -62,12 +71,14 @@ function TimeSheetOptions(props) {
     } else {
       if(!selected.includes(index)){
         setSelected([index]);
+        setSelectedId(data.id)
         dispatch({
           type: toggleType,
           payload: { type: "add", name }
         });
       } else {
         setSelected([]);
+        setSelectedId("")
         dispatch({
           type: toggleType,
           payload: { type: "remove", name }

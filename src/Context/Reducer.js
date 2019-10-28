@@ -57,6 +57,16 @@ export default (state, action) => {
     case Types.TOGGLE_ADMIN_MODE:
       return StateFunctions.toggleAdminMode(payload, state);
 
+    case Types.SELECT_EMPLOYEE:
+      return StateFunctions.selectEmployee(payload, state);
+    case Types.SELECT_LABOR_TYPE:
+      return StateFunctions.selectLaborType(payload, state);
+    case Types.SELECT_JOB_NUMBER:
+      return StateFunctions.selectJobNumber(payload, state);
+
+    case Types.SET_ACTION_BUTTONS:
+      return StateFunctions.setActiveButtons(payload, state);
+
     default:
     return state;
   }

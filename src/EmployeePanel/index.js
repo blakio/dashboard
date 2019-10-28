@@ -4,14 +4,14 @@ import Axios from "../Axios";
 import './RightPanel.css';
 
 import TimeSheetContext from "../Context/State";
-
 import EmployeePanelButtons from "./EmployeePanelButtons";
-
 import Types from "../Context/Types";
+import Util from "../Util";
 
 function EmployeePanel() {
 
   const [selected, setSelected] = useState([]);
+  const [selectedId, setSelectedId] = useState("");
   const [fullName, setFullName] = useState("");
   const [jobTitle, setJobTitle] = useState("");
   const [isEditing, setIsEditing] = useState(false);
@@ -23,6 +23,42 @@ function EmployeePanel() {
     isAdminMode,
     isAdminLoggedIn
   } = useContext(TimeSheetContext);
+
+  useEffect(() => {
+    let employee;
+    employees.forEach(data => {
+      if(data.id === selectedId){
+        employee = data;
+      }
+    })
+
+    if(!employee){
+      return dispatch({
+        type: Types.SET_ACTION_BUTTONS,
+        payload: []
+      })
+    }
+
+    const isClockedIn = Util.isEmployeeClockedIn(employee);
+    const isAtLunch = Util.isEmployeeAtLunch(employee);
+    const isFromLunch = Util.isEmployeeFromLunch(employee);
+    const isClockedOut = Util.isEmployeeClockedOut(employee);
+
+    const activeButtonsList = Util.getActionButtons(isClockedIn, isAtLunch, isFromLunch, isClockedOut)
+
+    dispatch({
+      type: Types.SET_ACTION_BUTTONS,
+      payload: activeButtonsList
+    })
+
+  }, [selectedId])
+
+  useEffect(() => {
+    dispatch({
+      type: Types.SELECT_EMPLOYEE,
+      payload: selectedId
+    })
+  }, [selected])
 
   useEffect(() => {
     dispatch({
@@ -61,6 +97,7 @@ function EmployeePanel() {
       const newSelected = [...selected];
       newSelected.splice(indexOfName, 1);
       setSelected(newSelected);
+      setSelectedId(false)
 
       dispatch({
         type: Types.TOGGLE_TYPE,
@@ -80,6 +117,7 @@ function EmployeePanel() {
 
       const newSelected = (!selected.includes(data.name) && isAdminMode) ? [...selected, data.name] : [data.name];
       setSelected(newSelected);
+      setSelectedId(data.id)
 
       dispatch({
         type: Types.TOGGLE_TYPE,

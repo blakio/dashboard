@@ -13,8 +13,7 @@ function TimeSheet() {
   const {
     isAdminMode,
     isAdminLoggedIn,
-    isClockedIn,
-    isAtLunch,
+    activeButtonsList,
     dispatch,
     laborTypes,
     jobNumbers,
@@ -43,25 +42,13 @@ function TimeSheet() {
     })
   }
 
-  const [activeButtons, setActiveButtons] = useState(["to lunch", "from lunch", "message"]);
+  const [activeButtons, setActiveButtons] = useState([]);
 
   useEffect(() => {
-    if(clickedTypes.includes("employees") && !activeButtons.includes("clock in")
-    && !isClockedIn){
-      setActiveButtons([...activeButtons, "clock in"])
-    } else if(clickedTypes.includes("employees") && !activeButtons.includes("clock out")
-    && isClockedIn){
-      setActiveButtons([...activeButtons, "clock out"])
-    } else if(!clickedTypes.includes("employees") && activeButtons.includes("clock in")) {
-      const newActiveButtons = JSON.parse(JSON.stringify(activeButtons));
-      newActiveButtons.splice(activeButtons.indexOf("clock in"), 1);
-      setActiveButtons(newActiveButtons);
-    } else if(!clickedTypes.includes("employees") && activeButtons.includes("clock out")){
-      const newActiveButtons = JSON.parse(JSON.stringify(activeButtons));
-      newActiveButtons.splice(activeButtons.indexOf("clock out"), 1);
-      setActiveButtons(newActiveButtons);
-    }
+    setActiveButtons(activeButtonsList)
+  }, [activeButtonsList])
 
+  useEffect(() => {
     const activeDeletion = deletions.laborTypes.length || deletions.jobNumbers.length || deletions.employees.length;
     if(activeDeletion && !activeButtons.includes("trash")){
       setActiveButtons([...activeButtons, "trash"])
@@ -115,18 +102,6 @@ function TimeSheet() {
     },
     {
       isAdminButton: false,
-      text: "clock out",
-      icon: "fas fa-clock",
-      function: (isActive) => {
-        if(!isActive) return;
-        dispatch({
-          type: Types.CLOCK_OUT,
-          payload: null
-        })
-      }
-    },
-    {
-      isAdminButton: false,
       text: "to lunch",
       icon: "fas fa-drumstick-bite",
       function: (isActive) => {
@@ -149,6 +124,18 @@ function TimeSheet() {
         })
       }
     },
+    {
+      isAdminButton: false,
+      text: "clock out",
+      icon: "fas fa-clock",
+      function: (isActive) => {
+        if(!isActive) return;
+        dispatch({
+          type: Types.CLOCK_OUT,
+          payload: null
+        })
+      }
+    }
     // {
     //   isAdminButton: false,
     //   text: "message",
@@ -181,16 +168,7 @@ function TimeSheet() {
       {topButtons.map((data, index) => {
 
         const isAdminButtonButNotOnAdminMode = data.isAdminButton && !isAdminMode;
-        const removeClockedInButton = (data.text === "clock in") && (isClockedIn || isAtLunch);
-        const removeClockedOutButton = (data.text === "clock out") && !isClockedIn;
-        const removeToLunchButton = (data.text === "to lunch") && (!isClockedIn || isAtLunch);
-        const removeFromLunchButton = (data.text === "from lunch") && (!isClockedIn || !isAtLunch);
-
-        if(isAdminButtonButNotOnAdminMode ||
-          removeClockedInButton ||
-          removeClockedOutButton ||
-          removeToLunchButton ||
-          removeFromLunchButton){
+        if(isAdminButtonButNotOnAdminMode){
           return <div key={index}></div>
         }
 
@@ -232,6 +210,7 @@ function TimeSheet() {
           route="labortypes"
           setFunction={setLabor}
           field="name"
+          updateType={Types.SELECT_LABOR_TYPE}
         />
       </div>
 
@@ -248,6 +227,7 @@ function TimeSheet() {
           route="jobs"
           setFunction={setJobs}
           field="number"
+          updateType={Types.SELECT_JOB_NUMBER}
         />
       </div>
 
