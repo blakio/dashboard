@@ -185,7 +185,7 @@ function TimeSheet() {
 
         if(isAdminMode && !data.isAdminButton) return null;
 
-        return (<div key={index}>
+        return (<div key={index} className="topBarButtonParent">
           <div
             className={`topBarButton flex ${isActive(data.text) && "active"}`}
             onClick={() => data.function(isActive(data.text))}>
