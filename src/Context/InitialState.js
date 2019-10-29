@@ -20,6 +20,11 @@ const initialState = {
     jobNumbers: [],
     employees: []
   },
+  selected: {
+    laborTypes: [],
+    jobNumbers: [],
+    employees: []
+  },
   clickedTypes: [],
   laborTypes: [],
   jobNumbers: [],

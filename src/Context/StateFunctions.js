@@ -12,7 +12,18 @@ export default {
   setJobNumbers: (payload, state) => ({ ...state, jobNumbers: payload }),
   setLaborTypes: (payload, state) => ({ ...state, laborTypes: payload }),
   setEmployees: (payload, state) =>  ({ ...state, employees: payload }),
-
+  setSelected: (payload, state) => {
+    const  {
+      type,
+      values
+    } = payload;
+    const newSelected = breakRefAndCopy(state.selected);
+    newSelected[type] = values;
+    return {
+      ...state,
+      selected: newSelected
+    }
+  },
 
   createEmployee: (payload, state) => {
     const currentState = breakRefAndCopy(state);
