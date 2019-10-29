@@ -1,6 +1,20 @@
 const initialState = {
   isAdminMode: false,
   isAdminLoggedIn: true,
+  message: {
+    confirmation: {
+      status: false,
+      message: ""
+    },
+    error: {
+      status: false,
+      message: ""
+    },
+    warning: {
+      status: true,
+      message: ""
+    }
+  },
   deletions: {
     laborTypes: [],
     jobNumbers: [],
