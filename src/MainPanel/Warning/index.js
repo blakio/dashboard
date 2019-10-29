@@ -1,6 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+
+import Types from "../../Context/Types";
+
+import TimeSheetContext from "../../Context/State";
 
 const Warning = () => {
+
+  const {
+    dispatch,
+    message
+  } = useContext(TimeSheetContext);
 
   const [fadeStlye, setFadeStlye] = useState({
     opacity: 0,
@@ -19,11 +28,18 @@ const Warning = () => {
       opacity: 0,
       top: "-5em"
     })
+
+    setTimeout(() => {
+      dispatch({
+        type: Types.CLOSE_MESSAGE,
+        payload: "warning"
+      })
+    }, 600);
   }
 
   return (<div style={{ ...styles.parent, ...fadeStlye }}>
     <i style={styles.icon} className="fas fa-hand-paper"></i>
-    <p style={styles.text} >ARE YOU SURE?</p>
+    <p style={styles.text} >{`${message.warning.message || "ARE YOU SURE?"}`}</p>
     <div style={styles.confirmBox}>
       <div
         onClick={confirm}

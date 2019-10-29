@@ -1,6 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+
+import Types from "../../Context/Types";
+
+import TimeSheetContext from "../../Context/State";
 
 const Confirmation = () => {
+
+  const {
+    dispatch,
+    message
+  } = useContext(TimeSheetContext);
 
   const [fadeStlye, setFadeStlye] = useState({
     opacity: 0,
@@ -19,11 +28,18 @@ const Confirmation = () => {
       opacity: 0,
       top: "-5em"
     })
+
+    setTimeout(() => {
+      dispatch({
+        type: Types.CLOSE_MESSAGE,
+        payload: "confirmation"
+      })
+    }, 600);
   }
 
   return (<div style={{ ...styles.parent, ...fadeStlye }}>
     <i style={styles.icon} className="fas fa-thumbs-up"></i>
-    <p style={styles.text} >ALL SET!</p>
+    <p style={styles.text} >{`${message.confirmation.message || "ALL SET!"}`}</p>
     <div
       onClick={confirm}
       style={styles.button}>ok</div>

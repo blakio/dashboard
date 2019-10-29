@@ -219,5 +219,15 @@ export default {
       ...state,
       activeButtonsList: payload
     }
+  },
+
+  closeMessage: (payload, state) => {
+    const newMessage = breakRefAndCopy(state.message);
+    newMessage[payload].status = false;
+    newMessage[payload].message = "";
+    return {
+      ...state,
+      message: newMessage
+    }
   }
 }

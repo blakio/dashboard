@@ -1,6 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+
+import Types from "../../Context/Types";
+
+import TimeSheetContext from "../../Context/State";
 
 const Error = () => {
+
+  const {
+    dispatch,
+    message
+  } = useContext(TimeSheetContext);
 
   const [fadeStlye, setFadeStlye] = useState({
     opacity: 0,
@@ -19,11 +28,18 @@ const Error = () => {
       opacity: 0,
       top: "-5em"
     })
+
+    setTimeout(() => {
+      dispatch({
+        type: Types.CLOSE_MESSAGE,
+        payload: "error"
+      })
+    }, 600);
   }
 
   return (<div style={{ ...styles.parent, ...fadeStlye }}>
     <i style={styles.icon} className="fas fa-exclamation"></i>
-    <p style={styles.text} >ERROR</p>
+    <p style={styles.text} >{`${message.error.message || "ERROR"}`}</p>
     <div
       onClick={confirm}
       style={styles.button}>ok</div>
