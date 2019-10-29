@@ -80,7 +80,7 @@ function TimeSheetOptions(props) {
     } else {
       if(!selected.includes(index)){
         setSelected([index]);
-        setSelectedId(data.id)
+        setSelectedId(data[field])
         dispatch({
           type: toggleType,
           payload: { type: "add", name }

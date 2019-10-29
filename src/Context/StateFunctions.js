@@ -152,19 +152,23 @@ export default {
   },
 
   clickIn: (payload, state) => {
-    Axios.clockIn(state.selectedEmployee, payload);
+    const fn = () => { Axios.clockIn(state.selectedEmployee, payload); }
+    Axios.updateEmployee(state.selectedEmployee, state.selectedLaborType, state.selectedJobNumber, fn);
     return state;
   },
   clockOut: (payload, state) => {
-    Axios.clockOut(state.selectedEmployee, payload);
+    const fn = () => { Axios.clockOut(state.selectedEmployee, payload); }
+    Axios.updateEmployee(state.selectedEmployee, state.selectedLaborType, state.selectedJobNumber, fn);
     return state;
   },
   toLunch: (payload, state) => {
-    Axios.startLunch(state.selectedEmployee, payload);
+    const fn = () => { Axios.startLunch(state.selectedEmployee, payload); }
+    Axios.updateEmployee(state.selectedEmployee, state.selectedLaborType, state.selectedJobNumber, fn);
     return state;
   },
   fromLunch: (payload, state) => {
-    Axios.endLunch(state.selectedEmployee, payload);
+    const fn = () => { Axios.endLunch(state.selectedEmployee, payload); }
+    Axios.updateEmployee(state.selectedEmployee, state.selectedLaborType, state.selectedJobNumber, fn);
     return state;
   },
 

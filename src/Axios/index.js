@@ -79,5 +79,18 @@ export default {
       clockOutTime: moment().format("YYYY/MM/DD HH:mm:ss")
     }).then(data => fn())
       .catch(error => console.log(error));
+  },
+  updateEmployee: (id, laborType, jobNumber, fn) => {
+    let url = `https://dashboard-api-02.herokuapp.com/api/employees/`
+    const updates = {};
+    if(laborType.length){
+      updates.laborType = laborType
+    }
+    if(jobNumber){
+      updates.jobNumber = jobNumber
+    }
+    axios.put(url + id, updates).then((response)=> {
+      fn();
+    })
   }
 };
