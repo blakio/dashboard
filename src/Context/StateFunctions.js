@@ -140,20 +140,31 @@ export default {
       deletions
     };
   },
+  resetDeletions: (payload, state) => {
+    return {
+      ...state,
+      deletions: {
+        laborTypes: [],
+        jobNumbers: [],
+        employees: []
+      }
+    }
+  },
 
   clickIn: (payload, state) => {
-    console.log(state.selectedEmployee);
-    console.log(state.selectedLaborType);
-    console.log(state.selectedJobNumber);
+    Axios.clockIn(state.selectedEmployee, payload);
     return state;
   },
   clockOut: (payload, state) => {
+    Axios.clockOut(state.selectedEmployee, payload);
     return state;
   },
   toLunch: (payload, state) => {
+    Axios.startLunch(state.selectedEmployee, payload);
     return state;
   },
   fromLunch: (payload, state) => {
+    Axios.endLunch(state.selectedEmployee, payload);
     return state;
   },
 

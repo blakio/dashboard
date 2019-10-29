@@ -34,6 +34,20 @@ function TimeSheet() {
     });
   }
 
+  const resetEmployees = () => {
+    dispatch({
+      type: Types.GET_EMPLOYEES,
+      payload: {
+        fn: obj => {
+          dispatch({
+            type: Types.SET_EMPLOYEES,
+            payload: obj.data
+          })
+        }
+      }
+    })
+  }
+
   const setLabor = (response) => {
     const { data } = response;
     dispatch({
@@ -50,8 +64,8 @@ function TimeSheet() {
 
   useEffect(() => {
     const activeDeletion = deletions.laborTypes.length || deletions.jobNumbers.length || deletions.employees.length;
-    if(activeDeletion && !activeButtons.includes("trash")){
-      setActiveButtons([...activeButtons, "trash"])
+    if(activeDeletion){
+      setActiveButtons(["trash"])
     } else if (!activeDeletion && activeButtons.includes("trash")) {
       const newActiveButtons = JSON.parse(JSON.stringify(activeButtons));
       newActiveButtons.splice(activeButtons.indexOf("trash"), 1);
@@ -70,17 +84,7 @@ function TimeSheet() {
           type: Types.BULK_DELETE,
           payload: {
             fn: () => {
-              dispatch({
-                type: Types.GET_EMPLOYEES,
-                payload: {
-                  fn: obj => {
-                    dispatch({
-                      type: Types.SET_EMPLOYEES,
-                      payload: obj.data
-                    })
-                  }
-                }
-              })
+              resetEmployees();
               Axios.get("labortypes", null, response => setLabor(response));
               Axios.get("jobs", null, response => setJobs(response));
             }
@@ -96,7 +100,7 @@ function TimeSheet() {
         if(!isActive) return;
         dispatch({
           type: Types.CLOCK_IN,
-          payload: null
+          payload: resetEmployees
         })
       }
     },
@@ -108,7 +112,7 @@ function TimeSheet() {
         if(!isActive) return;
         dispatch({
           type: Types.GO_TO_LUNCH,
-          payload: null
+          payload: resetEmployees
         })
       }
     },
@@ -120,7 +124,7 @@ function TimeSheet() {
         if(!isActive) return;
         dispatch({
           type: Types.BACK_FROM_LUNCH,
-          payload: null
+          payload: resetEmployees
         })
       }
     },
@@ -132,7 +136,19 @@ function TimeSheet() {
         if(!isActive) return;
         dispatch({
           type: Types.CLOCK_OUT,
-          payload: null
+          payload: () => {
+            dispatch({
+              type: Types.GET_EMPLOYEES,
+              payload: {
+                fn: obj => {
+                  dispatch({
+                    type: Types.SET_EMPLOYEES,
+                    payload: obj.data
+                  })
+                }
+              }
+            })
+          }
         })
       }
     }

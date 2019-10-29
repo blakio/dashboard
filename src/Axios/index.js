@@ -1,4 +1,5 @@
 import axios from "axios";
+import moment from "moment";
 
 // Set config defaults when creating the instance
 const instance = axios.create({
@@ -45,5 +46,38 @@ export default {
       .catch(function (error) {
         console.log(error);
       });
+  },
+  clockIn: (id, fn) => {
+    let url = `https://dashboard-api-02.herokuapp.com/api/employees/`
+    url += id
+    axios.put(url, {
+      clockInTime: moment().format("YYYY/MM/DD HH:mm:ss")
+    })
+    .then(data => fn())
+    .catch(error => { console.log(error) });
+  },
+  startLunch: (id, fn) => {
+    let url = `https://dashboard-api-02.herokuapp.com/api/employees/`
+    url += id
+    axios.put(url, {
+      startLunch: moment().format("YYYY/MM/DD HH:mm:ss")
+    }).then(data => fn())
+      .catch(error => console.log(JSON.stringify(error)));
+  },
+  endLunch: (id, fn) => {
+    let url = `https://dashboard-api-02.herokuapp.com/api/employees/`
+    url += id
+    axios.put(url, {
+      endLunch: moment().format("YYYY/MM/DD HH:mm:ss")
+    }).then(data => fn())
+    .catch(error => console.log(JSON.stringify(error)) );
+  },
+  clockOut: (id, fn) => {
+    let url = `https://dashboard-api-02.herokuapp.com/api/employees/`
+    url += id
+    axios.put(url, {
+      clockOutTime: moment().format("YYYY/MM/DD HH:mm:ss")
+    }).then(data => fn())
+      .catch(error => console.log(error));
   }
 };

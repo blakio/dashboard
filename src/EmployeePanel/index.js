@@ -25,6 +25,14 @@ function EmployeePanel() {
   } = useContext(TimeSheetContext);
 
   useEffect(() => {
+    setSelected([]);
+    setSelectedId("");
+    dispatch({
+      type: Types.RESET_DELETIONS
+    });
+  }, [isAdminMode]);
+
+  useEffect(() => {
     let employee;
     employees.forEach(data => {
       if(data.id === selectedId){

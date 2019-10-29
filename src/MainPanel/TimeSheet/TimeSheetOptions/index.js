@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import TimeSheetContext from "../../../Context/State";
 import Axios from "../../../Axios";
+import Types from "../../../Context/Types";
 
 import './TimeSheetOptions.css';
 
@@ -29,6 +30,14 @@ function TimeSheetOptions(props) {
   const [inputValue, setInputValue] = useState(null);
   const [selected, setSelected] = useState([""]);
   const [selectedId, setSelectedId] = useState("");
+
+  useEffect(() => {
+    setSelected([]);
+    setSelectedId("");
+    dispatch({
+      type: Types.RESET_DELETIONS
+    });
+  }, [isAdminMode]);
 
   useEffect(() => {
     dispatch({
