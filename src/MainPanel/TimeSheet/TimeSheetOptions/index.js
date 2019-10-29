@@ -11,7 +11,8 @@ function TimeSheetOptions(props) {
     isAdminMode,
     isAdminLoggedIn,
     dispatch,
-    deletions
+    deletions,
+    selectedItems
   } = useContext(TimeSheetContext);
 
   const {
@@ -24,8 +25,29 @@ function TimeSheetOptions(props) {
     route,
     setFunction,
     field,
-    updateType
+    updateType,
+    selectedItemType
   } = props;
+
+  const breakRefAndCopy = (obj) => JSON.parse(JSON.stringify(obj));
+
+  const selectItem = (name) => {
+    const selected = breakRefAndCopy(selectedItems);
+    if(selected[selectedItemType].includes(name)){
+      const index = selected[selectedItemType].indexOf(name);
+      selected[selectedItemType].splice(index, 1);
+    } else {
+      if(isAdminMode){
+        selected[selectedItemType].push(name)
+      } else {
+        selected[selectedItemType] = [name];
+      }
+    }
+    dispatch({
+      type: Types.SET_SELECTED,
+      payload: selected
+    })
+  }
 
   const [inputValue, setInputValue] = useState(null);
   const [selected, setSelected] = useState([""]);
@@ -125,7 +147,10 @@ function TimeSheetOptions(props) {
     <div className="sideOptionBody flex">
       {options.map((data, index) => (<div key={index}>
         <div
-          onClick={() => select(index, data)}
+          onClick={() => {
+            selectItem(data[field])
+            select(index, data)
+          }}
           className={`tag tagLabel ${(selected.includes(index)) && "selected"}`}>
           {data[field]}
         </div>

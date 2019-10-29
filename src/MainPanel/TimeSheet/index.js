@@ -227,6 +227,7 @@ function TimeSheet() {
           setFunction={setLabor}
           field="name"
           updateType={Types.SELECT_LABOR_TYPE}
+          selectedItemType="laborTypes"
         />
       </div>
 
@@ -244,6 +245,7 @@ function TimeSheet() {
           setFunction={setJobs}
           field="number"
           updateType={Types.SELECT_JOB_NUMBER}
+          selectedItemType="jobNumbers"
         />
       </div>
 

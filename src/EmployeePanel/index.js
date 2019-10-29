@@ -230,7 +230,6 @@ function EmployeePanel() {
       {employees && employees.map((data, index) => {
         return <EmployeePanelButtons
           key={index}
-          dispatch={dispatch}
           createActionType={Types.CREATE_EMPLOYEE}
           deleteActionType={Types.DELETE_EMPLOYEE}
           isAdminMode={isAdminMode && isAdminLoggedIn}
@@ -238,7 +237,8 @@ function EmployeePanel() {
           selected={selected && (selected.includes(data.name))}
           select={select}
           toggleType={Types.TOGGLE_TYPE}
-          editEmployee={editEmployee}/>
+          editEmployee={editEmployee}
+          selectedItemType="employees"/>
       })}
     </div>
   </div>);

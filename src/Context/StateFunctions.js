@@ -13,15 +13,9 @@ export default {
   setLaborTypes: (payload, state) => ({ ...state, laborTypes: payload }),
   setEmployees: (payload, state) =>  ({ ...state, employees: payload }),
   setSelected: (payload, state) => {
-    const  {
-      type,
-      values
-    } = payload;
-    const newSelected = breakRefAndCopy(state.selected);
-    newSelected[type] = values;
     return {
       ...state,
-      selected: newSelected
+      selectedItems: payload
     }
   },
 
@@ -202,7 +196,12 @@ export default {
     return {
       ...state,
       isAdminMode: currentState.isAdminMode,
-      clickedTypes: []
+      clickedTypes: [],
+      selectedItems: {
+        laborTypes: [],
+        jobNumbers: [],
+        employees: []
+      }
     };
   },
 

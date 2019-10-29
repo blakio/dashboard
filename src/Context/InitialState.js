@@ -20,7 +20,7 @@ const initialState = {
     jobNumbers: [],
     employees: []
   },
-  selected: {
+  selectedItems: {
     laborTypes: [],
     jobNumbers: [],
     employees: []
