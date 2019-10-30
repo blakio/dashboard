@@ -146,18 +146,31 @@ function TimeSheetOptions(props) {
       }
     </div>
     <div className="sideOptionBody flex">
-      {options.map((data, index) =>
-        data.isActive &&
-        (<div key={index}>
-          <div
-            onClick={() => {
-              selectItem(data[field])
-              select(index, data)
-            }}
-            className={`tag tagLabel ${selectedItems[name].includes(data[field]) && "selected"}`}>
-            {data[field]}
-          </div>
-        </div>))}
+      {options.map((data, index) => {
+        if(isAdminMode){
+          return (<div key={index}>
+            <div
+              onClick={() => {
+                selectItem(data[field])
+                select(index, data)
+              }}
+              className={`tag tagLabel ${selectedItems[name].includes(data[field]) && "selected"}`}>
+              {data[field]}
+            </div>
+          </div>)
+        } else {
+          return data.isActive && (<div key={index}>
+            <div
+              onClick={() => {
+                selectItem(data[field])
+                select(index, data)
+              }}
+              className={`tag tagLabel ${selectedItems[name].includes(data[field]) && "selected"}`}>
+              {data[field]}
+            </div>
+          </div>)
+        }
+      })}
     </div>
   </div>);
 }
