@@ -70,7 +70,9 @@ export default (state, action) => {
 
     case Types.SET_ACTION_BUTTONS:
       return StateFunctions.setActiveButtons(payload, state);
-
+      
+    case Types.OPEN_MESSAGE:
+      return StateFunctions.openMessage(payload, state);
     case Types.CLOSE_MESSAGE:
       return StateFunctions.closeMessage(payload, state);
 

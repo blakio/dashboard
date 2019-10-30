@@ -186,7 +186,17 @@ function EmployeePanel() {
       jobTitle: jobTitle.toUpperCase(),
       name: fullName.toUpperCase(),
     }, obj => {
-      Axios.get("employees", null, response => setState(response));
+      if(typeof(obj.data) === "string"){
+        dispatch({
+          type: Types.OPEN_MESSAGE,
+          payload: {
+            type: "error",
+            message: obj.data
+          }
+        })
+      } else {
+        Axios.get("employees", null, response => setState(response));
+      }
     });
     setFullName("");
     setJobTitle("");

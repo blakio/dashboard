@@ -291,6 +291,15 @@ export default {
     }
   },
 
+  openMessage: (payload, state) => {
+    const newMessage = breakRefAndCopy(state.message);
+    newMessage[payload.type].status = true;
+    newMessage[payload.type].message = payload.message;
+    return {
+      ...state,
+      message: newMessage
+    }
+  },
   closeMessage: (payload, state) => {
     const newMessage = breakRefAndCopy(state.message);
     newMessage[payload].status = false;
