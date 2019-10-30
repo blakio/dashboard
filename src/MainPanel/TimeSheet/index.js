@@ -76,7 +76,7 @@ function TimeSheet() {
 
   const topButtons = [
     {
-      isAdminButton: true,
+      isVisable: isAdminMode,
       text: "trash",
       icon: "fas fa-trash-alt",
       function: (isActive) => {
@@ -94,7 +94,7 @@ function TimeSheet() {
       }
     },
     {
-      isAdminButton: true,
+      isVisable: isAdminMode,
       text: "deactivate",
       icon: "fas fa-unlink",
       function: (isActive) => {
@@ -112,7 +112,7 @@ function TimeSheet() {
       }
     },
     {
-      isAdminButton: false,
+      isVisable: !isAdminMode,
       text: "clock in",
       icon: "fas fa-clock",
       function: (isActive) => {
@@ -124,7 +124,7 @@ function TimeSheet() {
       }
     },
     {
-      isAdminButton: false,
+      isVisable: !isAdminMode,
       text: "to lunch",
       icon: "fas fa-drumstick-bite",
       function: (isActive) => {
@@ -136,7 +136,7 @@ function TimeSheet() {
       }
     },
     {
-      isAdminButton: false,
+      isVisable: !isAdminMode,
       text: "from lunch",
       icon: "fas fa-bone",
       function: (isActive) => {
@@ -148,7 +148,7 @@ function TimeSheet() {
       }
     },
     {
-      isAdminButton: false,
+      isVisable: !isAdminMode,
       text: "clock out",
       icon: "fas fa-clock",
       function: (isActive) => {
@@ -171,15 +171,6 @@ function TimeSheet() {
         })
       }
     }
-    // {
-    //   isAdminButton: false,
-    //   text: "message",
-    //   icon: "fas fa-envelope-open-text",
-    //   function: (isActive) => {
-    //     if(!isActive) return;
-    //     dispatch({})
-    //   }
-    // }
   ]
 
   const onClickToggle = () => {
@@ -202,10 +193,7 @@ function TimeSheet() {
       {toggleButton}
       {topButtons.map((data, index) => {
 
-        const isAdminButtonButNotOnAdminMode = data.isAdminButton && !isAdminMode;
-        if(isAdminButtonButNotOnAdminMode){
-          return <div key={index}></div>
-        }
+        if(!data.isVisable) return <div key={index}></div>;
 
         const isActive = (text) => {
           return (
@@ -218,8 +206,6 @@ function TimeSheet() {
             (activeButtons.includes("message") && text === "message")
           )
         }
-
-        if(isAdminMode && !data.isAdminButton) return null;
 
         return (<div key={index} className="topBarButtonParent">
           <div
