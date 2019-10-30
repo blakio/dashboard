@@ -159,22 +159,82 @@ export default {
   clickIn: (payload, state) => {
     const fn = () => { Axios.clockIn(state.selectedEmployee, payload); }
     Axios.updateEmployee(state.selectedEmployee, state.selectedLaborType, state.selectedJobNumber, fn);
-    return state;
+    const newMessage = breakRefAndCopy(state.message);
+    newMessage.confirmation.status = true;
+    newMessage.confirmation.message = "";
+    return {
+      ...state,
+      message: newMessage,
+      selectedItems: {
+        laborTypes: [],
+        jobNumbers: [],
+        employees: []
+      },
+      activeButtonsList: [],
+      selectedEmployee: "",
+      selectedLaborType: "",
+      selectedJobNumber: ""
+    };
   },
   clockOut: (payload, state) => {
     const fn = () => { Axios.clockOut(state.selectedEmployee, payload); }
     Axios.updateEmployee(state.selectedEmployee, state.selectedLaborType, state.selectedJobNumber, fn);
-    return state;
+    const newMessage = breakRefAndCopy(state.message);
+    newMessage.confirmation.status = true;
+    newMessage.confirmation.message = "";
+    return {
+      ...state,
+      message: newMessage,
+      selectedItems: {
+        laborTypes: [],
+        jobNumbers: [],
+        employees: []
+      },
+      activeButtonsList: [],
+      selectedEmployee: "",
+      selectedLaborType: "",
+      selectedJobNumber: ""
+    };
   },
   toLunch: (payload, state) => {
     const fn = () => { Axios.startLunch(state.selectedEmployee, payload); }
     Axios.updateEmployee(state.selectedEmployee, state.selectedLaborType, state.selectedJobNumber, fn);
-    return state;
+    const newMessage = breakRefAndCopy(state.message);
+    newMessage.confirmation.status = true;
+    newMessage.confirmation.message = "";
+    return {
+      ...state,
+      message: newMessage,
+      selectedItems: {
+        laborTypes: [],
+        jobNumbers: [],
+        employees: []
+      },
+      activeButtonsList: [],
+      selectedEmployee: "",
+      selectedLaborType: "",
+      selectedJobNumber: ""
+    };
   },
   fromLunch: (payload, state) => {
     const fn = () => { Axios.endLunch(state.selectedEmployee, payload); }
     Axios.updateEmployee(state.selectedEmployee, state.selectedLaborType, state.selectedJobNumber, fn);
-    return state;
+    const newMessage = breakRefAndCopy(state.message);
+    newMessage.confirmation.status = true;
+    newMessage.confirmation.message = "";
+    return {
+      ...state,
+      message: newMessage,
+      selectedItems: {
+        laborTypes: [],
+        jobNumbers: [],
+        employees: []
+      },
+      activeButtonsList: [],
+      selectedEmployee: "",
+      selectedLaborType: "",
+      selectedJobNumber: ""
+    };
   },
 
   toggleType: ({type, name}, state) => {

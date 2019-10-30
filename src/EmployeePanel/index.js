@@ -21,7 +21,8 @@ function EmployeePanel() {
     dispatch,
     employees,
     isAdminMode,
-    isAdminLoggedIn
+    isAdminLoggedIn,
+    selectedItems
   } = useContext(TimeSheetContext);
 
   useEffect(() => {
@@ -35,7 +36,7 @@ function EmployeePanel() {
   useEffect(() => {
     let employee;
     employees.forEach(data => {
-      if(data.id === selectedId){
+      if(selectedItems.employees.includes(data.name)){
         employee = data;
       }
     })
@@ -59,14 +60,15 @@ function EmployeePanel() {
       payload: activeButtonsList
     })
 
-  }, [selectedId])
+  }, [selectedItems.employees])
 
-  useEffect(() => {
-    dispatch({
-      type: Types.SELECT_EMPLOYEE,
-      payload: selectedId
-    })
-  }, [selected])
+  // useEffect(() => {
+  //   console.log()
+  //   dispatch({
+  //     type: Types.SELECT_EMPLOYEE,
+  //     payload: selectedId
+  //   })
+  // }, [selected])
 
   useEffect(() => {
     dispatch({

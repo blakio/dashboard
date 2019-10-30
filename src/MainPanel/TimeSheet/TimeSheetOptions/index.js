@@ -151,7 +151,7 @@ function TimeSheetOptions(props) {
             selectItem(data[field])
             select(index, data)
           }}
-          className={`tag tagLabel ${(selected.includes(index)) && "selected"}`}>
+          className={`tag tagLabel ${selectedItems[name].includes(data[field]) && "selected"}`}>
           {data[field]}
         </div>
       </div>))}

@@ -43,9 +43,15 @@ function EmployeePanelButtons(props) {
     })
   }
 
+  const isSelected = selectedItems.employees.includes(name);
+
   return (<div
-    className={`employeeButton flex ${selected && "selected"}`}
+    className={`employeeButton flex ${isSelected && "selected"}`}
     onClick={() => {
+      dispatch({
+        type: Types.SELECT_EMPLOYEE,
+        payload: id
+      })
       selectedEmployee(name);
       select({name, id});
     }}>
