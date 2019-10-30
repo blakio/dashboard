@@ -88,11 +88,7 @@ function EmployeePanel() {
     const { data } = response;
     const payload = [];
     data.forEach(data => {
-      payload.push({
-        id: data.id,
-        name: data.name,
-        jobTitle: data.jobTitle
-      })
+      payload.push(data)
     });
     dispatch({
       type: Types.SET_EMPLOYEES,
@@ -241,7 +237,7 @@ function EmployeePanel() {
     </div>}
     <div id="rightPanelLiner">
       {employees && employees.map((data, index) => {
-        if(!data.isActive) return false;
+        if(!data.isActive && !isAdminMode) return null;
         return <EmployeePanelButtons
           key={index}
           createActionType={Types.CREATE_EMPLOYEE}
