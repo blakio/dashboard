@@ -185,6 +185,7 @@ function EmployeePanel() {
     Axios.post("employees", {
       jobTitle: jobTitle.toUpperCase(),
       name: fullName.toUpperCase(),
+      isActive: true
     }, obj => {
       if(typeof(obj.data) === "string"){
         dispatch({
@@ -240,6 +241,7 @@ function EmployeePanel() {
     </div>}
     <div id="rightPanelLiner">
       {employees && employees.map((data, index) => {
+        if(!data.isActive) return false;
         return <EmployeePanelButtons
           key={index}
           createActionType={Types.CREATE_EMPLOYEE}
