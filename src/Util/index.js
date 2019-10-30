@@ -17,7 +17,7 @@ export default {
   },
 
   getActionButtons: (isClockedIn, isAtLunch, isFromLunch, isClockedOut) => {
-    let activeButtonsList = ["trash"];
+    let activeButtonsList = ["trash", "deactivate"];
     if(!isClockedIn){
       activeButtonsList.push("clock in")
     } else if (!isAtLunch) {

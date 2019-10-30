@@ -50,6 +50,8 @@ export default (state, action) => {
       return StateFunctions.deleteJobNumber(payload, state);
     case Types.BULK_DELETE:
       return StateFunctions.bulkDelete(payload, state);
+    case Types.BULK_DEACTIVATE:
+      return StateFunctions.bulkDeactivate(payload, state);
 
     // OTHER
     case Types.UPDATE_DELETIONS:
@@ -70,7 +72,7 @@ export default (state, action) => {
 
     case Types.SET_ACTION_BUTTONS:
       return StateFunctions.setActiveButtons(payload, state);
-      
+
     case Types.OPEN_MESSAGE:
       return StateFunctions.openMessage(payload, state);
     case Types.CLOSE_MESSAGE:

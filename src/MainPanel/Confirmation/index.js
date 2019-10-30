@@ -51,9 +51,9 @@ const styles = {
     position: "absolute",
     backgroundColor: "#008280",
     top: "10vh",
-    left: "38vw",
-    height: "24vw",
-    width: "24vw",
+    left: "40vw",
+    height: "20em",
+    width: "20em",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -63,7 +63,7 @@ const styles = {
   },
   icon: {
     color: "rgba(255, 255, 255, 0.4)",
-    fontSize: "10em"
+    fontSize: "6em"
   },
   text: {
     color: "#eaeaea",

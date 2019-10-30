@@ -65,10 +65,11 @@ function TimeSheet() {
   useEffect(() => {
     const activeDeletion = deletions.laborTypes.length || deletions.jobNumbers.length || deletions.employees.length;
     if(activeDeletion){
-      setActiveButtons(["trash"])
+      setActiveButtons(["trash", "deactivate"])
     } else if (!activeDeletion && activeButtons.includes("trash")) {
       const newActiveButtons = JSON.parse(JSON.stringify(activeButtons));
       newActiveButtons.splice(activeButtons.indexOf("trash"), 1);
+      newActiveButtons.splice(activeButtons.indexOf("deactivate"), 1);
       setActiveButtons(newActiveButtons);
     }
   }, [clickedTypes, deletions])
@@ -82,6 +83,24 @@ function TimeSheet() {
         if(!isActive) return;
         dispatch({
           type: Types.BULK_DELETE,
+          payload: {
+            fn: () => {
+              resetEmployees();
+              Axios.get("labortypes", null, response => setLabor(response));
+              Axios.get("jobs", null, response => setJobs(response));
+            }
+          },
+        })
+      }
+    },
+    {
+      isAdminButton: true,
+      text: "deactivate",
+      icon: "fas fa-unlink",
+      function: (isActive) => {
+        if(!isActive) return;
+        dispatch({
+          type: Types.BULK_DEACTIVATE,
           payload: {
             fn: () => {
               resetEmployees();
@@ -191,6 +210,7 @@ function TimeSheet() {
         const isActive = (text) => {
           return (
             (activeButtons.includes("trash") && text === "trash") ||
+            (activeButtons.includes("deactivate") && text === "deactivate") ||
             (activeButtons.includes("clock in") && text === "clock in") ||
             (activeButtons.includes("clock out") && text === "clock out") ||
             (activeButtons.includes("to lunch") && text === "to lunch") ||
