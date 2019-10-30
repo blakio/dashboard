@@ -14,6 +14,7 @@ function EmployeePanel() {
   const [selectedId, setSelectedId] = useState("");
   const [fullName, setFullName] = useState("");
   const [jobTitle, setJobTitle] = useState("");
+  const [travelTime, setTravelTime] = useState(0);
   const [isEditing, setIsEditing] = useState(false);
 
   const {
@@ -61,14 +62,6 @@ function EmployeePanel() {
     })
 
   }, [selectedItems.employees])
-
-  // useEffect(() => {
-  //   console.log()
-  //   dispatch({
-  //     type: Types.SELECT_EMPLOYEE,
-  //     payload: selectedId
-  //   })
-  // }, [selected])
 
   useEffect(() => {
     dispatch({
@@ -145,6 +138,7 @@ function EmployeePanel() {
   const editEmployee = data => {
     setFullName(data.name);
     setJobTitle(data.jobTitle);
+    setTravelTime(data.travelTime);
     setIsEditing({
       id: data.id
     })
@@ -175,13 +169,15 @@ function EmployeePanel() {
     setIsEditing(false);
     setFullName("");
     setJobTitle("");
+    setTravelTime(0);
   }
 
   const add = () => {
     Axios.post("employees", {
       jobTitle: jobTitle.toUpperCase(),
       name: fullName.toUpperCase(),
-      isActive: true
+      isActive: true,
+      travelTime: parseInt(travelTime)
     }, obj => {
       if(typeof(obj.data) === "string"){
         dispatch({
@@ -197,6 +193,7 @@ function EmployeePanel() {
     });
     setFullName("");
     setJobTitle("");
+    setTravelTime(0);
   }
 
   return (<div id="rightPanel" className="flex">
@@ -234,6 +231,22 @@ function EmployeePanel() {
             (isEditing) ? edit() : add();
           }
         }}/>
+        <input
+          className="addInput tag"
+          style={{
+            fontWeight: 400,
+            border: "none",
+            borderRadius: 0
+          }}
+          placeholder="Travel Time"
+          type="number"
+          value={travelTime}
+          onChange={e => setTravelTime(e.target.value)}
+          onKeyPress={e => {
+            if(e.key === "Enter" && fullName.trim().length && jobTitle.trim().length){
+              (isEditing) ? edit() : add();
+            }
+          }}/>
     </div>}
     <div id="rightPanelLiner">
       {employees && employees.map((data, index) => {
