@@ -105,33 +105,52 @@ export default {
     };
   },
   bulkDelete: (payload, state) => {
-    const routes = {
+    const map = {
       employees: "employees",
-      jobNumbers: "jobs",
-      laborTypes: "labortypes"
+      laborTypes: "labortypes",
+      jobNumbers: "jobs"
     }
-    const deletions = [];
-    for(let i in state.deletions){
-      const route = routes[i];
-      if(state.deletions[i].length){
-        state.deletions[i].forEach(data => {
-          deletions.push(Axios.delete(`${route}/${data.id}`));
-        })
+    for(let i in state.selectedItems){
+      if(state.selectedItems[i].length){
+        state.selectedItems[i].forEach(data => Axios.delete(`${map[i]}/${data.id}`, null, payload.fn))
       }
     }
-    Promise.all(deletions)
-          .then(obj => payload.fn())
-          .catch(e => console.log(e))
     return {
       ...state,
-      deletions: breakRefAndCopy(initialState.deletions)
+      selectedItems: breakRefAndCopy(initialState.selectedItems)
     };
   },
   bulkDeactivate: (payload, state) => {
-    return state;
+    const map = {
+      employees: "employees",
+      laborTypes: "labortypes",
+      jobNumbers: "jobs"
+    }
+    for(let i in state.selectedItems){
+      if(state.selectedItems[i].length){
+        state.selectedItems[i].forEach(data => Axios.put(`${map[i]}/${data.id}`, { isActive: false }, payload.fn))
+      }
+    }
+    return {
+      ...state,
+      selectedItems: breakRefAndCopy(initialState.selectedItems)
+    }
   },
   bulkActivate: (payload, state) => {
-    return state;
+    const map = {
+      employees: "employees",
+      laborTypes: "labortypes",
+      jobNumbers: "jobs"
+    }
+    for(let i in state.selectedItems){
+      if(state.selectedItems[i].length){
+        state.selectedItems[i].forEach(data => Axios.put(`${map[i]}/${data.id}`, { isActive: true }, payload.fn))
+      }
+    }
+    return {
+      ...state,
+      selectedItems: breakRefAndCopy(initialState.selectedItems)
+    };
   },
 
   updateDeletions: (payload, state) => {
