@@ -10,44 +10,26 @@ const instance = axios.create({
 export default {
   get: async (path, params, fn) => {
     await instance.get(path, { params })
-      .then(function (response) {
-        if(fn) fn(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
-      .then(function () {
-        // always executed
-        // if(fn) fn();
-     });
+      .then(response => { fn && fn(response) })
+      .catch(error => console.log(error));
   },
   post: async (path, obj, fn, errorFn) => {
     await instance.post(path, obj)
-      .then(function (response) {
-        if(fn) fn(response);
-      })
-      .catch(function (error) {
+      .then(response => { fn && fn(response) })
+      .catch(error => {
         console.log(error);
         if(errorFn) errorFn(error)
       });
   },
   put: async (path, obj, fn) => {
     await instance.put(path, obj)
-      .then(function (response) {
-        if(fn) fn(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+      .then(response => { fn && fn(response) })
+      .catch(error => console.log(error));
   },
   delete: async (path, obj, fn) => {
     await instance.delete(path, obj)
-      .then(function (response) {
-        if(fn) fn(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+      .then(response => { fn && fn(response) })
+      .catch(error => console.log(error));
   },
   clockIn: (id, fn) => {
     let url = `https://dashboard-api-02.herokuapp.com/api/clockin/${id}`;
@@ -82,9 +64,7 @@ export default {
     if(jobNumber){
       updates.jobNumber = jobNumber
     }
-    axios.put(url + id, updates).then((response)=> {
-      fn();
-    })
+    axios.put(url + id, updates).then(response => fn());
   },
   fetchEmployees: async (dispatch) => {
     const response = await axios.get("https://dashboard-api-02.herokuapp.com/api/employees");
