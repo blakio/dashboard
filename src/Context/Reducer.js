@@ -6,13 +6,9 @@ export default (state, action) => {
   console.table(action)
 
   switch(action.type){
-    // GET
-    case Types.GET_EMPLOYEES:
-      return StateFunctions.getEmployees(payload, state);
-
+    // SET
     case Types.SET_SELECTED_ITEMS:
       return StateFunctions.setSelectedItems(payload, state);
-
     case Types.SET_EMPLOYEES:
       return StateFunctions.setEmployees(payload, state);
     case Types.SET_LABOR_TYPES:
@@ -28,6 +24,11 @@ export default (state, action) => {
     case Types.CREATE_JOB_NUMBER:
       return StateFunctions.createJobNumber(payload, state);
 
+    // DELETE
+    case Types.BULK_DELETE:
+      return StateFunctions.bulkDelete(payload, state);
+
+    // OTHER
     case Types.CLOCK_IN:
       return StateFunctions.clickIn(payload, state);
     case Types.CLOCK_OUT:
@@ -36,38 +37,14 @@ export default (state, action) => {
       return StateFunctions.toLunch(payload, state);
     case Types.BACK_FROM_LUNCH:
       return StateFunctions.fromLunch(payload, state);
-
-    // UPDATE
-    case Types.UPDATE_EMPLOYEE:
-      return StateFunctions.updateEmployee(payload, state);
-
-    // DELETE
-    case Types.DELETE_EMPLOYEE:
-      return StateFunctions.deleteEmployee(payload, state);
-    case Types.DELETE_LABOR_TYPE:
-      return StateFunctions.deleteLaborType(payload, state);
-    case Types.DELETE_JOB_NUMBER:
-      return StateFunctions.deleteJobNumber(payload, state);
-    case Types.BULK_DELETE:
-      return StateFunctions.bulkDelete(payload, state);
     case Types.BULK_DEACTIVATE:
       return StateFunctions.bulkDeactivate(payload, state);
     case Types.BULK_ACTIVATE:
       return StateFunctions.bulkActivate(payload, state);
-
-    // OTHER
-    case Types.UPDATE_DELETIONS:
-      return StateFunctions.updateDeletions(payload, state);
-    case Types.RESET_DELETIONS:
-      return StateFunctions.resetDeletions(payload, state);
-    case Types.TOGGLE_TYPE:
-      return StateFunctions.toggleType(payload, state);
+    case Types.UPDATE_EMPLOYEE:
+      return StateFunctions.updateEmployee(payload, state);
     case Types.TOGGLE_ADMIN_MODE:
       return StateFunctions.toggleAdminMode(payload, state);
-
-    case Types.SET_ACTION_BUTTONS:
-      return StateFunctions.setActiveButtons(payload, state);
-
     case Types.OPEN_MESSAGE:
       return StateFunctions.openMessage(payload, state);
     case Types.CLOSE_MESSAGE:
