@@ -52,25 +52,25 @@ export default {
   clockIn: (id, fn) => {
     let url = `https://dashboard-api-02.herokuapp.com/api/clockin/${id}`;
     axios.post(url)
-    .then(data => if(fn) fn())
+    .then(data => {if(fn) fn()})
     .catch(error => { console.log(error) });
   },
   startLunch: (id, fn) => {
     let url = `https://dashboard-api-02.herokuapp.com/api/tolunch/${id}`;
     axios.post(url)
-      .then(data => if(fn) fn())
+      .then(data => {if(fn) fn()})
       .catch(error => console.log(JSON.stringify(error)));
   },
   endLunch: (id, fn) => {
     let url = `https://dashboard-api-02.herokuapp.com/api/fromlunch/${id}`;
     axios.post(url)
-    .then(data => if(fn) fn())
+    .then(data => {if(fn) fn()})
     .catch(error => console.log(JSON.stringify(error)));
   },
   clockOut: (id, fn) => {
     let url = `https://dashboard-api-02.herokuapp.com/api/clockout/${id}`;
     axios.post(url)
-      .then(data => if(fn) fn())
+      .then(data => {if(fn) fn()})
       .catch(error => console.log(error));
   },
   updateEmployee: (id, laborType, jobNumber, fn) => {
