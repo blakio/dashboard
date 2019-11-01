@@ -93,12 +93,12 @@ function TimeSheetOptions(props) {
             {data[field]}
           </div>
         </div>)})}
-      {deactivatedButtons.map((data, index) => {
+      {isAdminMode && deactivatedButtons.map((data, index) => {
 
         const adminClass = isAdminMode && "activeClass";
         const selectedIds = selectedItems[name].map(data => data.id);
         const isSelected = selectedIds.includes(data.id);
-        const className = `tag tagLabel ${adminClass} ${isSelected && "selected"}`;
+        const className = `tag tagLabel ${adminClass} ${isSelected && "selected"} deactivatedClass`;
 
         return (<div key={index}>
           <div

@@ -9,7 +9,8 @@ function EmployeePanelButtons(props) {
   const {
     editEmployee,
     selectedItemType,
-    employee
+    employee,
+    isDeactivated
   } = props;
 
   const {
@@ -68,10 +69,10 @@ function EmployeePanelButtons(props) {
     onClick={() => click()}>
     <div className="sideButtonDescription flex">
       <div className="sideButtonDescriptionTop sectionHeading">
-        <p>{employee.name}</p>
+        <p className={`${isDeactivated && "deactivatedEmployeeClass"}`}>{employee.name}</p>
       </div>
       <div className="sideButtonDescriptionBottom sectionHeading">
-        <p>{employee.jobTitle}</p>
+        <p className={`${isDeactivated && "deactivatedEmployeeClass"}`}>{employee.jobTitle}</p>
       </div>
     </div>
     {isAdminMode && <div

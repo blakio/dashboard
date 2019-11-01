@@ -41,3 +41,7 @@ p.timesheetEmployeeSectionTitle {
   font-size: 1.8em;
   font-weight: 300;
 }
+
+.deactivatedEmployeeClass {
+  color: "#fc8e8e"
+}

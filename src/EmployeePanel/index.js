@@ -125,13 +125,14 @@ function EmployeePanel() {
           employee={data}
           />
       })}
-      {employees && deactivatedButtons.map((data, index) => {
+      {employees && isAdminMode && deactivatedButtons.map((data, index) => {
         if(!data.isActive && !isAdminMode) return null;
         return <EmployeePanelButtons
           key={index}
           editEmployee={editEmployee}
           selectedItemType="employees"
           employee={data}
+          isDeactivated={true}
           />
       })}
     </div>
