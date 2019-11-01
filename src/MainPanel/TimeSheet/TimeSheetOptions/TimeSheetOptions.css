@@ -25,3 +25,17 @@
   border: 1px solid #dbdbdb;
   border-radius: 0;
 }
+
+.activeClass {
+  background-color: #bbe3ff;
+  border: 1px solid #004779;
+}
+
+.deactivatedClass {
+  background-color: #ffeaea;
+  border: 1px solid #fc8e8e;
+}
+
+.deactivatedEmployeeClass {
+  color: #ffeaea;
+}

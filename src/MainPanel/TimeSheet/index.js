@@ -18,43 +18,14 @@ function TimeSheet() {
     laborTypes,
     jobNumbers,
     clickedTypes,
-    deletions
+    deletions,
+    selectedItems
   } = useContext(TimeSheetContext);
 
   useEffect(() => {
-    Axios.get("labortypes", null, response => setLabor(response));
-    Axios.get("jobs", null, response => setJobs(response));
+    Axios.fetchLaborTypes(dispatch);
+    Axios.fetchJobNumbers(dispatch);
   }, []);
-
-  const setJobs = (response) => {
-    const { data } = response;
-    dispatch({
-      type: Types.SET_JOB_NUMBERS,
-      payload: data
-    });
-  }
-
-  const resetEmployees = () => {
-    dispatch({
-      type: Types.GET_EMPLOYEES,
-      payload: {
-        fn: obj => {
-          dispatch({
-            type: Types.SET_EMPLOYEES,
-            payload: obj.data
-          })
-        }
-      }
-    })
-  }
-
-  const setLabor = (response) => {
-    const { data } = response;
-    dispatch({
-      type: Types.SET_LABOR_TYPES,
-      payload: data
-    })
-  }
 
   const [activeButtons, setActiveButtons] = useState([]);
 
@@ -62,122 +33,135 @@ function TimeSheet() {
     setActiveButtons(activeButtonsList)
   }, [activeButtonsList])
 
-  useEffect(() => {
-    const activeDeletion = deletions.laborTypes.length || deletions.jobNumbers.length || deletions.employees.length;
-    if(activeDeletion){
-      setActiveButtons(["trash", "deactivate"])
-    } else if (!activeDeletion && activeButtons.includes("trash")) {
-      const newActiveButtons = JSON.parse(JSON.stringify(activeButtons));
-      newActiveButtons.splice(activeButtons.indexOf("trash"), 1);
-      newActiveButtons.splice(activeButtons.indexOf("deactivate"), 1);
-      setActiveButtons(newActiveButtons);
-    }
-  }, [clickedTypes, deletions])
+  const isArrayEmpty = (arr) => {
+    return arr.length === 0;
+  }
 
   const topButtons = [
     {
-      isVisable: isAdminMode,
       text: "trash",
       icon: "fas fa-trash-alt",
+      isVisable: isAdminMode,
+      isActive: !isArrayEmpty(selectedItems.laborTypes) || !isArrayEmpty(selectedItems.jobNumbers) || !isArrayEmpty(selectedItems.employees),
       function: (isActive) => {
         if(!isActive) return;
         dispatch({
           type: Types.BULK_DELETE,
           payload: {
             fn: () => {
-              resetEmployees();
-              Axios.get("labortypes", null, response => setLabor(response));
-              Axios.get("jobs", null, response => setJobs(response));
+              Axios.fetchEmployees(dispatch)
+              Axios.fetchLaborTypes(dispatch);
+              Axios.fetchJobNumbers(dispatch);
             }
           },
         })
       }
     },
     {
-      isVisable: isAdminMode,
       text: "deactivate",
       icon: "fas fa-unlink",
+      isVisable: isAdminMode,
+      isActive: !isArrayEmpty(selectedItems.laborTypes) || !isArrayEmpty(selectedItems.jobNumbers) || !isArrayEmpty(selectedItems.employees),
       function: (isActive) => {
         if(!isActive) return;
         dispatch({
           type: Types.BULK_DEACTIVATE,
           payload: {
             fn: () => {
-              resetEmployees();
-              Axios.get("labortypes", null, response => setLabor(response));
-              Axios.get("jobs", null, response => setJobs(response));
+              Axios.fetchEmployees(dispatch)
+              Axios.fetchLaborTypes(dispatch);
+              Axios.fetchJobNumbers(dispatch);
             }
           },
         })
       }
     },
     {
-      isVisable: !isAdminMode,
+      text: "activate",
+      icon: "fas fa-link",
+      isVisable: isAdminMode,
+      isActive: !isArrayEmpty(selectedItems.laborTypes) || !isArrayEmpty(selectedItems.jobNumbers) || !isArrayEmpty(selectedItems.employees),
+      function: (isActive) => {
+        if(!isActive) return;
+        dispatch({
+          type: Types.BULK_DEACTIVATE,
+          payload: {
+            fn: () => {
+              Axios.fetchEmployees(dispatch)
+              Axios.fetchLaborTypes(dispatch);
+              Axios.fetchJobNumbers(dispatch);
+            }
+          },
+        })
+      }
+    },
+    {
       text: "clock in",
       icon: "fas fa-clock",
+      isVisable: !isAdminMode,
+      isActive: () => {
+        const employeeSelected = !isArrayEmpty(selectedItems.employees);
+        return employeeSelected;
+      },
       function: (isActive) => {
         if(!isActive) return;
         dispatch({
           type: Types.CLOCK_IN,
-          payload: resetEmployees
+          payload: () => Axios.fetchEmployees(dispatch)
         })
       }
     },
     {
-      isVisable: !isAdminMode,
       text: "to lunch",
       icon: "fas fa-drumstick-bite",
+      isVisable: !isAdminMode,
+      isActive: () => {
+        const employeeSelected = !isArrayEmpty(selectedItems.employees);
+        return employeeSelected;
+      },
       function: (isActive) => {
         if(!isActive) return;
         dispatch({
           type: Types.GO_TO_LUNCH,
-          payload: resetEmployees
+          payload: () => Axios.fetchEmployees(dispatch)
         })
       }
     },
     {
-      isVisable: !isAdminMode,
       text: "from lunch",
       icon: "fas fa-bone",
+      isVisable: !isAdminMode,
+      isActive: () => {
+        const employeeSelected = !isArrayEmpty(selectedItems.employees);
+        return employeeSelected;
+      },
       function: (isActive) => {
         if(!isActive) return;
         dispatch({
           type: Types.BACK_FROM_LUNCH,
-          payload: resetEmployees
+          payload: () => Axios.fetchEmployees(dispatch)
         })
       }
     },
     {
-      isVisable: !isAdminMode,
       text: "clock out",
       icon: "fas fa-clock",
+      isVisable: !isAdminMode,
+      isActive: () => {
+        const employeeSelected = !isArrayEmpty(selectedItems.employees);
+        return employeeSelected;
+      },
       function: (isActive) => {
         if(!isActive) return;
         dispatch({
           type: Types.CLOCK_OUT,
-          payload: () => {
-            dispatch({
-              type: Types.GET_EMPLOYEES,
-              payload: {
-                fn: obj => {
-                  dispatch({
-                    type: Types.SET_EMPLOYEES,
-                    payload: obj.data
-                  })
-                }
-              }
-            })
-          }
+          payload: () => Axios.fetchEmployees(dispatch)
         })
       }
     }
   ]
 
-  const onClickToggle = () => {
-    dispatch({
-      type: Types.TOGGLE_ADMIN_MODE
-    })
-  }
+  const onClickToggle = () => dispatch({ type: Types.TOGGLE_ADMIN_MODE });
 
   const toggleButton = isAdminLoggedIn ? (<Toogle
     onClick={onClickToggle}
@@ -186,25 +170,17 @@ function TimeSheet() {
     offStlyes={{ fontSize: "2em", color: "#a7a7a7", opacity: 0.6, textAlign: "center" }}
     text="Edit"
     isOn={isAdminMode}
-  />) : (<div></div>);
+  />) : null;
 
   return (<div id="timesheet">
     <div id="topbar" className="flex">
       {toggleButton}
       {topButtons.map((data, index) => {
 
-        if(!data.isVisable) return <div key={index}></div>;
+        if(!data.isVisable) return null;
 
         const isActive = (text) => {
-          return (
-            (activeButtons.includes("trash") && text === "trash") ||
-            (activeButtons.includes("deactivate") && text === "deactivate") ||
-            (activeButtons.includes("clock in") && text === "clock in") ||
-            (activeButtons.includes("clock out") && text === "clock out") ||
-            (activeButtons.includes("to lunch") && text === "to lunch") ||
-            (activeButtons.includes("from lunch") && text === "from lunch") ||
-            (activeButtons.includes("message") && text === "message")
-          )
+          return true
         }
 
         return (<div key={index} className="topBarButtonParent">
@@ -221,37 +197,23 @@ function TimeSheet() {
 
       <div className="middlePanelMiddleChild">
         <TimeSheetOptions
-          title="Labor Type"
-          options={laborTypes}
-          createActionType={ Types.CREATE_LABOR_TYPE }
-          deleteActionType={ Types.DELETE_LABOR_TYPE }
-          name={"laborTypes"}
-          type={Types.UPDATE_DELETIONS}
-          toggleType={Types.TOGGLE_TYPE}
-          dispatch={dispatch}
-          route="labortypes"
-          setFunction={setLabor}
-          field="name"
-          updateType={Types.SELECT_LABOR_TYPE}
-          selectedItemType="laborTypes"
+          title="Job Number"
+          options={jobNumbers}
+          name={"jobNumbers"}
+          route="jobs"
+          field="number"
+          selectedItemType="jobNumbers"
         />
       </div>
 
       <div className="middlePanelMiddleChild">
         <TimeSheetOptions
-          title="Job Number"
-          options={jobNumbers}
-          createActionType={ Types.CREATE_JOB_NUMBER }
-          deleteActionType={ Types.DELETE_JOB_NUMBER }
-          name={"jobNumbers"}
-          type={Types.UPDATE_DELETIONS}
-          toggleType={Types.TOGGLE_TYPE}
-          dispatch={dispatch}
-          route="jobs"
-          setFunction={setJobs}
-          field="number"
-          updateType={Types.SELECT_JOB_NUMBER}
-          selectedItemType="jobNumbers"
+          title="Labor Type"
+          options={laborTypes}
+          name={"laborTypes"}
+          route="labortypes"
+          field="name"
+          selectedItemType="laborTypes"
         />
       </div>
 

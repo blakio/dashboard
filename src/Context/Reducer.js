@@ -10,15 +10,15 @@ export default (state, action) => {
     case Types.GET_EMPLOYEES:
       return StateFunctions.getEmployees(payload, state);
 
-    // SET
+    case Types.SET_SELECTED_ITEMS:
+      return StateFunctions.setSelectedItems(payload, state);
+
     case Types.SET_EMPLOYEES:
       return StateFunctions.setEmployees(payload, state);
-    case Types.SET_JOB_NUMBERS:
-      return StateFunctions.setJobNumbers(payload, state);
     case Types.SET_LABOR_TYPES:
       return StateFunctions.setLaborTypes(payload, state);
-    case Types.SET_SELECTED:
-      return StateFunctions.setSelected(payload, state);
+    case Types.SET_JOB_NUMBERS:
+      return StateFunctions.setJobNumbers(payload, state);
 
     // CREATE
     case Types.CREATE_EMPLOYEE:
@@ -62,13 +62,6 @@ export default (state, action) => {
       return StateFunctions.toggleType(payload, state);
     case Types.TOGGLE_ADMIN_MODE:
       return StateFunctions.toggleAdminMode(payload, state);
-
-    case Types.SELECT_EMPLOYEE:
-      return StateFunctions.selectEmployee(payload, state);
-    case Types.SELECT_LABOR_TYPE:
-      return StateFunctions.selectLaborType(payload, state);
-    case Types.SELECT_JOB_NUMBER:
-      return StateFunctions.selectJobNumber(payload, state);
 
     case Types.SET_ACTION_BUTTONS:
       return StateFunctions.setActiveButtons(payload, state);

@@ -15,24 +15,14 @@ const initialState = {
       message: ""
     }
   },
-  deletions: {
-    laborTypes: [],
-    jobNumbers: [],
-    employees: []
-  },
   selectedItems: {
     laborTypes: [],
     jobNumbers: [],
     employees: []
   },
-  clickedTypes: [],
   laborTypes: [],
   jobNumbers: [],
   employees: [],
-  selectedEmployee: "",
-  selectedLaborType: "",
-  selectedJobNumber: "",
-  activeButtonsList: []
 };
 
 export default initialState;

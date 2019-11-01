@@ -7,68 +7,75 @@ import Types from "../../Context/Types";
 function EmployeePanelButtons(props) {
 
   const {
-    name,
-    jobTitle,
-    id,
-    select,
-    selected,
-    isAdminMode,
-    isAdminLoggedIn,
     editEmployee,
-    selectedItemType
+    selectedItemType,
+    employee
   } = props;
 
   const {
     dispatch,
-    selectedItems
+    selectedItems,
+    isAdminMode
   } = useContext(TimeSheetContext)
 
   const breakRefAndCopy = (obj) => JSON.parse(JSON.stringify(obj));
 
-  const selectedEmployee = (name) => {
+  const selectedEmployee = () => {
     const selectedEmployees = breakRefAndCopy(selectedItems);
-    if(selectedEmployees[selectedItemType].includes(name)){
-      const index = selectedEmployees[selectedItemType].indexOf(name);
+    const selectedIds = selectedItems.employees.map(data => data.id);
+
+    if(selectedIds.includes(employee.id)){
+      const index = selectedIds.indexOf(employee.id);
       selectedEmployees[selectedItemType].splice(index, 1);
     } else {
       if(isAdminMode){
-        selectedEmployees[selectedItemType].push(name)
+        selectedEmployees[selectedItemType].push(employee)
       } else {
-        selectedEmployees[selectedItemType] = [name];
+        selectedEmployees[selectedItemType] = [employee];
       }
     }
     dispatch({
-      type: Types.SET_SELECTED,
+      type: Types.SET_SELECTED_ITEMS,
       payload: selectedEmployees
     })
   }
 
-  const isSelected = selectedItems.employees.includes(name);
+  const removeEmployee = () => {
+    const newSelectedItems = breakRefAndCopy(selectedItems);
+    let index = null;
+    newSelectedItems.employees.forEach((data, i) => {
+      if(data.id === employee.id) index =  i;
+    });
+    newSelectedItems.employees.splice(index, 1);
+    dispatch({
+      type: Types.SET_SELECTED_ITEMS,
+      payload: newSelectedItems
+    })
+  }
+
+  const click = () => (!selectedItems.employees.includes(employee)) ? selectedEmployee() : removeEmployee();
+
+  const selectedIds = [];
+  selectedItems.employees.forEach(data => {
+    selectedIds.push(data.id)
+  })
+
+  const isSelected = selectedIds.includes(employee.id);
+  const className = `employeeButton flex ${isSelected && "selected"}`;
 
   return (<div
-    className={`employeeButton flex ${isSelected && "selected"}`}
-    onClick={() => {
-      dispatch({
-        type: Types.SELECT_EMPLOYEE,
-        payload: id
-      })
-      selectedEmployee(name);
-      select({name, id});
-    }}>
+    className={className}
+    onClick={() => click()}>
     <div className="sideButtonDescription flex">
       <div className="sideButtonDescriptionTop sectionHeading">
-        <p>{name}</p>
+        <p>{employee.name}</p>
       </div>
       <div className="sideButtonDescriptionBottom sectionHeading">
-        <p>{jobTitle}</p>
+        <p>{employee.jobTitle}</p>
       </div>
     </div>
     {isAdminMode && <div
-      onClick={() => editEmployee({
-        name,
-        jobTitle,
-        id
-      })}>
+      onClick={() => editEmployee(employee)}>
         <i style={{
           fontSize: "2.4em",
           color: "#008280"

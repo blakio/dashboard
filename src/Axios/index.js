@@ -1,5 +1,6 @@
 import axios from "axios";
 import moment from "moment";
+import Types from "../Context/Types.js";
 
 // Set config defaults when creating the instance
 const instance = axios.create({
@@ -20,13 +21,14 @@ export default {
         // if(fn) fn();
      });
   },
-  post: async (path, obj, fn) => {
+  post: async (path, obj, fn, errorFn) => {
     await instance.post(path, obj)
       .then(function (response) {
         if(fn) fn(response);
       })
       .catch(function (error) {
         console.log(error);
+        if(errorFn) errorFn(error)
       });
   },
   put: async (path, obj, fn) => {
@@ -91,6 +93,27 @@ export default {
     }
     axios.put(url + id, updates).then((response)=> {
       fn();
+    })
+  },
+  fetchEmployees: async (dispatch) => {
+    const response = await axios.get("https://dashboard-api-02.herokuapp.com/api/employees");
+    dispatch({
+      type: Types.SET_EMPLOYEES,
+      payload: response.data
+    })
+  },
+  fetchLaborTypes: async (dispatch) => {
+    const response = await axios.get("https://dashboard-api-02.herokuapp.com/api/labortypes");
+    dispatch({
+      type: Types.SET_LABOR_TYPES,
+      payload: response.data
+    })
+  },
+  fetchJobNumbers: async (dispatch) => {
+    const response = await axios.get("https://dashboard-api-02.herokuapp.com/api/jobs");
+    dispatch({
+      type: Types.SET_JOB_NUMBERS,
+      payload: response.data
     })
   }
 };

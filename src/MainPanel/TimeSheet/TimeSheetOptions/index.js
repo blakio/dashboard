@@ -9,118 +9,50 @@ function TimeSheetOptions(props) {
 
   const {
     isAdminMode,
-    isAdminLoggedIn,
     dispatch,
-    deletions,
     selectedItems
   } = useContext(TimeSheetContext);
 
   const {
     title,
     options,
-    createActionType,
-    type,
     name,
-    toggleType,
     route,
-    setFunction,
     field,
-    updateType,
     selectedItemType
   } = props;
 
   const breakRefAndCopy = (obj) => JSON.parse(JSON.stringify(obj));
 
-  const selectItem = (name) => {
+  const selectItem = (data) => {
     const selected = breakRefAndCopy(selectedItems);
-    if(selected[selectedItemType].includes(name)){
-      const index = selected[selectedItemType].indexOf(name);
+    const selectedIds = selectedItems[selectedItemType].map(data => data.id);
+
+    if(selectedIds.includes(data.id)){
+      const index = selectedIds.indexOf(data.id);
       selected[selectedItemType].splice(index, 1);
     } else {
       if(isAdminMode){
-        selected[selectedItemType].push(name)
+        selected[selectedItemType].push(data)
       } else {
-        selected[selectedItemType] = [name];
+        selected[selectedItemType] = [data];
       }
     }
     dispatch({
-      type: Types.SET_SELECTED,
+      type: Types.SET_SELECTED_ITEMS,
       payload: selected
     })
   }
 
   const [inputValue, setInputValue] = useState(null);
-  const [selected, setSelected] = useState([""]);
-  const [selectedId, setSelectedId] = useState("");
 
-  useEffect(() => {
-    setSelected([]);
-    setSelectedId("");
-    dispatch({
-      type: Types.RESET_DELETIONS
-    });
-  }, [isAdminMode]);
-
-  useEffect(() => {
-    dispatch({
-      type: updateType,
-      payload: selectedId
-    })
-  }, [selected])
-
-  useEffect(() => {
-    if(name && !Object.keys(deletions[name]).length){
-      setSelected([null])
-    }
-  }, [deletions])
-
-  const select = (index, data) => {
-    if(isAdminMode && isAdminLoggedIn){
-      if(selected.includes(index)){
-        const newSelected = [...selected];
-        newSelected.splice(selected.indexOf(index), 1);
-        setSelected(newSelected);
-        dispatch({
-          type,
-          payload: {
-            type: "remove",
-            name,
-            data
-          }
-        })
-      } else {
-        setSelected([...selected, index])
-        dispatch({
-          type,
-          payload: {
-            type: "add",
-            name,
-            data
-          }
-        })
-      }
-    } else {
-      if(!selected.includes(index)){
-        setSelected([index]);
-        setSelectedId(data[field])
-        dispatch({
-          type: toggleType,
-          payload: { type: "add", name }
-        });
-      } else {
-        setSelected([]);
-        setSelectedId("")
-        dispatch({
-          type: toggleType,
-          payload: { type: "remove", name }
-        });
-      }
-    }
-  }
+  const activeButtons = [];
+  const deactivatedButtons = [];
+  options.forEach(data => (data.isActive) ? activeButtons.push(data) : deactivatedButtons.push(data));
 
   return (<div className="timeSheetSideOptions flex">
     <div className="sideOptionHeading sectionHeading flex">
-      {(isAdminMode && isAdminLoggedIn) ?
+      {isAdminMode ?
         <input
           className="addInput tag"
           placeholder={`add ${title}`}
@@ -138,7 +70,8 @@ function TimeSheetOptions(props) {
                 isActive: true
               }, () => {
                 setInputValue("");
-                Axios.get(route, null, response => setFunction(response));
+                Axios.fetchLaborTypes(dispatch);
+                Axios.fetchJobNumbers(dispatch);
               })
             }
           }}/> :
@@ -146,31 +79,34 @@ function TimeSheetOptions(props) {
       }
     </div>
     <div className="sideOptionBody flex">
-      {options.map((data, index) => {
-        if(isAdminMode){
-          return (<div key={index}>
-            <div
-              onClick={() => {
-                selectItem(data[field])
-                select(index, data)
-              }}
-              className={`tag tagLabel ${selectedItems[name].includes(data[field]) && "selected"}`}>
-              {data[field]}
-            </div>
-          </div>)
-        } else {
-          return data.isActive && (<div key={index}>
-            <div
-              onClick={() => {
-                selectItem(data[field])
-                select(index, data)
-              }}
-              className={`tag tagLabel ${selectedItems[name].includes(data[field]) && "selected"}`}>
-              {data[field]}
-            </div>
-          </div>)
-        }
-      })}
+      {activeButtons.map((data, index) => {
+
+        const adminClass = isAdminMode && "activeClass";
+        const selectedIds = selectedItems[name].map(data => data.id);
+        const isSelected = selectedIds.includes(data.id);
+        const className = `tag tagLabel ${adminClass} ${isSelected && "selected"}`;
+
+        return (<div key={index}>
+          <div
+            onClick={() => selectItem(data) }
+            className={className}>
+            {data[field]}
+          </div>
+        </div>)})}
+      {deactivatedButtons.map((data, index) => {
+
+        const adminClass = isAdminMode && "activeClass";
+        const selectedIds = selectedItems[name].map(data => data.id);
+        const isSelected = selectedIds.includes(data.id);
+        const className = `tag tagLabel ${adminClass} ${isSelected && "selected"}`;
+
+        return (<div key={index}>
+          <div
+            onClick={() => selectItem(data) }
+            className={className}>
+            {data[field]}
+          </div>
+        </div>)})}
     </div>
   </div>);
 }
