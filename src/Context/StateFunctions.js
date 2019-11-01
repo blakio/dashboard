@@ -183,11 +183,7 @@ export default {
     Axios.clockIn(employeesId);
     return {
       ...state,
-      selectedItems: {
-        laborTypes: [],
-        jobNumbers: [],
-        employees: []
-      }
+      selectedItems: breakRefAndCopy(initialState.selectedItems)
     }
   },
   clockOut: (payload, state) => {
@@ -195,11 +191,7 @@ export default {
     Axios.clockOut(employeesId);
     return {
       ...state,
-      selectedItems: {
-        laborTypes: [],
-        jobNumbers: [],
-        employees: []
-      }
+      selectedItems: breakRefAndCopy(initialState.selectedItems)
     }
   },
   toLunch: (payload, state) => {
@@ -207,11 +199,7 @@ export default {
     Axios.startLunch(employeesId);
     return {
       ...state,
-      selectedItems: {
-        laborTypes: [],
-        jobNumbers: [],
-        employees: []
-      }
+      selectedItems: breakRefAndCopy(initialState.selectedItems)
     }
   },
   fromLunch: (payload, state) => {
@@ -219,11 +207,7 @@ export default {
     Axios.endLunch(employeesId);
     return {
       ...state,
-      selectedItems: {
-        laborTypes: [],
-        jobNumbers: [],
-        employees: []
-      }
+      selectedItems: breakRefAndCopy(initialState.selectedItems)
     }
   },
 
