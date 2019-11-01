@@ -127,31 +127,11 @@ export default {
       deletions: breakRefAndCopy(initialState.deletions)
     };
   },
-
   bulkDeactivate: (payload, state) => {
-    const routes = {
-      employees: "employees",
-      jobNumbers: "jobs",
-      laborTypes: "labortypes"
-    }
-    const deletions = [];
-    for(let i in state.deletions){
-      const route = routes[i];
-      if(state.deletions[i].length){
-        state.deletions[i].forEach(data => {
-          deletions.push(null
-            // Axios.delete(`${route}/${data.id}`)
-          );
-        })
-      }
-    }
-    Promise.all(deletions)
-          .then(obj => payload.fn())
-          .catch(e => console.log(e))
-    return {
-      ...state,
-      deletions: breakRefAndCopy(initialState.deletions)
-    };
+    return state;
+  },
+  bulkActivate: (payload, state) => {
+    return state;
   },
 
   updateDeletions: (payload, state) => {

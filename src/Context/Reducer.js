@@ -52,6 +52,8 @@ export default (state, action) => {
       return StateFunctions.bulkDelete(payload, state);
     case Types.BULK_DEACTIVATE:
       return StateFunctions.bulkDeactivate(payload, state);
+    case Types.BULK_ACTIVATE:
+      return StateFunctions.bulkActivate(payload, state);
 
     // OTHER
     case Types.UPDATE_DELETIONS:

@@ -13,12 +13,9 @@ function TimeSheet() {
   const {
     isAdminMode,
     isAdminLoggedIn,
-    activeButtonsList,
     dispatch,
     laborTypes,
     jobNumbers,
-    clickedTypes,
-    deletions,
     selectedItems
   } = useContext(TimeSheetContext);
 
@@ -26,12 +23,6 @@ function TimeSheet() {
     Axios.fetchLaborTypes(dispatch);
     Axios.fetchJobNumbers(dispatch);
   }, []);
-
-  const [activeButtons, setActiveButtons] = useState([]);
-
-  useEffect(() => {
-    setActiveButtons(activeButtonsList)
-  }, [activeButtonsList])
 
   const isArrayEmpty = (arr) => {
     return arr.length === 0;
@@ -42,7 +33,12 @@ function TimeSheet() {
       text: "trash",
       icon: "fas fa-trash-alt",
       isVisable: isAdminMode,
-      isActive: !isArrayEmpty(selectedItems.laborTypes) || !isArrayEmpty(selectedItems.jobNumbers) || !isArrayEmpty(selectedItems.employees),
+      isActive: () => {
+        const hasEmployeeSelected = selectedItems.employees.length;
+        const hasLaborTypeSelected = selectedItems.laborTypes.length;
+        const hasJobNumberSelected = selectedItems.jobNumbers.length;
+        return hasEmployeeSelected || hasLaborTypeSelected || hasJobNumberSelected;
+      },
       function: (isActive) => {
         if(!isActive) return;
         dispatch({
@@ -61,7 +57,12 @@ function TimeSheet() {
       text: "deactivate",
       icon: "fas fa-unlink",
       isVisable: isAdminMode,
-      isActive: !isArrayEmpty(selectedItems.laborTypes) || !isArrayEmpty(selectedItems.jobNumbers) || !isArrayEmpty(selectedItems.employees),
+      isActive: () => {
+        const hasEmployeeSelected = selectedItems.employees.length;
+        const hasLaborTypeSelected = selectedItems.laborTypes.length;
+        const hasJobNumberSelected = selectedItems.jobNumbers.length;
+        return hasEmployeeSelected || hasLaborTypeSelected || hasJobNumberSelected;
+      },
       function: (isActive) => {
         if(!isActive) return;
         dispatch({
@@ -80,11 +81,16 @@ function TimeSheet() {
       text: "activate",
       icon: "fas fa-link",
       isVisable: isAdminMode,
-      isActive: !isArrayEmpty(selectedItems.laborTypes) || !isArrayEmpty(selectedItems.jobNumbers) || !isArrayEmpty(selectedItems.employees),
+      isActive: () => {
+        const hasEmployeeSelected = selectedItems.employees.length;
+        const hasLaborTypeSelected = selectedItems.laborTypes.length;
+        const hasJobNumberSelected = selectedItems.jobNumbers.length;
+        return hasEmployeeSelected || hasLaborTypeSelected || hasJobNumberSelected;
+      },
       function: (isActive) => {
         if(!isActive) return;
         dispatch({
-          type: Types.BULK_DEACTIVATE,
+          type: Types.BULK_ACTIVATE,
           payload: {
             fn: () => {
               Axios.fetchEmployees(dispatch)
@@ -99,10 +105,7 @@ function TimeSheet() {
       text: "clock in",
       icon: "fas fa-clock",
       isVisable: !isAdminMode,
-      isActive: () => {
-        const employeeSelected = !isArrayEmpty(selectedItems.employees);
-        return employeeSelected;
-      },
+      isActive: () => (selectedItems.employees[0] && !selectedItems.employees[0].clockInTime),
       function: (isActive) => {
         if(!isActive) return;
         dispatch({
@@ -115,10 +118,7 @@ function TimeSheet() {
       text: "to lunch",
       icon: "fas fa-drumstick-bite",
       isVisable: !isAdminMode,
-      isActive: () => {
-        const employeeSelected = !isArrayEmpty(selectedItems.employees);
-        return employeeSelected;
-      },
+      isActive: () => (selectedItems.employees[0] && !selectedItems.employees[0].startLunch),
       function: (isActive) => {
         if(!isActive) return;
         dispatch({
@@ -131,10 +131,7 @@ function TimeSheet() {
       text: "from lunch",
       icon: "fas fa-bone",
       isVisable: !isAdminMode,
-      isActive: () => {
-        const employeeSelected = !isArrayEmpty(selectedItems.employees);
-        return employeeSelected;
-      },
+      isActive: () => (selectedItems.employees[0] && !selectedItems.employees[0].endLunch),
       function: (isActive) => {
         if(!isActive) return;
         dispatch({
@@ -147,10 +144,7 @@ function TimeSheet() {
       text: "clock out",
       icon: "fas fa-clock",
       isVisable: !isAdminMode,
-      isActive: () => {
-        const employeeSelected = !isArrayEmpty(selectedItems.employees);
-        return employeeSelected;
-      },
+      isActive: () => (selectedItems.employees[0] && !selectedItems.employees[0].clockOutTime),
       function: (isActive) => {
         if(!isActive) return;
         dispatch({
@@ -176,17 +170,12 @@ function TimeSheet() {
     <div id="topbar" className="flex">
       {toggleButton}
       {topButtons.map((data, index) => {
-
         if(!data.isVisable) return null;
-
-        const isActive = (text) => {
-          return true
-        }
-
+        const className = `topBarButton flex ${data.isActive() && "active"}`;
         return (<div key={index} className="topBarButtonParent">
           <div
-            className={`topBarButton flex ${isActive(data.text) && "active"}`}
-            onClick={() => data.function(isActive(data.text))}>
+            className={className}
+            onClick={() => data.function(data.isActive())}>
             <i className={data.icon}></i>
           </div>
           <p className="topBarText">{data.text}</p>
