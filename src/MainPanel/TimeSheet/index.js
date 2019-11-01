@@ -118,7 +118,7 @@ function TimeSheet() {
       text: "to lunch",
       icon: "fas fa-drumstick-bite",
       isVisable: !isAdminMode,
-      isActive: () => (selectedItems.employees[0] && !selectedItems.employees[0].startLunch),
+      isActive: () => (selectedItems.employees[0] && !selectedItems.employees[0].startLunch && selectedItems.employees[0].clockInTime),
       function: (isActive) => {
         if(!isActive) return;
         dispatch({
@@ -131,7 +131,7 @@ function TimeSheet() {
       text: "from lunch",
       icon: "fas fa-bone",
       isVisable: !isAdminMode,
-      isActive: () => (selectedItems.employees[0] && !selectedItems.employees[0].endLunch),
+      isActive: () => (selectedItems.employees[0] && !selectedItems.employees[0].endLunch && selectedItems.employees[0].startLunch),
       function: (isActive) => {
         if(!isActive) return;
         dispatch({
@@ -144,7 +144,7 @@ function TimeSheet() {
       text: "clock out",
       icon: "fas fa-clock",
       isVisable: !isAdminMode,
-      isActive: () => (selectedItems.employees[0] && !selectedItems.employees[0].clockOutTime),
+      isActive: () => (selectedItems.employees[0] && !selectedItems.employees[0].clockOutTime && selectedItems.employees[0].clockInTime),
       function: (isActive) => {
         if(!isActive) return;
         dispatch({
