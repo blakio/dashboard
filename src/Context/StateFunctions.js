@@ -179,6 +179,8 @@ export default {
   },
 
   clickIn: (payload, state) => {
+    const employeesId = state.selectedItems.employees[0].id;
+    Axios.clockIn(employeesId);
     return {
       ...state,
       selectedItems: {
@@ -189,6 +191,8 @@ export default {
     }
   },
   clockOut: (payload, state) => {
+    const employeesId = state.selectedItems.employees[0].id;
+    Axios.clockOut(employeesId);
     return {
       ...state,
       selectedItems: {
@@ -199,6 +203,8 @@ export default {
     }
   },
   toLunch: (payload, state) => {
+    const employeesId = state.selectedItems.employees[0].id;
+    Axios.startLunch(employeesId);
     return {
       ...state,
       selectedItems: {
@@ -209,6 +215,8 @@ export default {
     }
   },
   fromLunch: (payload, state) => {
+    const employeesId = state.selectedItems.employees[0].id;
+    Axios.endLunch(employeesId);
     return {
       ...state,
       selectedItems: {
