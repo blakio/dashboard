@@ -6,6 +6,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import TimeSheetContext from "../../../Context/State";
 import Types from "../../../Context/Types";
 
+import moment from "moment";
+
 export default () => {
 
   const {
@@ -72,7 +74,13 @@ export default () => {
               <div>start</div>
               <DatePicker
                 selected={startDate}
-                onChange={date => setStartDate(date)}
+                onChange={date => {
+                  const isAfterEndDate = moment(date).diff(endDate, 'hours') > 0;
+                  if(isAfterEndDate){
+                    setEndDate(date);
+                  }
+                  setStartDate(date);
+                }}
                 selectsStart
                 startDate={startDate}
                 endDate={endDate}
