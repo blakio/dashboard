@@ -1,7 +1,7 @@
 import Axios from "../Axios";
 import initialState from "./InitialState";
 
-const breakRefAndCopy = (obj) => JSON.parse(JSON.stringify(obj));
+import Util from "../Util";
 
 export default {
 
@@ -13,7 +13,7 @@ export default {
 
   // CREATE
   createEmployee: (payload, state) => {
-    const currentState = breakRefAndCopy(state);
+    const currentState = Util.breakRefAndCopy(state);
     const { employees } = currentState;
     employees.push({
       id: (employees.length + 1),
@@ -25,7 +25,7 @@ export default {
     };
   },
   createLaborType: (payload, state) => {
-    const currentState = breakRefAndCopy(state);
+    const currentState = Util.breakRefAndCopy(state);
     const { laborTypes } = currentState;
     if(laborTypes.indexOf(payload) === -1) laborTypes.push(payload.toUpperCase())
     return {
@@ -34,7 +34,7 @@ export default {
     };
   },
   createJobNumber: (payload, state) => {
-    const currentState = breakRefAndCopy(state);
+    const currentState = Util.breakRefAndCopy(state);
     const { jobNumbers } = currentState;
     if(jobNumbers.indexOf(payload) === -1) jobNumbers.push(payload.toUpperCase())
     return {
@@ -57,7 +57,7 @@ export default {
     }
     return {
       ...state,
-      selectedItems: breakRefAndCopy(initialState.selectedItems)
+      selectedItems: Util.breakRefAndCopy(initialState.selectedItems)
     };
   },
 
@@ -65,45 +65,45 @@ export default {
   clickIn: (payload, state) => {
     const employeesId = state.selectedItems.employees[0].id;
     Axios.clockIn(employeesId, {
-      laborType: state.selectedItems.laborTypes[0].name,
-      jobNumber: state.selectedItems.jobNumbers[0].number
+      laborType: Util.getLaborType(state),
+      jobNumber: Util.getJobNumber(state)
     });
     return {
       ...state,
-      selectedItems: breakRefAndCopy(initialState.selectedItems)
+      selectedItems: Util.breakRefAndCopy(initialState.selectedItems)
     }
   },
   clockOut: (payload, state) => {
     const employeesId = state.selectedItems.employees[0].id;
     Axios.clockOut(employeesId, {
-      laborType: state.selectedItems.laborTypes[0].name,
-      jobNumber: state.selectedItems.jobNumbers[0].number
+      laborType: Util.getLaborType(state),
+      jobNumber: Util.getJobNumber(state)
     });
     return {
       ...state,
-      selectedItems: breakRefAndCopy(initialState.selectedItems)
+      selectedItems: Util.breakRefAndCopy(initialState.selectedItems)
     }
   },
   toLunch: (payload, state) => {
     const employeesId = state.selectedItems.employees[0].id;
     Axios.startLunch(employeesId, {
-      laborType: state.selectedItems.laborTypes[0].name,
-      jobNumber: state.selectedItems.jobNumbers[0].number
+      laborType: Util.getLaborType(state),
+      jobNumber: Util.getJobNumber(state)
     });
     return {
       ...state,
-      selectedItems: breakRefAndCopy(initialState.selectedItems)
+      selectedItems: Util.breakRefAndCopy(initialState.selectedItems)
     }
   },
   fromLunch: (payload, state) => {
     const employeesId = state.selectedItems.employees[0].id;
     Axios.endLunch(employeesId, {
-      laborType: state.selectedItems.laborTypes[0].name,
-      jobNumber: state.selectedItems.jobNumbers[0].number
+      laborType: Util.getLaborType(state),
+      jobNumber: Util.getJobNumber(state)
     });
     return {
       ...state,
-      selectedItems: breakRefAndCopy(initialState.selectedItems)
+      selectedItems: Util.breakRefAndCopy(initialState.selectedItems)
     }
   },
   bulkDeactivate: (payload, state) => {
@@ -119,7 +119,7 @@ export default {
     }
     return {
       ...state,
-      selectedItems: breakRefAndCopy(initialState.selectedItems)
+      selectedItems: Util.breakRefAndCopy(initialState.selectedItems)
     }
   },
   bulkActivate: (payload, state) => {
@@ -135,7 +135,7 @@ export default {
     }
     return {
       ...state,
-      selectedItems: breakRefAndCopy(initialState.selectedItems)
+      selectedItems: Util.breakRefAndCopy(initialState.selectedItems)
     };
   },
   updateEmployee: (payload, state) => {
@@ -152,7 +152,7 @@ export default {
     return state;
   },
   toggleAdminMode: (payload, state) => {
-    const currentState = breakRefAndCopy(state);
+    const currentState = Util.breakRefAndCopy(state);
     currentState.isAdminMode = !currentState.isAdminMode;
     return {
       ...state,
@@ -166,7 +166,7 @@ export default {
     };
   },
   openMessage: (payload, state) => {
-    const newMessage = breakRefAndCopy(state.message);
+    const newMessage = Util.breakRefAndCopy(state.message);
     newMessage[payload.type].status = true;
     newMessage[payload.type].message = payload.message;
     return {
@@ -175,7 +175,7 @@ export default {
     }
   },
   closeMessage: (payload, state) => {
-    const newMessage = breakRefAndCopy(state.message);
+    const newMessage = Util.breakRefAndCopy(state.message);
     newMessage[payload].status = false;
     newMessage[payload].message = "";
     return {
@@ -184,7 +184,7 @@ export default {
     }
   },
   toggleDownloadScreen: (payload, state) => {
-    const currentState = breakRefAndCopy(state);
+    const currentState = Util.breakRefAndCopy(state);
     currentState.isDownloadScreen = payload;
     return {
       ...state,
