@@ -33,25 +33,25 @@ export default {
   },
   clockIn: (id, obj, fn) => {
     let url = `https://dashboard-api-02.herokuapp.com/api/clockin/${id}`;
-    axios.post(url,  obj)
+    axios.put(url,  obj)
     .then(data => {if(fn) fn()})
     .catch(error => { console.log(error) });
   },
   startLunch: (id, obj, fn) => {
-    let url = `https://dashboard-api-02.herokuapp.com/api/tolunch/${id}`;
-    axios.post(url, obj)
+    let url = `https://dashboard-api-02.herokuapp.com/api/startlunch/${id}`;
+    axios.put(url, obj)
       .then(data => {if(fn) fn()})
       .catch(error => console.log(JSON.stringify(error)));
   },
   endLunch: (id, obj, fn) => {
-    let url = `https://dashboard-api-02.herokuapp.com/api/fromlunch/${id}`;
-    axios.post(url, obj)
+    let url = `https://dashboard-api-02.herokuapp.com/api/endlunch/${id}`;
+    axios.put(url, obj)
     .then(data => {if(fn) fn()})
     .catch(error => console.log(JSON.stringify(error)));
   },
   clockOut: (id, obj, fn) => {
     let url = `https://dashboard-api-02.herokuapp.com/api/clockout/${id}`;
-    axios.post(url, obj)
+    axios.put(url, obj)
       .then(data => {if(fn) fn()})
       .catch(error => console.log(error));
   },

@@ -67,7 +67,7 @@ export default {
     Axios.clockIn(employeesId, {
       laborType: Util.getLaborType(state),
       jobNumber: Util.getJobNumber(state)
-    });
+    }, payload);
     return {
       ...state,
       selectedItems: Util.breakRefAndCopy(initialState.selectedItems)
@@ -78,7 +78,7 @@ export default {
     Axios.clockOut(employeesId, {
       laborType: Util.getLaborType(state),
       jobNumber: Util.getJobNumber(state)
-    });
+    }, payload);
     return {
       ...state,
       selectedItems: Util.breakRefAndCopy(initialState.selectedItems)
@@ -89,7 +89,7 @@ export default {
     Axios.startLunch(employeesId, {
       laborType: Util.getLaborType(state),
       jobNumber: Util.getJobNumber(state)
-    });
+    }, payload);
     return {
       ...state,
       selectedItems: Util.breakRefAndCopy(initialState.selectedItems)
@@ -100,7 +100,7 @@ export default {
     Axios.endLunch(employeesId, {
       laborType: Util.getLaborType(state),
       jobNumber: Util.getJobNumber(state)
-    });
+    }, payload);
     return {
       ...state,
       selectedItems: Util.breakRefAndCopy(initialState.selectedItems)
