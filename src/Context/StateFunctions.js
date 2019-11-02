@@ -170,5 +170,13 @@ export default {
       ...state,
       message: newMessage
     }
+  },
+  toggleDownloadScreen: (payload, state) => {
+    const currentState = breakRefAndCopy(state);
+    currentState.isDownloadScreen = payload;
+    return {
+      ...state,
+      isDownloadScreen: currentState.isDownloadScreen
+    }
   }
 }

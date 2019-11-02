@@ -49,6 +49,8 @@ export default (state, action) => {
       return StateFunctions.openMessage(payload, state);
     case Types.CLOSE_MESSAGE:
       return StateFunctions.closeMessage(payload, state);
+    case Types.TOGGLE_DOWNLOAD_SCREEN:
+      return StateFunctions.toggleDownloadScreen(payload, state);
 
     default:
     return state;

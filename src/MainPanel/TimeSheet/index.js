@@ -5,6 +5,7 @@ import TimeSheetContext from "../../Context/State";
 import TimeSheetOptions from "./TimeSheetOptions";
 import Axios from "../../Axios";
 import Toogle from "./Toogle";
+import CSV from "./CSV";
 
 import Types from "../../Context/Types";
 
@@ -16,7 +17,8 @@ function TimeSheet() {
     dispatch,
     laborTypes,
     jobNumbers,
-    selectedItems
+    selectedItems,
+    isDownloadScreen
   } = useContext(TimeSheetContext);
 
   useEffect(() => {
@@ -159,7 +161,7 @@ function TimeSheet() {
 
   const toggleButton = isAdminLoggedIn ? (<Toogle
     onClick={onClickToggle}
-    parentStlyes={{ position: "absolute", top: "1.4em", right: "1.4em", display: "flex", alignItems: "ceneter", justifyContent: "ceneter", flexDirection: "column", width: "6em" }}
+    parentStlyes={{ position: "absolute", top: "1.4em", right: "1.4em", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", width: "6em" }}
     onStlyes={{ fontSize: "2em", color: "#008280", opacity: 0.6, textAlign: "center" }}
     offStlyes={{ fontSize: "2em", color: "#a7a7a7", opacity: 0.6, textAlign: "center" }}
     text="Edit"
@@ -207,6 +209,7 @@ function TimeSheet() {
       </div>
 
     </div>
+    {isDownloadScreen && <CSV />}
   </div>);
 }
 
