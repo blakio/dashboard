@@ -184,7 +184,7 @@ function TimeSheet() {
         </div>)
       })}
     </div>
-    <div id="middlePanelMiddle" className="flex">
+    {selectedItems.employees[0] && !selectedItems.employees[0].isContractor && <div id="middlePanelMiddle" className="flex">
 
       <div className="middlePanelMiddleChild">
         <TimeSheetOptions
@@ -208,7 +208,7 @@ function TimeSheet() {
         />
       </div>
 
-    </div>
+    </div>}
     {isDownloadScreen && <CSV />}
   </div>);
 }
