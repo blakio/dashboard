@@ -192,7 +192,7 @@ function TimeSheet() {
         </div>)
       })}
     </div>
-    {selectedItems.employees[0] && !selectedItems.employees[0].isContractor && <div id="middlePanelMiddle" className="flex">
+    {((selectedItems.employees[0] && !selectedItems.employees[0].isContractor) || isAdminMode) && <div id="middlePanelMiddle" className="flex">
 
       <div className="middlePanelMiddleChild">
         <TimeSheetOptions
