@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import TimeSheetContext from "../../../Context/State";
 import Axios from "../../../Axios";
 import Types from "../../../Context/Types";
+import Util from "../../../Util";
 
 import './TimeSheetOptions.css';
 
@@ -22,10 +23,8 @@ function TimeSheetOptions(props) {
     selectedItemType
   } = props;
 
-  const breakRefAndCopy = (obj) => JSON.parse(JSON.stringify(obj));
-
   const selectItem = (data) => {
-    const selected = breakRefAndCopy(selectedItems);
+    const selected = Util.breakRefAndCopy(selectedItems);
     const selectedIds = selectedItems[selectedItemType].map(data => data.id);
 
     if(selectedIds.includes(data.id)){

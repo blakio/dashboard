@@ -4,6 +4,8 @@ import './EmployeePanel.css';
 import TimeSheetContext from "../../Context/State";
 import Types from "../../Context/Types";
 
+import Util from "../../Util";
+
 function EmployeePanelButtons(props) {
 
   const {
@@ -19,10 +21,8 @@ function EmployeePanelButtons(props) {
     isAdminMode
   } = useContext(TimeSheetContext)
 
-  const breakRefAndCopy = (obj) => JSON.parse(JSON.stringify(obj));
-
   const selectedEmployee = () => {
-    const selectedEmployees = breakRefAndCopy(selectedItems);
+    const selectedEmployees = Util.breakRefAndCopy(selectedItems);
     const selectedIds = selectedItems.employees.map(data => data.id);
 
     if(selectedIds.includes(employee.id)){
@@ -42,7 +42,7 @@ function EmployeePanelButtons(props) {
   }
 
   const removeEmployee = () => {
-    const newSelectedItems = breakRefAndCopy(selectedItems);
+    const newSelectedItems = Util.breakRefAndCopy(selectedItems);
     let index = null;
     newSelectedItems.employees.forEach((data, i) => {
       if(data.id === employee.id) index =  i;
