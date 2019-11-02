@@ -143,11 +143,13 @@ export default {
       name,
       jobTitle,
       id,
+      isContractor,
       fn
     } = payload;
     Axios.put(`employees/${id}`, {
       name,
-      jobTitle
+      jobTitle,
+      isContractor
     }, data => fn(data))
     return state;
   },

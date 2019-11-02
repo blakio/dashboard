@@ -14,6 +14,7 @@ function EmployeePanel() {
   const [jobTitle, setJobTitle] = useState("");
   const [travelTime, setTravelTime] = useState(0);
   const [isEditing, setIsEditing] = useState(false);
+  const [isOn, setIsOn] = useState(false);
 
   const {
     dispatch,
@@ -45,6 +46,7 @@ function EmployeePanel() {
         id: isEditing.id,
         name: fullName.toUpperCase(),
         jobTitle: jobTitle.toUpperCase(),
+        isContractor: isOn,
         fn: () => Axios.fetchEmployees(dispatch)
       }
     })
@@ -57,7 +59,8 @@ function EmployeePanel() {
       jobTitle: jobTitle.toUpperCase(),
       name: fullName.toUpperCase(),
       isActive: true,
-      travelTime: parseInt(travelTime)
+      travelTime: parseInt(travelTime),
+      isContractor: isOn
     }, obj => {
       Axios.fetchEmployees(dispatch);
     }, err => {
@@ -115,6 +118,11 @@ function EmployeePanel() {
         value={travelTime}
         onChange={e => setTravelTime(e.target.value)}
         onKeyPress={submit}/>
+      <div className="flex" onClick={() => setIsOn(!isOn)}>
+        {isOn ? <i style={{ fontSize: "2em", color: "#008280", opacity: 0.6, textAlign: "center" }} className="fas fa-toggle-on"></i> :
+                <i style={{ fontSize: "2em", color: "#a7a7a7", opacity: 0.6, textAlign: "center" }} className="fas fa-toggle-off"></i>}
+        <p style={{color: "#fff", marginLeft: 6}} className="topBarText">CONTRACTOR</p>
+      </div>
     </div>}
     <div id="rightPanelLiner">
       {employees && activeButtons.map((data, index) => {
