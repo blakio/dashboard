@@ -20,7 +20,8 @@ function TimeSheetOptions(props) {
     name,
     route,
     field,
-    selectedItemType
+    selectedItemType,
+    type
   } = props;
 
   const selectItem = (data) => {
@@ -82,7 +83,8 @@ function TimeSheetOptions(props) {
 
         const adminClass = isAdminMode && "activeClass";
         const selectedIds = selectedItems[name].map(data => data.id);
-        const isSelected = selectedIds.includes(data.id);
+        const isSelected = selectedIds.includes(data.id) || (!isAdminMode && (selectedItems.employees[0][type] === data[field]));
+
         const className = `tag tagLabel ${adminClass} ${isSelected && "selected"}`;
 
         return (<div key={index}>

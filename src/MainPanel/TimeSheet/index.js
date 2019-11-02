@@ -202,6 +202,7 @@ function TimeSheet() {
           route="jobs"
           field="number"
           selectedItemType="jobNumbers"
+          type="jobNumber"
         />
       </div>
 
@@ -213,6 +214,7 @@ function TimeSheet() {
           route="labortypes"
           field="name"
           selectedItemType="laborTypes"
+          type="laborType"
         />
       </div>
 
