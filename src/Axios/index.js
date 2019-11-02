@@ -31,27 +31,27 @@ export default {
       .then(response => { fn && fn(response) })
       .catch(error => console.log(error));
   },
-  clockIn: (id, fn) => {
+  clockIn: (id, obj, fn) => {
     let url = `https://dashboard-api-02.herokuapp.com/api/clockin/${id}`;
-    axios.post(url)
+    axios.post(url,  obj)
     .then(data => {if(fn) fn()})
     .catch(error => { console.log(error) });
   },
-  startLunch: (id, fn) => {
+  startLunch: (id, obj, fn) => {
     let url = `https://dashboard-api-02.herokuapp.com/api/tolunch/${id}`;
-    axios.post(url)
+    axios.post(url, obj)
       .then(data => {if(fn) fn()})
       .catch(error => console.log(JSON.stringify(error)));
   },
-  endLunch: (id, fn) => {
+  endLunch: (id, obj, fn) => {
     let url = `https://dashboard-api-02.herokuapp.com/api/fromlunch/${id}`;
-    axios.post(url)
+    axios.post(url, obj)
     .then(data => {if(fn) fn()})
     .catch(error => console.log(JSON.stringify(error)));
   },
-  clockOut: (id, fn) => {
+  clockOut: (id, obj, fn) => {
     let url = `https://dashboard-api-02.herokuapp.com/api/clockout/${id}`;
-    axios.post(url)
+    axios.post(url, obj)
       .then(data => {if(fn) fn()})
       .catch(error => console.log(error));
   },

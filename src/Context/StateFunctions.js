@@ -64,7 +64,10 @@ export default {
   // OTHER
   clickIn: (payload, state) => {
     const employeesId = state.selectedItems.employees[0].id;
-    Axios.clockIn(employeesId);
+    Axios.clockIn(employeesId, {
+      laborType: state.selectedItems.laborTypes[0].name,
+      jobNumber: state.selectedItems.jobNumbers[0].number
+    });
     return {
       ...state,
       selectedItems: breakRefAndCopy(initialState.selectedItems)
@@ -72,7 +75,10 @@ export default {
   },
   clockOut: (payload, state) => {
     const employeesId = state.selectedItems.employees[0].id;
-    Axios.clockOut(employeesId);
+    Axios.clockOut(employeesId, {
+      laborType: state.selectedItems.laborTypes[0].name,
+      jobNumber: state.selectedItems.jobNumbers[0].number
+    });
     return {
       ...state,
       selectedItems: breakRefAndCopy(initialState.selectedItems)
@@ -80,7 +86,10 @@ export default {
   },
   toLunch: (payload, state) => {
     const employeesId = state.selectedItems.employees[0].id;
-    Axios.startLunch(employeesId);
+    Axios.startLunch(employeesId, {
+      laborType: state.selectedItems.laborTypes[0].name,
+      jobNumber: state.selectedItems.jobNumbers[0].number
+    });
     return {
       ...state,
       selectedItems: breakRefAndCopy(initialState.selectedItems)
@@ -88,7 +97,10 @@ export default {
   },
   fromLunch: (payload, state) => {
     const employeesId = state.selectedItems.employees[0].id;
-    Axios.endLunch(employeesId);
+    Axios.endLunch(employeesId, {
+      laborType: state.selectedItems.laborTypes[0].name,
+      jobNumber: state.selectedItems.jobNumbers[0].number
+    });
     return {
       ...state,
       selectedItems: breakRefAndCopy(initialState.selectedItems)
