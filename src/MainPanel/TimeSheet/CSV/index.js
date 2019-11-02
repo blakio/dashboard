@@ -101,15 +101,15 @@ export default () => {
                 className={`topBarButton flex ${startDate && endDate && "active"}`}
                 onClick={() => console.log("submit")}
               >
-                <i className="fas fa-file-csv"></i>
+                <i className="fas fa-database"></i>
               </div>
-              <p className="topBarText">sumit</p>
+              <p className="topBarText">submit</p>
             </div>
             <div style={{margin: 8}}>
               <div
                 className="topBarButton flex active"
                 onClick={() => console.log("submit")}>
-                <i className="fas fa-file-csv"></i>
+                <i className="fas fa-chart-bar"></i>
               </div>
               <p className="topBarText">download</p>
             </div>
