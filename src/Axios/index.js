@@ -31,6 +31,22 @@ export default {
       .then(response => { fn && fn(response) })
       .catch(error => console.log(error));
   },
+  seed: () => {
+    const a = [true, true, true, true, true, true, true, true, true, true];
+    const c = [false, false, true, true, false, true, false, false, true, true];
+    const tt = [0, 0, 1, 2, 0, 1, 0, 0, 2, 3];
+    const e = ["E01", "E02", "E03", "E04", "E05", "E06", "E07", "E08", "E09", "E10"];
+    const t = ["T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10"];
+    e.forEach((data, index) => {
+      axios.post("https://dashboard-api-02.herokuapp.com/api/employees", {
+        isActive: a[index],
+        isContractor: c[index],
+        jobTitle: t[index],
+        name: data,
+        travelTime: tt[index]
+      })
+    })
+  },
   clockIn: (id, obj, fn) => {
     let url = `https://dashboard-api-02.herokuapp.com/api/clockin/${id}`;
     axios.put(url,  obj)

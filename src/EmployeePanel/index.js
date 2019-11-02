@@ -92,7 +92,7 @@ function EmployeePanel() {
   }
 
   return (<div id="rightPanel" className="flex">
-    <div className="sectionHeading">
+    <div className="sectionHeading" onClick={() => isAdminMode && Axios.seed()}>
       <p className="timesheetEmployeeSectionTitle">employees</p>
     </div>
     {isAdminMode && <div className="employeeAdditionForm flex">
