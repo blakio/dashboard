@@ -77,7 +77,8 @@ export default {
     const employeesId = state.selectedItems.employees[0].id;
     Axios.clockOut(employeesId, {
       laborType: Util.getLaborType(state),
-      jobNumber: Util.getJobNumber(state)
+      jobNumber: Util.getJobNumber(state),
+      employee: state.selectedItems.employees[0]
     }, payload);
     return {
       ...state,
