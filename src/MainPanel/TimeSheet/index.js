@@ -107,7 +107,15 @@ function TimeSheet() {
       text: "clock in",
       icon: "fas fa-clock",
       isVisable: !isAdminMode,
-      isActive: () => (selectedItems.employees[0] && !selectedItems.employees[0].clockInTime),
+      isActive: () => {
+        const isEmployeeSelected = selectedItems.employees[0];
+        const isContractor = isEmployeeSelected && selectedItems.employees[0].isContractor;
+        const isLaborTypeSelected = selectedItems.laborTypes[0];
+        const isJobNuumberSelected = selectedItems.jobNumbers[0];
+        const isAlreadyClockedIn = isEmployeeSelected && selectedItems.employees[0].clockInTime;
+        if(isContractor && !isAlreadyClockedIn) return true;
+        return isEmployeeSelected && isLaborTypeSelected && isJobNuumberSelected;
+      },
       function: (isActive) => {
         if(!isActive) return;
         dispatch({
