@@ -82,6 +82,20 @@ function EmployeePanelButtons(props) {
           color: "#008280"
         }} className="fas fa-pen-square"></i>
     </div>}
+    {!isAdminMode && !employee.isContractor && <div
+      onClick={() => editEmployee(employee)}>
+        <i style={{
+          fontSize: "2.4em",
+          color: "#008280"
+        }} className="fas fa-user-tie"></i>
+    </div>}
+    {!isAdminMode && employee.isContractor && <div
+      onClick={() => editEmployee(employee)}>
+        <i style={{
+          fontSize: "2.4em",
+          color: "#008280"
+        }} className="fas fa-id-card-alt"></i>
+    </div>}
   </div>);
 }
 
