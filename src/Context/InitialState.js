@@ -2,6 +2,7 @@ const initialState = {
   isAdminMode: false,
   isAdminLoggedIn: true,
   isDownloadScreen: false,
+  isContractor: false,
   message: {
     confirmation: {
       status: false,

@@ -51,6 +51,8 @@ export default (state, action) => {
       return StateFunctions.closeMessage(payload, state);
     case Types.TOGGLE_DOWNLOAD_SCREEN:
       return StateFunctions.toggleDownloadScreen(payload, state);
+    case Types.TOGGLE_IS_CONTRACTOR:
+      return StateFunctions.toggleIsContractor(payload, state);
 
     default:
     return state;

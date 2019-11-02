@@ -14,12 +14,12 @@ function EmployeePanel() {
   const [jobTitle, setJobTitle] = useState("");
   const [travelTime, setTravelTime] = useState(0);
   const [isEditing, setIsEditing] = useState(false);
-  const [isOn, setIsOn] = useState(false);
 
   const {
     dispatch,
     employees,
-    isAdminMode
+    isAdminMode,
+    isContractor
   } = useContext(TimeSheetContext);
 
   useEffect(() => {
@@ -46,7 +46,7 @@ function EmployeePanel() {
         id: isEditing.id,
         name: fullName.toUpperCase(),
         jobTitle: jobTitle.toUpperCase(),
-        isContractor: isOn,
+        isContractor: isContractor,
         fn: () => Axios.fetchEmployees(dispatch)
       }
     })
@@ -60,7 +60,7 @@ function EmployeePanel() {
       name: fullName.toUpperCase(),
       isActive: true,
       travelTime: parseInt(travelTime),
-      isContractor: isOn
+      isContractor: isContractor
     }, obj => {
       Axios.fetchEmployees(dispatch);
     }, err => {
@@ -118,8 +118,13 @@ function EmployeePanel() {
         value={travelTime}
         onChange={e => setTravelTime(e.target.value)}
         onKeyPress={submit}/>
-      <div className="flex" onClick={() => setIsOn(!isOn)}>
-        {isOn ? <i style={{ fontSize: "2em", color: "#008280", opacity: 0.6, textAlign: "center" }} className="fas fa-toggle-on"></i> :
+      <div className="flex" onClick={() => {
+        dispatch({
+          type: Types.TOGGLE_IS_CONTRACTOR,
+          payload: !isContractor
+        });
+      }}>
+        {isContractor ? <i style={{ fontSize: "2em", color: "#008280", opacity: 0.6, textAlign: "center" }} className="fas fa-toggle-on"></i> :
                 <i style={{ fontSize: "2em", color: "#a7a7a7", opacity: 0.6, textAlign: "center" }} className="fas fa-toggle-off"></i>}
         <p style={{color: "#fff", marginLeft: 6}} className="topBarText">CONTRACTOR</p>
       </div>

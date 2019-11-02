@@ -164,7 +164,8 @@ export default {
         laborTypes: [],
         jobNumbers: [],
         employees: []
-      }
+      },
+      isContractor: false
     };
   },
   openMessage: (payload, state) => {
@@ -191,6 +192,14 @@ export default {
     return {
       ...state,
       isDownloadScreen: currentState.isDownloadScreen
+    }
+  },
+  toggleIsContractor: (payload, state) => {
+    const currentState = Util.breakRefAndCopy(state);
+    currentState.isContractor = payload;
+    return {
+      ...state,
+      isContractor: currentState.isContractor
     }
   }
 }
