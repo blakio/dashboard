@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 
+import { CSVLink, CSVDownload } from "react-csv";
 import DatePicker from  "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -9,6 +10,13 @@ import Types from "../../../Context/Types";
 import moment from "moment";
 
 export default () => {
+
+  const csvData = [
+    ["firstname", "lastname", "email"],
+    ["Ahmed", "Tomi", "ah@smthing.co.com"],
+    ["Raed", "Labes", "rl@smthing.co.com"],
+    ["Yezzi", "Min l3b", "ymin@cocococo.com"]
+  ];
 
   const {
     dispatch
@@ -21,6 +29,17 @@ export default () => {
     dispatch({
       type: Types.TOGGLE_DOWNLOAD_SCREEN,
       payload: false
+    })
+  }
+
+  const requestData = () => {
+    dispatch({
+      type: Types.GET_CSV_DATA,
+      payload: {
+        startDate,
+        endDate,
+        dispatch
+      }
     })
   }
 
@@ -107,20 +126,22 @@ export default () => {
             <div style={{margin: 8}}>
               <div
                 className={`topBarButton flex ${startDate && endDate && "active"}`}
-                onClick={() => console.log("submit")}
+                onClick={requestData}
               >
                 <i className="fas fa-database"></i>
               </div>
               <p className="topBarText">submit</p>
             </div>
-            <div style={{margin: 8}}>
-              <div
-                className="topBarButton flex active"
-                onClick={() => console.log("submit")}>
-                <i className="fas fa-chart-bar"></i>
+            <CSVLink data={csvData} style={{textDecoration: "none"}}>
+              <div style={{margin: 8}}>
+                <div
+                  className="topBarButton flex active"
+                  onClick={() => console.log("submit")}>
+                  <i className="fas fa-chart-bar"></i>
+                </div>
+                <p className="topBarText" style={{color: "#000"}}>download</p>
               </div>
-              <p className="topBarText">download</p>
-            </div>
+            </CSVLink>
           </div>
         </div>
 

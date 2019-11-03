@@ -202,5 +202,17 @@ export default {
       ...state,
       isContractor: currentState.isContractor
     }
+  },
+  getCSVData: (payload, state) => {
+    Axios.getCsvData(payload);
+    return state
+  },
+  setCSVData: (payload, state) => {
+    const currentState = Util.breakRefAndCopy(state);
+    currentState.csvData = payload;
+    return {
+      ...state,
+      csvData: Util.formatCSVData(currentState.csvData)
+    }
   }
 }

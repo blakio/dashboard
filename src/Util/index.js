@@ -11,4 +11,7 @@ export default {
     if(state.selectedItems.jobNumbers[0]) return state.selectedItems.jobNumbers[0].number;
     return state.selectedItems.employees[0].jobNumber
   },
+  formatCSVData: (data) => {
+    return data;
+  }
 }

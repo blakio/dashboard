@@ -116,5 +116,20 @@ export default {
       type: Types.SET_JOB_NUMBERS,
       payload: response.data
     })
+  },
+  getCsvData: async (payload) => {
+    const {
+      dispatch,
+      startDate,
+      endDate
+    } = payload;
+    const response = await axios.post("https://dashboard-api-02.herokuapp.com/api/history/csv", {
+      startDate,
+      endDate
+    });
+    dispatch({
+      type: Types.SET_CSV_DATA,
+      payload: response.data
+    })
   }
 };
