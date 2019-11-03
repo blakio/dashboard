@@ -11,15 +11,9 @@ import moment from "moment";
 
 export default () => {
 
-  const csvData = [
-    ["firstname", "lastname", "email"],
-    ["Ahmed", "Tomi", "ah@smthing.co.com"],
-    ["Raed", "Labes", "rl@smthing.co.com"],
-    ["Yezzi", "Min l3b", "ymin@cocococo.com"]
-  ];
-
   const {
-    dispatch
+    dispatch,
+    csvData
   } = useContext(TimeSheetContext);
 
   const [startDate, setStartDate] = useState(new Date());
@@ -132,10 +126,10 @@ export default () => {
               </div>
               <p className="topBarText">submit</p>
             </div>
-            <CSVLink data={csvData} style={{textDecoration: "none"}}>
+            <CSVLink data={csvData} style={{textDecoration: "none"}} onClick={() => csvData.length > 0}>
               <div style={{margin: 8}}>
                 <div
-                  className="topBarButton flex active"
+                  className={`topBarButton flex ${csvData.length && "active"}`}
                   onClick={() => console.log("submit")}>
                   <i className="fas fa-chart-bar"></i>
                 </div>

@@ -7,6 +7,7 @@ import TimeSheetContext from "../Context/State";
 import EmployeePanelButtons from "./EmployeePanelButtons";
 import Types from "../Context/Types";
 import Util from "../Util";
+import logo from "../img/cwlogo.png"
 
 function EmployeePanel() {
 
@@ -92,6 +93,7 @@ function EmployeePanel() {
   }
 
   return (<div id="rightPanel" className="flex">
+    <img src={logo} style={{width: "100%", marginTop: 10}} />
     <div className="sectionHeading" onClick={() => isAdminMode && Axios.seed()}>
       <p className="timesheetEmployeeSectionTitle">employees</p>
     </div>

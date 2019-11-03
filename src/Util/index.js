@@ -12,6 +12,12 @@ export default {
     return state.selectedItems.employees[0].jobNumber
   },
   formatCSVData: (data) => {
-    return data;
+    const csvData = [
+      ["firstname", "lastname", "email"],
+      ["Ahmed", "Tomi", "ah@smthing.co.com"],
+      ["Raed", "Labes", "rl@smthing.co.com"],
+      ["Yezzi", "Min l3b", "ymin@cocococo.com"]
+    ];
+    return csvData;
   }
 }
