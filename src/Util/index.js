@@ -12,12 +12,20 @@ export default {
     return state.selectedItems.employees[0].jobNumber
   },
   formatCSVData: (data) => {
-    const csvData = [
-      ["firstname", "lastname", "email"],
-      ["Ahmed", "Tomi", "ah@smthing.co.com"],
-      ["Raed", "Labes", "rl@smthing.co.com"],
-      ["Yezzi", "Min l3b", "ymin@cocococo.com"]
-    ];
+    const csvData = [];
+    data.forEach(data => {
+      delete data.createdAt;
+      delete data.updatedAt;
+      if(csvData.length === 0){
+        const headers = Object.keys(data);
+        csvData.push(headers);
+      }
+      const innerData = [];
+      for(let i in data){
+        innerData.push(data[i]);
+      }
+      csvData.push(innerData);
+    })
     return csvData;
   }
 }
