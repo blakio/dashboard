@@ -123,9 +123,9 @@ export default {
       startDate,
       endDate
     } = payload;
-    const response = await axios.post("https://dashboard-api-02.herokuapp.com/api/history/csv", {
-      startDate,
-      endDate
+    const response = await axios.post("https://dashboard-api-02.herokuapp.com/api/history", {
+      startDate: moment(startDate).format("YYYY-MM-DD"),
+      endDate: moment(endDate).format("YYYY-MM-DD")
     });
     dispatch({
       type: Types.SET_CSV_DATA,
