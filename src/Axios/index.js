@@ -33,8 +33,8 @@ export default {
   },
   seed: () => {
     const a = [true, true, true, true, true, true, true, true, true, true];
-    const c = [false, false, true, true, false, true, false, false, true, true];
-    const tt = [0, 0, 1, 2, 0, 1, 0, 0, 2, 3];
+    const c = [false, false, false, false, false, false, false, false, true, true];
+    const tt = [0, 0, 0, 0, 0, 0, 0, 0, 2, 3];
     const e = ["E01", "E02", "E03", "E04", "E05", "E06", "E07", "E08", "E09", "E10"];
     const t = ["T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10"];
     const j = [123, 234, 345, 456, 567, 678, 789, 891, 912, 1234];
