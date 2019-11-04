@@ -208,11 +208,14 @@ export default {
     return state
   },
   setCSVData: (payload, state) => {
-    const currentState = Util.breakRefAndCopy(state);
-    currentState.csvData = payload;
+    const { data, startDate, endDate } = payload;
     return {
       ...state,
-      csvData: Util.formatCSVData(currentState.csvData)
+      csvData: {
+        data: Util.formatCSVData(data),
+        startDate,
+        endDate
+      }
     }
   }
 }

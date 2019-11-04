@@ -129,7 +129,11 @@ export default {
     });
     dispatch({
       type: Types.SET_CSV_DATA,
-      payload: response.data
+      payload: {
+        data: response.data,
+        startDate: moment(startDate).format("YYYY-MM-DD"),
+        endDate: moment(endDate).format("YYYY-MM-DD")
+      }
     })
   }
 };

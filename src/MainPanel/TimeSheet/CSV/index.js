@@ -126,10 +126,14 @@ export default () => {
               </div>
               <p className="topBarText">submit</p>
             </div>
-            <CSVLink data={csvData} style={{textDecoration: "none"}} onClick={() => csvData.length > 0}>
+            <CSVLink
+              data={csvData.data}
+              style={{textDecoration: "none"}}
+              filename={`cummins-wagner_timesheet__from:${csvData.startDate}-to:${csvData.endDate}.csv`}
+              onClick={() => csvData.data.length > 0}>
               <div style={{margin: 8}}>
                 <div
-                  className={`topBarButton flex ${csvData.length && "active"}`}
+                  className={`topBarButton flex ${csvData.data.length && "active"}`}
                   onClick={() => console.log("submit")}>
                   <i className="fas fa-chart-bar"></i>
                 </div>

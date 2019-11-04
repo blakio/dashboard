@@ -25,7 +25,11 @@ const initialState = {
   laborTypes: [],
   jobNumbers: [],
   employees: [],
-  csvData: []
+  csvData: {
+    data: [],
+    startDate: "",
+    endDate: ""
+  }
 };
 
 export default initialState;
