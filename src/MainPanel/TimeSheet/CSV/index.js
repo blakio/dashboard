@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 
-import { CSVLink, CSVDownload } from "react-csv";
+import { CSVLink } from "react-csv";
 import DatePicker from  "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
