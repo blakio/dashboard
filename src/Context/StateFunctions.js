@@ -64,9 +64,10 @@ export default {
   // OTHER
   clockIn: (payload, state) => {
     const employeesId = state.selectedItems.employees[0].id;
+    const isContractor = state.selectedItems.employees[0].isContractor;
     Axios.clockIn(employeesId, {
-      laborType: Util.getLaborType(state),
-      jobNumber: Util.getJobNumber(state)
+      laborType: isContractor ? "WELDER" : Util.getLaborType(state),
+      jobNumber: isContractor ? "35000-222" : Util.getJobNumber(state)
     }, payload);
     return {
       ...state,
@@ -75,9 +76,10 @@ export default {
   },
   clockOut: (payload, state) => {
     const employeesId = state.selectedItems.employees[0].id;
+    const isContractor = state.selectedItems.employees[0].isContractor;
     Axios.clockOut(employeesId, {
-      laborType: Util.getLaborType(state),
-      jobNumber: Util.getJobNumber(state),
+      laborType: isContractor ? "WELDER" : Util.getLaborType(state),
+      jobNumber: isContractor ? "35000-222" : Util.getJobNumber(state),
       ...state.selectedItems.employees[0]
     }, payload);
     return {
@@ -87,9 +89,10 @@ export default {
   },
   toLunch: (payload, state) => {
     const employeesId = state.selectedItems.employees[0].id;
+    const isContractor = state.selectedItems.employees[0].isContractor;
     Axios.startLunch(employeesId, {
-      laborType: Util.getLaborType(state),
-      jobNumber: Util.getJobNumber(state)
+      laborType: isContractor ? "WELDER" : Util.getLaborType(state),
+      jobNumber: isContractor ? "35000-222" : Util.getJobNumber(state)
     }, payload);
     return {
       ...state,
@@ -98,9 +101,10 @@ export default {
   },
   fromLunch: (payload, state) => {
     const employeesId = state.selectedItems.employees[0].id;
+    const isContractor = state.selectedItems.employees[0].isContractor;
     Axios.endLunch(employeesId, {
-      laborType: Util.getLaborType(state),
-      jobNumber: Util.getJobNumber(state)
+      laborType: isContractor ? "WELDER" : Util.getLaborType(state),
+      jobNumber: isContractor ? "35000-222" : Util.getJobNumber(state)
     }, payload);
     return {
       ...state,
