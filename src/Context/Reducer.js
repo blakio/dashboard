@@ -30,7 +30,7 @@ export default (state, action) => {
 
     // OTHER
     case Types.CLOCK_IN:
-      return StateFunctions.clickIn(payload, state);
+      return StateFunctions.clockIn(payload, state);
     case Types.CLOCK_OUT:
       return StateFunctions.clockOut(payload, state);
     case Types.GO_TO_LUNCH:

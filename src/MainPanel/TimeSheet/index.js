@@ -120,7 +120,16 @@ function TimeSheet() {
         if(!isActive) return;
         dispatch({
           type: Types.CLOCK_IN,
-          payload: () => Axios.fetchEmployees(dispatch)
+          payload: () => {
+            Axios.fetchEmployees(dispatch);
+            dispatch({
+              type: Types.OPEN_MESSAGE,
+              payload: {
+                type: "confirmation",
+                message: "CONFIRMED!"
+              }
+            })
+          }
         })
       }
     },
@@ -133,7 +142,16 @@ function TimeSheet() {
         if(!isActive) return;
         dispatch({
           type: Types.GO_TO_LUNCH,
-          payload: () => Axios.fetchEmployees(dispatch)
+          payload: () => {
+            Axios.fetchEmployees(dispatch)
+            dispatch({
+              type: Types.OPEN_MESSAGE,
+              payload: {
+                type: "confirmation",
+                message: "CONFIRMED!"
+              }
+            })
+          }
         })
       }
     },
@@ -146,7 +164,16 @@ function TimeSheet() {
         if(!isActive) return;
         dispatch({
           type: Types.BACK_FROM_LUNCH,
-          payload: () => Axios.fetchEmployees(dispatch)
+          payload: () => {
+            Axios.fetchEmployees(dispatch);
+            dispatch({
+              type: Types.OPEN_MESSAGE,
+              payload: {
+                type: "confirmation",
+                message: "CONFIRMED!"
+              }
+            })
+          }
         })
       }
     },
@@ -159,7 +186,16 @@ function TimeSheet() {
         if(!isActive) return;
         dispatch({
           type: Types.CLOCK_OUT,
-          payload: () => Axios.fetchEmployees(dispatch)
+          payload: () => {
+            Axios.fetchEmployees(dispatch);
+            dispatch({
+              type: Types.OPEN_MESSAGE,
+              payload: {
+                type: "confirmation",
+                message: "CONFIRMED!"
+              }
+            })
+          }
         })
       }
     }

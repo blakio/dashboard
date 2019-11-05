@@ -62,7 +62,7 @@ export default {
   },
 
   // OTHER
-  clickIn: (payload, state) => {
+  clockIn: (payload, state) => {
     const employeesId = state.selectedItems.employees[0].id;
     Axios.clockIn(employeesId, {
       laborType: Util.getLaborType(state),
