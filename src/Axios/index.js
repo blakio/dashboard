@@ -36,8 +36,8 @@ export default {
     const tt = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2];
     const e = ["Mike Kowal", "Ryan McWilliams", "Joseph Nees", "Bill Croissette, Jr.", "Paul Wick", "Paul Bement", "Mark Schoonover", "Ben Vehabovic", "Shawn Savitz", "Craig Fuller", "Courtney Johnson", "Michael Clucas", "Lisa Thomas", "Amber", "Bill Croissette", "Jake Shellhammer"];
     const t = ["Shop Manager", "Mechanic/Tech", "Mechanic/Tech", "Mechanic/Tech", "Mechanic/Tech", "Department Manager", "Project Manager", "Application Engineer", "Designer", "Project Manager", "Project Manager and Production Planner", "Project Manager", "Office Administrator", "Shipper/Receiver", "Welder", "Welder"];
-    const j = ["35000-123", "35000-234", "35000-345", "35000-456", "35000-567", "35000-678", "35000-789", "35000-891", "35000-912", "35000-321"];
-    const l = ["Base", "Crate", "DP Switch", "adder: flex house", "pipping assembly", "adder: pumps", "paint", "rework", "test"];
+    const j = ["35000-123", "35000-234", "35000-345", "35000-456", "35000-567", "35000-678", "35000-789", "35000-891", "35000-912", "35000-321", "Other"];
+    const l = ["Base", "Crate", "DP Switch", "adder: flex house", "pipping assembly", "adder: pumps", "paint", "rework", "test", "Other"];
 
     e.forEach((data, index) => {
       axios.post("https://dashboard-api-02.herokuapp.com/api/employees", {
