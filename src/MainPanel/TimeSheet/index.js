@@ -187,14 +187,15 @@ function TimeSheet() {
         dispatch({
           type: Types.CLOCK_OUT,
           payload: () => {
-            Axios.fetchEmployees(dispatch);
-            dispatch({
-              type: Types.OPEN_MESSAGE,
-              payload: {
-                type: "confirmation",
-                message: "CONFIRMED!"
-              }
-            })
+            Axios.reset(selectedItems.employees[0].id, () => {
+              dispatch({
+                type: Types.OPEN_MESSAGE,
+                payload: {
+                  type: "confirmation",
+                  message: "CONFIRMED!"
+                }
+              });
+            });
           }
         })
       }

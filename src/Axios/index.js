@@ -36,7 +36,7 @@ export default {
     const tt = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2];
     const e = ["Mike Kowal", "Ryan McWilliams", "Joseph Nees", "Bill Croissette, Jr.", "Paul Wick", "Paul Bement", "Mark Schoonover", "Ben Vehabovic", "Shawn Savitz", "Craig Fuller", "Courtney Johnson", "Michael Clucas", "Lisa Thomas", "Amber", "Bill Croissette", "Jake Shellhammer"];
     const t = ["Shop Manager", "Mechanic/Tech", "Mechanic/Tech", "Mechanic/Tech", "Mechanic/Tech", "Department Manager", "Project Manager", "Application Engineer", "Designer", "Project Manager", "Project Manager and Production Planner", "Project Manager", "Office Administrator", "Shipper/Receiver", "Welder", "Welder"];
-    const j = ["35000-123", "35000-234", "35000-345", "35000-456", "35000-567", "35000-678", "35000-789", "35000-891", "35000-912", "35000-321", "Other"];
+    const j = ["35000123", "35000234", "35000345", "35000456", "35000567", "35000678", "35000789", "35000891", "35000912", "35000321", "Other"];
     const l = ["Base", "Crate", "DP Switch", "adder: flex house", "pipping assembly", "adder: pumps", "paint", "rework", "test", "Other"];
 
     e.forEach((data, index) => {
@@ -84,6 +84,11 @@ export default {
     axios.put(url, obj)
       .then(data => {if(fn) fn()})
       .catch(error => console.log(error));
+  },
+  reset: async (id, fn) => {
+    const resetEmployee = await axios.put(`https://dashboard-api-02.herokuapp.com/api/reset/${id}`, {});
+    const fetchEmployees = await axios.get("https://dashboard-api-02.herokuapp.com/api/employees");
+    fn();
   },
   updateEmployee: (id, laborType, jobNumber, fn) => {
     let url = `https://dashboard-api-02.herokuapp.com/api/employees/`
