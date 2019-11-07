@@ -214,21 +214,8 @@ function TimeSheet() {
   />) : null;
 
   return (<div id="timesheet">
-    <div id="topbar" className="flex">
-      {toggleButton}
-      {topButtons.map((data, index) => {
-        if(!data.isVisable) return null;
-        const className = `topBarButton flex ${data.isActive() && "active"}`;
-        return (<div key={index} className="topBarButtonParent">
-          <div
-            className={className}
-            onClick={() => data.function(data.isActive())}>
-            <i className={data.icon}></i>
-          </div>
-          <p className="topBarText">{data.text}</p>
-        </div>)
-      })}
-    </div>
+    {toggleButton}
+
     {((selectedItems.employees[0] && !selectedItems.employees[0].isContractor) || isAdminMode) && <div id="middlePanelMiddle" className="flex">
 
       <div className="middlePanelMiddleChild">
@@ -256,6 +243,22 @@ function TimeSheet() {
       </div>
 
     </div>}
+
+    <div id="topbar" className="flex">
+      {topButtons.map((data, index) => {
+        if(!data.isVisable) return null;
+        const className = `topBarButton flex ${data.isActive() && "active"}`;
+        return (<div key={index} className="topBarButtonParent">
+          <div
+            className={className}
+            onClick={() => data.function(data.isActive())}>
+            <i className={data.icon}></i>
+          </div>
+          <p className="topBarText">{data.text}</p>
+        </div>)
+      })}
+    </div>
+    
     {isDownloadScreen && <CSV />}
   </div>);
 }
