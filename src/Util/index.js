@@ -1,3 +1,6 @@
+import moment from "moment";
+import util from "./util";
+
 export default {
 
   breakRefAndCopy: obj => (JSON.parse(JSON.stringify(obj))),
@@ -14,15 +17,30 @@ export default {
   formatCSVData: (data) => {
     const csvData = [];
     data.forEach(data => {
-      delete data.createdAt;
-      delete data.updatedAt;
+      const usedData = util.breakRefAndCopy(data)
+      delete usedData.createdAt;
+      delete usedData.updatedAt;
+      delete usedData.jobTitle;
+
+      usedData.clockInTime = util.getTime("clockInTime", data);
+      usedData.clockOutTime = util.getTime("clockOutTime", data);
+      usedData.endLunch = util.getTime("endLunch", data);
+      usedData.startLunch = util.getTime("startLunch", data);
+      usedData.lunchTime = usedData.lunchTime || "no lunch taken"
+      usedData.isContractor = data.isContractor ? "yes" : "no";
+
       if(csvData.length === 0){
-        const headers = Object.keys(data);
-        csvData.push(headers);
+        const headers = [];
+        const headersKeys = Object.keys(usedData);
+        headersKeys.forEach(data => {
+          const head = util.getHeader[data] || data;
+          headers.push(head)
+        })
+        csvData.push(headers)
       }
       const innerData = [];
-      for(let i in data){
-        innerData.push(data[i]);
+      for(let i in usedData){
+        innerData.push(usedData[i]);
       }
       csvData.push(innerData);
     })
