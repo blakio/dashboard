@@ -60,9 +60,10 @@ function EmployeePanelButtons(props) {
       }
     }
 
-    employee.jobNumber ? addJobNumber(selectedEmployees) : emptyJobNumber(selectedEmployees);
-    employee.laborType ? addLaborTypes(selectedEmployees) : emptyLaborTypes(selectedEmployees);
-    debugger
+    if(!isAdminMode){
+      employee.jobNumber ? addJobNumber(selectedEmployees) : emptyJobNumber(selectedEmployees);
+      employee.laborType ? addLaborTypes(selectedEmployees) : emptyLaborTypes(selectedEmployees);
+    }
 
     dispatch({
       type: Types.SET_SELECTED_ITEMS,
@@ -78,15 +79,18 @@ function EmployeePanelButtons(props) {
     newSelectedItems.employees.forEach((data, i) => {
       if(data.id === employee.id) index =  i;
     });
-    newSelectedItems.jobNumbers.forEach((data, i) => {
-      if(data.number === employee.jobNumber) jobNumberIndex =  i;
-    });
-    newSelectedItems.laborTypes.forEach((data, i) => {
-      if(data.name === employee.laborType) laborTypeIndex =  i;
-    });
+
+    if(!isAdminMode){
+      newSelectedItems.jobNumbers.forEach((data, i) => {
+        if(data.number === employee.jobNumber) jobNumberIndex =  i;
+      });
+      newSelectedItems.laborTypes.forEach((data, i) => {
+        if(data.name === employee.laborType) laborTypeIndex =  i;
+      });
+      newSelectedItems.jobNumbers.splice(jobNumberIndex, 1);
+      newSelectedItems.laborTypes.splice(laborTypeIndex, 1);
+    }
     newSelectedItems.employees.splice(index, 1);
-    newSelectedItems.jobNumbers.splice(jobNumberIndex, 1);
-    newSelectedItems.laborTypes.splice(laborTypeIndex, 1);
     dispatch({
       type: Types.SET_SELECTED_ITEMS,
       payload: newSelectedItems
