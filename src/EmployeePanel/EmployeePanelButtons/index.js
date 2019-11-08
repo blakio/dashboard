@@ -107,6 +107,11 @@ function EmployeePanelButtons(props) {
   const isSelected = selectedIds.includes(employee.id);
   const className = `employeeButton flex ${isSelected && "selected"}`;
 
+  const iconStlye = {
+    fontSize: "2em",
+    color: "#008280"
+  }
+
   return (<div
     className={className}
     onClick={() => click()}>
@@ -120,24 +125,15 @@ function EmployeePanelButtons(props) {
     </div>
     {isAdminMode && <div
       onClick={() => editEmployee(employee)}>
-        <i style={{
-          fontSize: "2.4em",
-          color: "#008280"
-        }} className="fas fa-pen-square"></i>
+        <i style={iconStlye} className="fas fa-pen-square"></i>
     </div>}
     {!isAdminMode && !employee.isContractor && <div
       onClick={() => editEmployee(employee)}>
-        <i style={{
-          fontSize: "2.4em",
-          color: "#008280"
-        }} className="fas fa-user-tie"></i>
+        <i style={iconStlye} className="fas fa-user-tie"></i>
     </div>}
     {!isAdminMode && employee.isContractor && <div
       onClick={() => editEmployee(employee)}>
-        <i style={{
-          fontSize: "2.4em",
-          color: "#008280"
-        }} className="fas fa-id-card-alt"></i>
+        <i style={iconStlye} className="fas fa-id-card-alt"></i>
     </div>}
   </div>);
 }
