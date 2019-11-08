@@ -41,6 +41,10 @@ function EmployeePanelButtons(props) {
     })
   }
 
+  const emptyJobNumber = (selectedItems) => selectedItems.jobNumbers = [];
+
+  const emptyLaborTypes = (selectedItems) => selectedItems.laborTypes = [];
+
   const selectedEmployee = () => {
     const selectedEmployees = Util.breakRefAndCopy(selectedItems);
     const selectedIds = selectedItems.employees.map(data => data.id);
@@ -56,8 +60,9 @@ function EmployeePanelButtons(props) {
       }
     }
 
-    employee.jobNumber && addJobNumber(selectedEmployees);
-    employee.laborType && addLaborTypes(selectedEmployees);
+    employee.jobNumber ? addJobNumber(selectedEmployees) : emptyJobNumber(selectedEmployees);
+    employee.laborType ? addLaborTypes(selectedEmployees) : emptyLaborTypes(selectedEmployees);
+    debugger
 
     dispatch({
       type: Types.SET_SELECTED_ITEMS,
