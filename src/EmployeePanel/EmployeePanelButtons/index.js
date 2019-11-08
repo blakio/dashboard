@@ -27,7 +27,7 @@ function EmployeePanelButtons(props) {
     const jobNumber = employee.jobNumber;
     jobNumbers.forEach(data => {
       if(data.number === jobNumber){
-        selectedItems.jobNumbers.push(data);
+        selectedItems.jobNumbers = [data];
       }
     })
   }
@@ -36,7 +36,7 @@ function EmployeePanelButtons(props) {
     const laborType = employee.laborType;
     laborTypes.forEach(data => {
       if(data.name === laborType){
-        selectedItems.laborTypes.push(data);
+        selectedItems.laborTypes = [data];
       }
     })
   }
