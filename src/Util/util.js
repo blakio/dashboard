@@ -18,10 +18,11 @@ export default {
     isContractor: "Is A Contractor",
     jobNumber: "Job Number",
     laborType: "Labor Type",
-    lunchTime: "Lunch Total Time",
+    lunchTime: "Lunch Total Time (hrs)",
     name: "Employee Name",
     startLunch: "Lunch Start Time",
-    totalHrs: "Total Hours Worked"
+    totalHrs: "Total Hours Worked (hrs)",
+    overTime: "Total Overtime (hrs)"
   }
 
 }

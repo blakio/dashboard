@@ -28,6 +28,9 @@ export default {
       usedData.startLunch = util.getTime("startLunch", data);
       usedData.lunchTime = usedData.lunchTime || "no lunch taken"
       usedData.isContractor = data.isContractor ? "yes" : "no";
+      usedData.totalHrs = (parseInt(data.totalHrs) / 60).toFixed(2);
+      usedData.overTime = (parseInt(data.overTime) / 60).toFixed(2);
+      usedData.lunchTime = (parseInt(data.lunchTime) / 60).toFixed(2);
 
       if(csvData.length === 0){
         const headers = [];
