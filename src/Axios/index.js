@@ -88,7 +88,7 @@ export default {
   reset: async (id, fn) => {
     const resetEmployee = await axios.put(`https://dashboard-api-02.herokuapp.com/api/reset/${id}`, {});
     const fetchEmployees = await axios.get("https://dashboard-api-02.herokuapp.com/api/employees");
-    fn();
+    fn(fetchEmployees);
   },
   updateEmployee: (id, laborType, jobNumber, fn) => {
     let url = `https://dashboard-api-02.herokuapp.com/api/employees/`

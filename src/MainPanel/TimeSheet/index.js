@@ -187,13 +187,17 @@ function TimeSheet() {
         dispatch({
           type: Types.CLOCK_OUT,
           payload: () => {
-            Axios.reset(selectedItems.employees[0].id, () => {
+            Axios.reset(selectedItems.employees[0].id, (obj) => {
               dispatch({
                 type: Types.OPEN_MESSAGE,
                 payload: {
                   type: "confirmation",
                   message: "CONFIRMED!"
                 }
+              });
+              dispatch({
+                type: Types.SET_EMPLOYEES,
+                payload: obj.data
               });
             });
           }
@@ -258,7 +262,7 @@ function TimeSheet() {
         </div>)
       })}
     </div>
-    
+
     {isDownloadScreen && <CSV />}
   </div>);
 }
