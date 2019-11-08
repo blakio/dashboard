@@ -87,7 +87,7 @@ export default () => {
         <div style={{height: "60%"}}>
           <div className="flex">
             <div style={styles.button}>
-              <div>start</div>
+              <div>START</div>
               <DatePicker
                 selected={startDate}
                 onChange={date => {
@@ -103,7 +103,7 @@ export default () => {
               />
             </div>
             <div style={styles.button}>
-              <div>end</div>
+              <div>END</div>
               <DatePicker
                 selected={endDate}
                 onChange={date => setEndDate(date)}
