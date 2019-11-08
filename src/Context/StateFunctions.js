@@ -83,7 +83,7 @@ export default {
     Axios.clockOut(employeesId, {
       laborType: isContractor ? "WELDER" : Util.getLaborType(state),
       jobNumber: isContractor ? "35000-222" : Util.getJobNumber(state),
-      date: moment(new Date).format("YYYY-MM-DD"),
+      date: moment(new Date).format("YYYY/MM/DD"),
       ...state.selectedItems.employees[0]
     }, payload);
     return {
