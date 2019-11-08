@@ -11,10 +11,6 @@
   transition: all 0.5s;
 }
 
-.employeeButton.selected p {
-  color: #008280;
-}
-
 .sideButtonDescription {
   min-width: 8em;
   height: 4em;
@@ -28,6 +24,14 @@
 .sideButtonDescriptionBottom p {
   margin: 0em;
   color: rgba(255, 255, 255, 0.4);
+}
+
+.sideButtonDescriptionTop p.deactivatedEmployeeClass {
+  color: #de5050;
+}
+
+.employeeButton.selected p {
+  color: #008280;
 }
 
 .sideButtonDescriptionTop p {
