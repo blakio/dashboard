@@ -133,9 +133,9 @@ export default () => {
                 className={`topBarButton flex ${startDate && endDate && "active"}`}
                 onClick={requestData}
               >
-                <i className="fas fa-database"></i>
+                <i class="fas fa-search"></i>
               </div>
-              <p className="topBarText">submit</p>
+              <p className="topBarText">search</p>
             </div>
             <CSVLink
               data={csvData.data}
@@ -144,7 +144,7 @@ export default () => {
               onClick={() => csvData.data.length > 0}>
               <div style={{margin: 8}}>
                 <div className={`topBarButton flex ${csvData.data.length && "active"}`}>
-                  <i className="fas fa-chart-bar"></i>
+                  <i class="fas fa-file-download"></i>
                 </div>
                 <p className="topBarText" style={{color: "#000"}}>download</p>
               </div>
