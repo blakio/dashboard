@@ -18,11 +18,16 @@ export default {
     isContractor: "Is A Contractor",
     jobNumber: "Job Number",
     laborType: "Labor Type",
-    lunchTime: "Lunch Total Time (hrs)",
+    lunchTime: "Lunch Total Time",
     name: "Employee Name",
     startLunch: "Lunch Start Time",
-    totalHrs: "Total Hours Worked (hrs)",
-    overTime: "Total Overtime (hrs)"
+    totalHrs: "Total Hours Worked",
+    overTime: "Total Overtime"
+  },
+
+  getTimeFromString: (time) => {
+    const split = time.split(":");
+    return `${split[0] || 0} hr : ${split[1] || 0} min : ${split[2] || 0} sec`
   }
 
 }
