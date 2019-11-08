@@ -96,6 +96,9 @@ export default () => {
                     setEndDate(date);
                   }
                   setStartDate(date);
+                  dispatch({
+                    type: Types.CLEAR_CSV_DATA
+                  })
                 }}
                 selectsStart
                 startDate={startDate}
@@ -106,7 +109,12 @@ export default () => {
               <div>END</div>
               <DatePicker
                 selected={endDate}
-                onChange={date => setEndDate(date)}
+                onChange={date => {
+                  setEndDate(date)
+                  dispatch({
+                    type: Types.CLEAR_CSV_DATA
+                  })
+                }}
                 selectsEnd
                 endDate={endDate}
                 minDate={startDate}
