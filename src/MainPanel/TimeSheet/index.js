@@ -113,8 +113,9 @@ function TimeSheet() {
         const isLaborTypeSelected = selectedItems.laborTypes[0];
         const isJobNuumberSelected = selectedItems.jobNumbers[0];
         const isAlreadyClockedIn = isEmployeeSelected && selectedItems.employees[0].clockInTime;
+        const hasClockedIn = isEmployeeSelected && isEmployeeSelected.clockInTime;
         if(isContractor && !isAlreadyClockedIn) return true;
-        return isEmployeeSelected && isLaborTypeSelected && isJobNuumberSelected;
+        return isEmployeeSelected && isLaborTypeSelected && isJobNuumberSelected && !hasClockedIn;
       },
       function: (isActive) => {
         if(!isActive) return;
