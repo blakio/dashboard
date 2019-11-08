@@ -1,6 +1,10 @@
 #timesheet {
   height: 100%;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 #topbar {
@@ -54,7 +58,6 @@
 }
 
 .middlePanelMiddleChild {
-  height: 100%;
   width: 80%;
   min-width: 18em;
 }
