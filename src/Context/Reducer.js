@@ -53,6 +53,8 @@ export default (state, action) => {
       return StateFunctions.toggleDownloadScreen(payload, state);
     case Types.TOGGLE_IS_CONTRACTOR:
       return StateFunctions.toggleIsContractor(payload, state);
+    case Types.CLEAR_CSV_DATA:
+      return StateFunctions.clearCSVData(payload, state);
     case Types.GET_CSV_DATA:
       return StateFunctions.getCSVData(payload, state);
     case Types.SET_CSV_DATA:

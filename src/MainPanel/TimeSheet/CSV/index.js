@@ -28,6 +28,9 @@ export default () => {
 
   const requestData = () => {
     dispatch({
+      type: Types.CLEAR_CSV_DATA
+    })
+    dispatch({
       type: Types.GET_CSV_DATA,
       payload: {
         startDate,
@@ -132,9 +135,7 @@ export default () => {
               filename={`cummins-wagner_timesheet__from:${csvData.startDate}-to:${csvData.endDate}.csv`}
               onClick={() => csvData.data.length > 0}>
               <div style={{margin: 8}}>
-                <div
-                  className={`topBarButton flex ${csvData.data.length && "active"}`}
-                  onClick={() => console.log("submit")}>
+                <div className={`topBarButton flex ${csvData.data.length && "active"}`}>
                   <i className="fas fa-chart-bar"></i>
                 </div>
                 <p className="topBarText" style={{color: "#000"}}>download</p>

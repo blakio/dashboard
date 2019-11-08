@@ -18,8 +18,28 @@ function EmployeePanelButtons(props) {
   const {
     dispatch,
     selectedItems,
-    isAdminMode
-  } = useContext(TimeSheetContext)
+    isAdminMode,
+    jobNumbers,
+    laborTypes
+  } = useContext(TimeSheetContext);
+
+  const addJobNumber = (selectedItems) => {
+    const jobNumber = employee.jobNumber;
+    jobNumbers.forEach(data => {
+      if(data.number === jobNumber){
+        selectedItems.jobNumbers.push(data);
+      }
+    })
+  }
+
+  const addLaborTypes = (selectedItems) => {
+    const laborType = employee.laborType;
+    laborTypes.forEach(data => {
+      if(data.name === laborType){
+        selectedItems.laborTypes.push(data);
+      }
+    })
+  }
 
   const selectedEmployee = () => {
     const selectedEmployees = Util.breakRefAndCopy(selectedItems);
@@ -35,6 +55,10 @@ function EmployeePanelButtons(props) {
         selectedEmployees[selectedItemType] = [employee];
       }
     }
+
+    employee.jobNumber && addJobNumber(selectedEmployees);
+    employee.laborType && addLaborTypes(selectedEmployees);
+
     dispatch({
       type: Types.SET_SELECTED_ITEMS,
       payload: selectedEmployees

@@ -1,6 +1,9 @@
 import Axios from "../Axios";
 import initialState from "./InitialState";
 
+
+import moment from "moment";
+
 import Util from "../Util";
 
 export default {
@@ -80,6 +83,7 @@ export default {
     Axios.clockOut(employeesId, {
       laborType: isContractor ? "WELDER" : Util.getLaborType(state),
       jobNumber: isContractor ? "35000-222" : Util.getJobNumber(state),
+      date: moment(new Date).format("YYYY-MM-DD"),
       ...state.selectedItems.employees[0]
     }, payload);
     return {
@@ -205,6 +209,16 @@ export default {
     return {
       ...state,
       isContractor: currentState.isContractor
+    }
+  },
+  clearCSVData: (payload, state) => {
+    return {
+      ...state,
+      csvData: {
+        data: [],
+        startDate: "",
+        endDate: ""
+      }
     }
   },
   getCSVData: (payload, state) => {
