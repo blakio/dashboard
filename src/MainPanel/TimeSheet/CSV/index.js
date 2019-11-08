@@ -144,7 +144,7 @@ export default () => {
               onClick={() => csvData.data.length > 0}>
               <div style={{margin: 8}}>
                 <div className={`topBarButton flex ${csvData.data.length && "active"}`}>
-                  <i class="fas fa-file-download"></i>
+                  <i class="fas fa-cloud-download-alt"></i>
                 </div>
                 <p className="topBarText" style={{color: "#000"}}>download</p>
               </div>

@@ -22,10 +22,12 @@
   border-radius: 0.2em;
   transition: all 0.3s;
   background-color: #f8f8f8;
+  margin-bottom: 1em;
 }
 
 .topBarButton.active {
   background-color:  #008280;
+  transform: scale(1.1);
 }
 
 .topBarButton i {
