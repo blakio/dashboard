@@ -89,6 +89,7 @@ export default () => {
             <div style={styles.button}>
               <div>START</div>
               <DatePicker
+                maxDate={new Date()}
                 selected={startDate}
                 onChange={date => {
                   const isAfterEndDate = moment(date).diff(endDate, 'hours') > 0;
@@ -108,6 +109,7 @@ export default () => {
             <div style={styles.button}>
               <div>END</div>
               <DatePicker
+                maxDate={new Date()}
                 selected={endDate}
                 onChange={date => {
                   setEndDate(date)
