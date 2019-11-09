@@ -88,10 +88,10 @@ function EmployeePanel() {
     }
   })
 
-  const submit = e => {
-    const enterKeyPress = e.key === "Enter";
+  const submit = (e, buttonSubmit) => {
+    const enterKeyOrSubmitButtonPressed = ((e && e.key === "Enter") || buttonSubmit);
     const fieldsEmpty = !fullName.trim().length || !jobTitle.trim().length;
-    if(enterKeyPress && !fieldsEmpty) isEditing ? edit() : add();
+    if(enterKeyOrSubmitButtonPressed && !fieldsEmpty) isEditing ? edit() : add();
   }
 
   return (<div id="rightPanel" className="flex">
@@ -122,24 +122,47 @@ function EmployeePanel() {
         value={travelTime}
         onChange={e => setTravelTime(e.target.value)}
         onKeyPress={submit}/>
+      <div
+        className="flex"
+        style={{
+          backgroundColor: "#008280",
+          width: "80%",
+          borderRadius: 4,
+          marginBottom: 20
+        }}
+        onClick={() => submit(null, true)}>
+        <p>SUBMIT</p>
+      </div>
 
-      <div className="flex" onClick={() => {
-        dispatch({
-          type: Types.TOGGLE_IS_CONTRACTOR,
-          payload: !isContractor
-        });
-      }}>
+      <div
+        style={{
+          marginTop: 20,
+          marginBottom: 20
+        }}
+        className="flex"
+        onClick={() => {
+          dispatch({
+            type: Types.TOGGLE_IS_CONTRACTOR,
+            payload: !isContractor
+          });
+        }}>
         {isContractor ? <i style={{ fontSize: "2em", color: "#008280", opacity: 0.6, textAlign: "center" }} className="fas fa-toggle-on"></i> :
                 <i style={{ fontSize: "2em", color: "#a7a7a7", opacity: 0.6, textAlign: "center" }} className="fas fa-toggle-off"></i>}
         <p style={{color: "#fff", marginLeft: 6}} className="topBarText">CONTRACTOR</p>
       </div>
 
-      <div className="flex" onClick={() => {
-        dispatch({
-          type: Types.TOGGLE_IS_TECT,
-          payload: !isTech
-        });
-      }}>
+      <div
+        style={{
+          marginTop: 20,
+          marginBottom: 20
+        }}
+        className="flex"
+        onClick={() => {
+          dispatch({
+            type: Types.TOGGLE_IS_TECT,
+            payload: !isTech
+          });
+        }}>
         {isTech ? <i style={{ fontSize: "2em", color: "#008280", opacity: 0.6, textAlign: "center" }} className="fas fa-toggle-on"></i> :
                 <i style={{ fontSize: "2em", color: "#a7a7a7", opacity: 0.6, textAlign: "center" }} className="fas fa-toggle-off"></i>}
         <p style={{color: "#fff", marginLeft: 6}} className="topBarText">TECHNICIAN</p>
