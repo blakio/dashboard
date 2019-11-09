@@ -34,10 +34,10 @@ export default {
   seed: () => {
     const c = [false, false, false, false, false, false, false, false, false, false, false, false, true, true];
     const tt = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2];
-    const e = ["Mike Kowal", "Ryan McWilliams", "Joseph Nees", "Bill Croissette, Jr.", "Paul Wick", "Paul Bement", "Mark Schoonover", "Ben Vehabovic", "Shawn Savitz", "Craig Fuller", "Courtney Johnson", "Michael Clucas", "Lisa Thomas", "Amber", "Bill Croissette", "Jake Shellhammer"];
-    const t = ["Shop Manager", "Mechanic/Tech", "Mechanic/Tech", "Mechanic/Tech", "Mechanic/Tech", "Department Manager", "Project Manager", "Application Engineer", "Designer", "Project Manager", "Project Manager and Production Planner", "Project Manager", "Office Administrator", "Shipper/Receiver", "Welder", "Welder"];
+    const e = ["MIKE KOWAL", "RYAN MCWILLIAMS", "JOSEPH NEES", "BILL CROISSETTE, JR.", "PAUL WICK", "PAUL BEMENT", "MARK SCHOONOVER", "BEN VEHABOVIC", "SHAWN SAVITZ", "CRAIG FULLER", "COURTNEY JOHNSON", "MICHAEL CLUCAS", "LISA THOMAS", "AMBER", "BILL CROISSETTE", "JAKE SHELLHAMMER"];
+    const t = ["SHOP MANAGER", "MECHANIC/TECH", "DEPARTMENT MANAGER", "PROJECT MANAGER", "APPLICATION ENGINEER", "DESIGN", "PROJECT MANAGER", "PROJECT MANAGER AND PRODUCTION PLANNER", "OFFICE ADMINISTRATION", "SHIPPER/RECEIVER", "WELDER"];
     const j = ["35000123", "35000234", "35000345", "35000456", "35000567", "35000678", "35000789", "35000891", "35000912", "35000321", "Other"];
-    const l = ["Base", "Crate", "DP Switch", "adder: flex house", "pipping assembly", "adder: pumps", "paint", "rework", "test", "Other"];
+    const l = ["BASE", "CRATE", "DP SWITCH", "ADDER: FLEX HOUSE", "PIPPING ASSEMBLY", "ADDER: PUMPS", "PAINT", "REWORK", "TEST", "OTHER"];
 
     e.forEach((data, index) => {
       axios.post("https://dashboard-api-02.herokuapp.com/api/employees", {
