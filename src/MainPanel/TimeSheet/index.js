@@ -243,7 +243,7 @@ function TimeSheet() {
         />
       </div>}
 
-      {((isEmployeeSelected && !isContractorSelected) || isAdminMode) && isTechSelected && <div className="middlePanelMiddleChild">
+      {(((isEmployeeSelected && !isContractorSelected) && (isEmployeeSelected && isTechSelected)) || isAdminMode) && <div className="middlePanelMiddleChild">
         <TimeSheetOptions
           title="Labor Type"
           options={laborTypes}
