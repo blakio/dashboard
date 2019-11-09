@@ -113,9 +113,13 @@ function TimeSheet() {
         const isAlreadyClockedIn = isEmployeeSelected && selectedItems.employees[0].clockInTime;
         const hasClockedIn = isEmployeeSelected && isEmployeeSelected.clockInTime;
 
-        if(isTech && !isAlreadyClockedIn) return true;
-        if(isContractor && !isAlreadyClockedIn && isJobNuumberSelected) return true;
-        return isEmployeeSelected && isLaborTypeSelected && isJobNuumberSelected && !hasClockedIn;
+        if(isTech && !isAlreadyClockedIn && isJobNuumberSelected && isLaborTypeSelected){
+          return true;
+        } else if(isContractor && !isAlreadyClockedIn) {
+          return true;
+        } else if(!isTech && !isAlreadyClockedIn && isJobNuumberSelected) {
+          return true;
+        }
       },
       function: (isActive) => {
         if(!isActive) return;
@@ -227,7 +231,7 @@ function TimeSheet() {
 
     <div id="middlePanelMiddle" className="flex">
 
-      {((isEmployeeSelected && !isTechSelected) || isAdminMode) && <div className="middlePanelMiddleChild">
+      {((isEmployeeSelected && !isContractorSelected) || isAdminMode) && <div className="middlePanelMiddleChild">
         <TimeSheetOptions
           title="Job Number"
           options={jobNumbers}
@@ -239,7 +243,7 @@ function TimeSheet() {
         />
       </div>}
 
-      {((isEmployeeSelected && !isContractorSelected) || isAdminMode) && !isTechSelected && <div className="middlePanelMiddleChild">
+      {((isEmployeeSelected && !isContractorSelected) || isAdminMode) && isTechSelected && <div className="middlePanelMiddleChild">
         <TimeSheetOptions
           title="Labor Type"
           options={laborTypes}

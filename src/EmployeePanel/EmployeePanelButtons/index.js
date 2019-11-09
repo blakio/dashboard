@@ -114,12 +114,12 @@ function EmployeePanelButtons(props) {
 
   let iconClass = "fas fa-pen-square";
   if(!isAdminMode){
-    if(employee.isContractor) {
-      iconClass = "fas fa-id-card-alt";
-    } else if(!employee.isTech){
-      iconClass = "fas fa-user-tie";
-    } else if(employee.isTech) {
+    if(employee.isTech){
       iconClass = "fas fa-wrench";
+    } else if(employee.isContractor) {
+      iconClass = "fas fa-id-card-alt";
+    } else {
+      iconClass = "fas fa-user-tie";
     }
   }
 
