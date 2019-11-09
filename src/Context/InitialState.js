@@ -3,6 +3,7 @@ const initialState = {
   isAdminLoggedIn: true,
   isDownloadScreen: false,
   isContractor: false,
+  isTech: true,
   message: {
     confirmation: {
       status: false,

@@ -20,7 +20,8 @@ function EmployeePanel() {
     dispatch,
     employees,
     isAdminMode,
-    isContractor
+    isContractor,
+    isTech
   } = useContext(TimeSheetContext);
 
   useEffect(() => {
@@ -61,7 +62,8 @@ function EmployeePanel() {
       name: fullName.toUpperCase(),
       isActive: true,
       travelTime: parseInt(travelTime),
-      isContractor: isContractor
+      isContractor: isContractor,
+      isTech: isTech
     }, obj => {
       Axios.fetchEmployees(dispatch);
     }, err => {
@@ -120,6 +122,7 @@ function EmployeePanel() {
         value={travelTime}
         onChange={e => setTravelTime(e.target.value)}
         onKeyPress={submit}/>
+
       <div className="flex" onClick={() => {
         dispatch({
           type: Types.TOGGLE_IS_CONTRACTOR,
@@ -130,6 +133,18 @@ function EmployeePanel() {
                 <i style={{ fontSize: "2em", color: "#a7a7a7", opacity: 0.6, textAlign: "center" }} className="fas fa-toggle-off"></i>}
         <p style={{color: "#fff", marginLeft: 6}} className="topBarText">CONTRACTOR</p>
       </div>
+
+      <div className="flex" onClick={() => {
+        dispatch({
+          type: Types.TOGGLE_IS_TECT,
+          payload: !isTech
+        });
+      }}>
+        {isTech ? <i style={{ fontSize: "2em", color: "#008280", opacity: 0.6, textAlign: "center" }} className="fas fa-toggle-on"></i> :
+                <i style={{ fontSize: "2em", color: "#a7a7a7", opacity: 0.6, textAlign: "center" }} className="fas fa-toggle-off"></i>}
+        <p style={{color: "#fff", marginLeft: 6}} className="topBarText">TECHNICIAN</p>
+      </div>
+
     </div>}
     <div id="rightPanelLiner">
       {employees && activeButtons.map((data, index) => {

@@ -69,8 +69,7 @@ export default {
     const employeesId = state.selectedItems.employees[0].id;
     const isContractor = state.selectedItems.employees[0].isContractor;
     Axios.clockIn(employeesId, {
-      laborType: isContractor ? "WELDER" : Util.getLaborType(state),
-      jobNumber: isContractor ? "35000-222" : Util.getJobNumber(state)
+      laborType: isContractor ? "WELDER" : Util.getLaborType(state)
     }, payload);
     return {
       ...state,
@@ -82,7 +81,6 @@ export default {
     const isContractor = state.selectedItems.employees[0].isContractor;
     Axios.clockOut(employeesId, {
       laborType: isContractor ? "WELDER" : Util.getLaborType(state),
-      jobNumber: isContractor ? "35000-222" : Util.getJobNumber(state),
       ...state.selectedItems.employees[0],
       date: moment(new Date).format("YYYY/MM/DD")
     }, payload);
@@ -95,8 +93,7 @@ export default {
     const employeesId = state.selectedItems.employees[0].id;
     const isContractor = state.selectedItems.employees[0].isContractor;
     Axios.startLunch(employeesId, {
-      laborType: isContractor ? "WELDER" : Util.getLaborType(state),
-      jobNumber: isContractor ? "35000-222" : Util.getJobNumber(state)
+      laborType: isContractor ? "WELDER" : Util.getLaborType(state)
     }, payload);
     return {
       ...state,
@@ -107,8 +104,7 @@ export default {
     const employeesId = state.selectedItems.employees[0].id;
     const isContractor = state.selectedItems.employees[0].isContractor;
     Axios.endLunch(employeesId, {
-      laborType: isContractor ? "WELDER" : Util.getLaborType(state),
-      jobNumber: isContractor ? "35000-222" : Util.getJobNumber(state)
+      laborType: isContractor ? "WELDER" : Util.getLaborType(state)
     }, payload);
     return {
       ...state,
@@ -209,6 +205,14 @@ export default {
     return {
       ...state,
       isContractor: currentState.isContractor
+    }
+  },
+  toggleIsTech: (payload, state) => {
+    const currentState = Util.breakRefAndCopy(state);
+    currentState.isTech = payload;
+    return {
+      ...state,
+      isTech: currentState.isTech
     }
   },
   clearCSVData: (payload, state) => {
