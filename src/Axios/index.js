@@ -132,13 +132,23 @@ export default {
       startDate: moment(startDate).format("YYYY-MM-DD"),
       endDate: moment(endDate).format("YYYY-MM-DD")
     });
-    dispatch({
-      type: Types.SET_CSV_DATA,
-      payload: {
-        data: response.data,
-        startDate: moment(startDate).format("YYYY-MM-DD"),
-        endDate: moment(endDate).format("YYYY-MM-DD")
-      }
-    })
+    if(response.data.length){
+      dispatch({
+        type: Types.SET_CSV_DATA,
+        payload: {
+          data: response.data,
+          startDate: moment(startDate).format("YYYY-MM-DD"),
+          endDate: moment(endDate).format("YYYY-MM-DD")
+        }
+      })
+    } else {
+      dispatch({
+        type: Types.OPEN_MESSAGE,
+        payload: {
+          type: "error",
+          message: "NO DATA TIMEFRAME"
+        }
+      })
+    }
   }
 };

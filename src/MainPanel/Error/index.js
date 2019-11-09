@@ -49,7 +49,7 @@ const Error = () => {
 const styles = {
   parent: {
     position: "absolute",
-    backgroundColor: "#D6C973",
+    backgroundColor: "#b3a43e",
     top: "10vh",
     left: "40vw",
     height: "20em",
