@@ -68,8 +68,9 @@ export default {
   clockIn: (payload, state) => {
     const employeesId = state.selectedItems.employees[0].id;
     const isContractor = state.selectedItems.employees[0].isContractor;
-    const laborType = state.selectedItems.laborTypes[0] ? state.selectedItems.laborTypes[0].name : "OTHER";
-    const jobNumber = state.selectedItems.jobNumbers[0] ? state.selectedItems.jobNumbers[0].number : "OTHER";
+    const isTech = state.selectedItems.employees[0].isTech;
+    const laborType = state.selectedItems.laborTypes[0] ? state.selectedItems.laborTypes[0].name : Util.getDefaultLaborType(isContractor, isTech);
+    const jobNumber = state.selectedItems.jobNumbers[0] ? state.selectedItems.jobNumbers[0].number : Util.getDefaultJobNumber(isContractor, isTech);
     Axios.clockIn(employeesId, {
       laborType,
       jobNumber
@@ -82,8 +83,9 @@ export default {
   clockOut: (payload, state) => {
     const employeesId = state.selectedItems.employees[0].id;
     const isContractor = state.selectedItems.employees[0].isContractor;
-    const laborType = state.selectedItems.laborTypes[0].name;
-    const jobNumber = state.selectedItems.jobNumbers[0].number;
+    const isTech = state.selectedItems.employees[0].isTech;
+    const laborType = state.selectedItems.laborTypes[0] ? state.selectedItems.laborTypes[0].name : Util.getDefaultLaborType(isContractor, isTech);
+    const jobNumber = state.selectedItems.jobNumbers[0] ? state.selectedItems.jobNumbers[0].number : Util.getDefaultJobNumber(isContractor, isTech);
     Axios.clockOut(employeesId, {
       ...state.selectedItems.employees[0],
       laborType,
@@ -98,8 +100,9 @@ export default {
   toLunch: (payload, state) => {
     const employeesId = state.selectedItems.employees[0].id;
     const isContractor = state.selectedItems.employees[0].isContractor;
-    const laborType = state.selectedItems.laborTypes[0].name;
-    const jobNumber = state.selectedItems.jobNumbers[0].number;
+    const isTech = state.selectedItems.employees[0].isTech;
+    const laborType = state.selectedItems.laborTypes[0] ? state.selectedItems.laborTypes[0].name : Util.getDefaultLaborType(isContractor, isTech);
+    const jobNumber = state.selectedItems.jobNumbers[0] ? state.selectedItems.jobNumbers[0].number : Util.getDefaultJobNumber(isContractor, isTech);
     Axios.startLunch(employeesId, {
       laborType,
       jobNumber,
@@ -112,8 +115,9 @@ export default {
   fromLunch: (payload, state) => {
     const employeesId = state.selectedItems.employees[0].id;
     const isContractor = state.selectedItems.employees[0].isContractor;
-    const laborType = state.selectedItems.laborTypes[0].name;
-    const jobNumber = state.selectedItems.jobNumbers[0].number;
+    const isTech = state.selectedItems.employees[0].isTech;
+    const laborType = state.selectedItems.laborTypes[0] ? state.selectedItems.laborTypes[0].name : Util.getDefaultLaborType(isContractor, isTech);
+    const jobNumber = state.selectedItems.jobNumbers[0] ? state.selectedItems.jobNumbers[0].number : Util.getDefaultJobNumber(isContractor, isTech);
     Axios.endLunch(employeesId, {
       laborType,
       jobNumber,

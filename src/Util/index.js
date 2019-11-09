@@ -50,5 +50,16 @@ export default {
       csvData.push(innerData);
     })
     return csvData;
-  }
+  },
+
+  getDefaultLaborType: (isContractor, isTech) => {
+    if(isContractor) return "WELDER";
+    if(!isTech) return "NONE";
+  },
+
+  getDefaultJobNumber: (isContractor, isTech) => {
+    if(isContractor) return "OTHER";
+    if(!isTech) return "NONE";
+  },
+
 }
