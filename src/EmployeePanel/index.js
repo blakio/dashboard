@@ -128,7 +128,7 @@ function EmployeePanel() {
           backgroundColor: "#008280",
           width: "80%",
           borderRadius: 4,
-          marginBottom: 20
+          marginBottom: 10
         }}
         onClick={() => submit(null, true)}>
         <p>SUBMIT</p>
@@ -136,8 +136,8 @@ function EmployeePanel() {
 
       <div
         style={{
-          marginTop: 20,
-          marginBottom: 20
+          marginTop: 10,
+          marginBottom: 10
         }}
         className="flex"
         onClick={() => {
@@ -153,8 +153,8 @@ function EmployeePanel() {
 
       <div
         style={{
-          marginTop: 20,
-          marginBottom: 20
+          marginTop: 10,
+          marginBottom: 10
         }}
         className="flex"
         onClick={() => {
