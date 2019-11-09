@@ -110,11 +110,14 @@ function TimeSheet() {
       isActive: () => {
         const isEmployeeSelected = selectedItems.employees[0];
         const isContractor = isEmployeeSelected && selectedItems.employees[0].isContractor;
+        const isTech = isEmployeeSelected && selectedItems.employees[0].isTech;
         const isLaborTypeSelected = selectedItems.laborTypes[0];
         const isJobNuumberSelected = selectedItems.jobNumbers[0];
         const isAlreadyClockedIn = isEmployeeSelected && selectedItems.employees[0].clockInTime;
         const hasClockedIn = isEmployeeSelected && isEmployeeSelected.clockInTime;
-        if(isContractor && !isAlreadyClockedIn) return true;
+
+        if(isTech && !isAlreadyClockedIn) return true;
+        if(isContractor && !isAlreadyClockedIn && isJobNuumberSelected) return true;
         return isEmployeeSelected && isLaborTypeSelected && isJobNuumberSelected && !hasClockedIn;
       },
       function: (isActive) => {
@@ -218,12 +221,16 @@ function TimeSheet() {
     isOn={isAdminMode}
   />) : null;
 
+  const isEmployeeSelected = selectedItems.employees[0];
+  const isTechSelected = isEmployeeSelected && selectedItems.employees[0].isTech;
+  const isContractorSelected = isEmployeeSelected && selectedItems.employees[0].isContractor;
+
   return (<div id="timesheet">
     {toggleButton}
 
-    {((selectedItems.employees[0] && !selectedItems.employees[0].isContractor) || isAdminMode) && <div id="middlePanelMiddle" className="flex">
+    <div id="middlePanelMiddle" className="flex">
 
-      <div className="middlePanelMiddleChild">
+      {((isEmployeeSelected && !isTechSelected) || isAdminMode) && <div className="middlePanelMiddleChild">
         <TimeSheetOptions
           title="Job Number"
           options={jobNumbers}
@@ -233,9 +240,9 @@ function TimeSheet() {
           selectedItemType="jobNumbers"
           type="jobNumber"
         />
-      </div>
+      </div>}
 
-      <div className="middlePanelMiddleChild">
+      {((isEmployeeSelected && !isContractorSelected) || isAdminMode) && !isTechSelected && <div className="middlePanelMiddleChild">
         <TimeSheetOptions
           title="Labor Type"
           options={laborTypes}
@@ -245,9 +252,9 @@ function TimeSheet() {
           selectedItemType="laborTypes"
           type="laborType"
         />
-      </div>
+      </div>}
 
-    </div>}
+    </div>
 
     <div id="topbar" className="flex">
       {topButtons.map((data, index) => {
