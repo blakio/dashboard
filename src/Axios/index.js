@@ -146,7 +146,7 @@ export default {
         type: Types.OPEN_MESSAGE,
         payload: {
           type: "error",
-          message: "NO DATA TIMEFRAME"
+          message: "NO DATA FOR TIMEFRAME"
         }
       })
     }
