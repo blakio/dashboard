@@ -112,6 +112,17 @@ function EmployeePanelButtons(props) {
     color: "#008280"
   }
 
+  let iconClass = "fas fa-pen-square";
+  if(!isAdminMode){
+    if(employee.isContractor) {
+      iconClass = "fas fa-id-card-alt";
+    } else if(!employee.isTech){
+      iconClass = "fas fa-user-tie";
+    } else if(employee.isTech) {
+      iconClass = "fas fa-wrench";
+    }
+  }
+
   return (<div
     className={className}
     onClick={() => click()}>
@@ -123,18 +134,9 @@ function EmployeePanelButtons(props) {
         <p className={`${isDeactivated && "deactivatedEmployeeClass"}`}>{employee.jobTitle}</p>
       </div>
     </div>
-    {isAdminMode && <div
-      onClick={() => editEmployee(employee)}>
-        <i style={iconStlye} className="fas fa-pen-square"></i>
-    </div>}
-    {!isAdminMode && !employee.isContractor && <div
-      onClick={() => editEmployee(employee)}>
-        <i style={iconStlye} className="fas fa-user-tie"></i>
-    </div>}
-    {!isAdminMode && employee.isContractor && <div
-      onClick={() => editEmployee(employee)}>
-        <i style={iconStlye} className="fas fa-id-card-alt"></i>
-    </div>}
+    <div onClick={() => editEmployee(employee)}>
+        <i style={iconStlye} className={iconClass}></i>
+    </div>
   </div>);
 }
 
