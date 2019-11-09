@@ -26,8 +26,9 @@ export default {
   },
 
   getTimeFromString: (time) => {
+    if(time === "Invalid date") return "0";
     const split = time.split(":");
-    return `${split[0] || 0} hr : ${split[1] || 0} min : ${split[2] || 0} sec`
+    return `${split[0] || 0} hr : ${split[1] || 0} min : ${split[2] || 0} sec`;
   }
 
 }
