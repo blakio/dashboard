@@ -44,14 +44,11 @@ function TimeSheet() {
       function: (isActive) => {
         if(!isActive) return;
         dispatch({
-          type: Types.BULK_DELETE,
+          type: Types.OPEN_MESSAGE,
           payload: {
-            fn: () => {
-              Axios.fetchEmployees(dispatch)
-              Axios.fetchLaborTypes(dispatch);
-              Axios.fetchJobNumbers(dispatch);
-            }
-          },
+            type: "warning",
+            message: "ARE YOU SURE?"
+          }
         })
       }
     },

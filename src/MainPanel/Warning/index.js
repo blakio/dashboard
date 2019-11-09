@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 
 import Types from "../../Context/Types";
+import Axios from "../../Axios";
 
 import TimeSheetContext from "../../Context/State";
 
@@ -23,7 +24,32 @@ const Warning = () => {
     })
   }, [])
 
-  const confirm = () => {
+  const confirm = (yes) => {
+    setFadeStlye({
+      opacity: 0,
+      top: "-5em"
+    })
+
+    setTimeout(() => {
+      dispatch({
+        type: Types.CLOSE_MESSAGE,
+        payload: "warning"
+      })
+    }, 600);
+
+    dispatch({
+      type: Types.BULK_DELETE,
+      payload: {
+        fn: () => {
+          Axios.fetchEmployees(dispatch)
+          Axios.fetchLaborTypes(dispatch);
+          Axios.fetchJobNumbers(dispatch);
+        }
+      },
+    })
+  }
+
+  const cancel = (yes) => {
     setFadeStlye({
       opacity: 0,
       top: "-5em"
@@ -45,7 +71,7 @@ const Warning = () => {
         onClick={confirm}
         style={styles.button}>YES</div>
       <div
-        onClick={confirm}
+        onClick={cancel}
         style={styles.button}>NO</div>
     </div>
   </div>)
