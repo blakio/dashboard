@@ -82,9 +82,12 @@ export default {
   clockOut: (payload, state) => {
     const employeesId = state.selectedItems.employees[0].id;
     const isContractor = state.selectedItems.employees[0].isContractor;
+    const laborType = state.selectedItems.laborTypes[0].name;
+    const jobNumber = state.selectedItems.jobNumbers[0].number;
     Axios.clockOut(employeesId, {
-      laborType: isContractor ? "WELDER" : Util.getLaborType(state),
       ...state.selectedItems.employees[0],
+      laborType,
+      jobNumber,
       date: moment(new Date).format("YYYY/MM/DD")
     }, payload);
     return {
@@ -95,8 +98,11 @@ export default {
   toLunch: (payload, state) => {
     const employeesId = state.selectedItems.employees[0].id;
     const isContractor = state.selectedItems.employees[0].isContractor;
+    const laborType = state.selectedItems.laborTypes[0].name;
+    const jobNumber = state.selectedItems.jobNumbers[0].number;
     Axios.startLunch(employeesId, {
-      laborType: isContractor ? "WELDER" : Util.getLaborType(state)
+      laborType,
+      jobNumber,
     }, payload);
     return {
       ...state,
@@ -106,8 +112,11 @@ export default {
   fromLunch: (payload, state) => {
     const employeesId = state.selectedItems.employees[0].id;
     const isContractor = state.selectedItems.employees[0].isContractor;
+    const laborType = state.selectedItems.laborTypes[0].name;
+    const jobNumber = state.selectedItems.jobNumbers[0].number;
     Axios.endLunch(employeesId, {
-      laborType: isContractor ? "WELDER" : Util.getLaborType(state)
+      laborType,
+      jobNumber,
     }, payload);
     return {
       ...state,
