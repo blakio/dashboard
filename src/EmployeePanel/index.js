@@ -104,7 +104,7 @@ function EmployeePanel() {
   }
 
   return (<div id="rightPanel" className="flex">
-    <img src={logo} style={{width: "100%", marginTop: 10}} />
+    <img src={logo} style={{width: "50%", marginTop: 10, marginLeft: "auto", marginRight: "auto"}} />
     <div className="sectionHeading" onClick={() => isAdminMode && Axios.seed()}>
       <p className="timesheetEmployeeSectionTitle">employees</p>
     </div>
