@@ -68,8 +68,11 @@ export default {
   clockIn: (payload, state) => {
     const employeesId = state.selectedItems.employees[0].id;
     const isContractor = state.selectedItems.employees[0].isContractor;
+    const laborType = state.selectedItems.laborTypes[0].name;
+    const jobNumber = state.selectedItems.jobNumbers[0].number;
     Axios.clockIn(employeesId, {
-      laborType: isContractor ? "WELDER" : Util.getLaborType(state)
+      laborType,
+      jobNumber
     }, payload);
     return {
       ...state,
