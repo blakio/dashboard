@@ -53,7 +53,7 @@ export default (state, action) => {
       return StateFunctions.toggleDownloadScreen(payload, state);
     case Types.TOGGLE_IS_CONTRACTOR:
       return StateFunctions.toggleIsContractor(payload, state);
-    case Types.TOGGLE_IS_TECT:
+    case Types.TOGGLE_IS_TECH:
       return StateFunctions.toggleIsTech(payload, state);
     case Types.CLEAR_CSV_DATA:
       return StateFunctions.clearCSVData(payload, state);

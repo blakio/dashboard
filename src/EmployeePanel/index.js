@@ -33,6 +33,14 @@ function EmployeePanel() {
     setJobTitle(data.jobTitle);
     setTravelTime(data.travelTime);
     setIsEditing({ id: data.id });
+    dispatch({
+      type: Types.TOGGLE_IS_CONTRACTOR,
+      payload: data.isContractor
+    })
+    dispatch({
+      type: Types.TOGGLE_IS_TECH,
+      payload: data.isTech
+    })
   }
 
   const resetInputs = () => {
@@ -49,6 +57,7 @@ function EmployeePanel() {
         name: fullName.toUpperCase(),
         jobTitle: jobTitle.toUpperCase(),
         isContractor: isContractor,
+        isTech: isTech,
         fn: () => Axios.fetchEmployees(dispatch)
       }
     })
@@ -159,7 +168,7 @@ function EmployeePanel() {
         className="flex"
         onClick={() => {
           dispatch({
-            type: Types.TOGGLE_IS_TECT,
+            type: Types.TOGGLE_IS_TECH,
             payload: !isTech
           });
         }}>
