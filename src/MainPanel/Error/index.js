@@ -52,8 +52,8 @@ const styles = {
     backgroundColor: "#b3a43e",
     top: "10vh",
     left: "40vw",
-    height: "20em",
-    width: "20em",
+    height: "14em",
+    width: "14em",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -63,11 +63,11 @@ const styles = {
   },
   icon: {
     color: "rgba(255, 255, 255, 0.4)",
-    fontSize: "10em"
+    fontSize: "4em"
   },
   text: {
     color: "#eaeaea",
-    fontSize: "1.4em",
+    fontSize: "1em",
     fontWeight: 300
   },
   button: {
