@@ -1,6 +1,6 @@
 #middlePanel {
   height: 100vh;
-  width: 78vw;
+  width: 74vw;
   flex-direction: column;
   overflow-y: scroll;
   background-color: #fff;
