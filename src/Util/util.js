@@ -22,7 +22,7 @@ export default {
     name: "Employee Name",
     startLunch: "Lunch Start Time",
     totalHrs: "Total Hours Worked",
-    overTime: "Total Overtime"
+    overTime: "Total Overtime (hrs)"
   },
 
   getTimeFromString: (time) => {

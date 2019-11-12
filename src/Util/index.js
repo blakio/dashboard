@@ -29,9 +29,23 @@ export default {
       usedData.lunchTime = usedData.lunchTime || "no lunch taken"
       usedData.isContractor = data.isContractor ? "Y" : "N";
 
+      var end  = data.clockOutTime;
+      var start = data.clockInTime;
+      const difference = moment.utc(moment(end,"DD/MM/YYYY HH:mm:ss").diff(moment(start,"DD/MM/YYYY HH:mm:ss"))).format("HH:mm:ss")
+
+      const timeInHours = (time) => {
+        const timeArray = time.split(":");
+        const hours = parseInt(timeArray[0]);
+        const minutes = parseInt(timeArray[1]);
+        const seconds = parseInt(timeArray[2]);
+        const totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
+        return totalSeconds / 3600;
+      }
+
+      const totalHoursWorked = timeInHours(difference);
 
       usedData.totalHrs = data.totalHrs && util.getTimeFromString(data.totalHrs);
-      usedData.overTime = data.overTime && util.getTimeFromString(data.overTime);
+      usedData.overTime = (totalHoursWorked > 8) ? parseFloat(totalHoursWorked - 8).toFixed(2) : 0;
       usedData.lunchTime = data.lunchTime && util.getTimeFromString(data.lunchTime);
 
       if(csvData.length === 0){
