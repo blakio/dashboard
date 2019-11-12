@@ -22,6 +22,7 @@ export default {
       delete usedData.updatedAt;
       delete usedData.jobTitle;
 
+      usedData.date = moment(data.date).format("MM/DD/YYYY");
       usedData.clockInTime = util.getTime("clockInTime", data);
       usedData.clockOutTime = util.getTime("clockOutTime", data);
       usedData.endLunch = util.getTime("endLunch", data);
