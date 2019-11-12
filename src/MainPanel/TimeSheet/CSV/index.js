@@ -142,7 +142,7 @@ export default () => {
             <CSVLink
               data={csvData.data}
               style={{textDecoration: "none"}}
-              filename={`cummins-wagner_timesheet__from:${csvData.startDate}-to:${csvData.endDate}.csv`}
+              filename={`Cummins Wagner Timesheet ${moment(csvData.startDate).format("MM/DD/YYYY")} to ${moment(csvData.endDate).format("MM/DD/YYYY")}.csv`}
               onClick={() => csvData.data.length > 0}>
               <div style={{margin: 8}}>
                 <div className={`topBarButton flex ${csvData.data.length && "active"}`}>
