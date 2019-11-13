@@ -229,17 +229,15 @@ function TimeSheet() {
   const isTechSelected = isEmployeeSelected && selectedItems.employees[0].isTech;
   const isContractorSelected = isEmployeeSelected && selectedItems.employees[0].isContractor;
 
-  return (<div id="timesheet" style={{
-    position: "relative"
-  }}>
+  return (<div id="timesheet">
     {toggleButton}
 
     <div
       className="flex"
       style={{
         position: "absolute",
-        top: "1em",
-        left: "1em"
+        bottom: 0,
+        right: 0
       }}
     >
       <div
