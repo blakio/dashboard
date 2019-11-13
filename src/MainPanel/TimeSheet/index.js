@@ -6,10 +6,13 @@ import TimeSheetOptions from "./TimeSheetOptions";
 import Axios from "../../Axios";
 import Toogle from "./Toogle";
 import CSV from "./CSV";
+import axios from "axios";
 
 import Types from "../../Context/Types";
 
 function TimeSheet() {
+
+  const [jobNumberSearch, setJobNumberSearch] = useState("");
 
   const {
     isAdminMode,
@@ -226,8 +229,40 @@ function TimeSheet() {
   const isTechSelected = isEmployeeSelected && selectedItems.employees[0].isTech;
   const isContractorSelected = isEmployeeSelected && selectedItems.employees[0].isContractor;
 
-  return (<div id="timesheet">
+  return (<div id="timesheet" style={{
+    position: "relative"
+  }}>
     {toggleButton}
+
+    <div
+      className="flex"
+      style={{
+        position: "absolute",
+        top: "1em",
+        left: "1em"
+      }}
+    >
+      <div
+        className="selected flex"
+        style={{
+          height: "2.2em",
+          width: "2.2em",
+          borderRadius: '0.2em',
+          backgroundColor: "#008280"
+        }}
+        onClick={() => {
+          const response = axios.post("https://dashboard-api-02.herokuapp.com/api/totaljobhrs", {
+            jobNumber: jobNumberSearch
+          }).then(data => {
+            const time = data.data;
+            setJobNumberSearch(time)
+          }).catch(e => setJobNumberSearch("job # not found"));
+        }}
+        >
+        <i className="fas fa-hashtag sideIcon"></i>
+      </div>
+      <input className="addInput tag" value={jobNumberSearch} onChange={(e) => setJobNumberSearch(e.target.value)} />
+    </div>
 
     <div id="middlePanelMiddle" className="flex">
 
