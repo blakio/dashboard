@@ -61,6 +61,8 @@ export default (state, action) => {
       return StateFunctions.getCSVData(payload, state);
     case Types.SET_CSV_DATA:
       return StateFunctions.setCSVData(payload, state);
+    case Types.LOG_IN:
+      return StateFunctions.logIn(payload, state);
 
     default:
     return state;

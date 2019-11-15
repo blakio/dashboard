@@ -1,4 +1,6 @@
 const initialState = {
+  isLoggedIn: false,
+  token: "",
   isAdminMode: false,
   isAdminLoggedIn: true,
   isDownloadScreen: false,

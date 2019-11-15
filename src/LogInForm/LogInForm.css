@@ -1,0 +1,18 @@
+#logInForm {
+  height: 100vh;
+  width: 100vw;
+}
+
+#formBox {
+  flex-direction: column;
+}
+
+#formBox input  {
+  margin-bottom: 1em;
+  font-size: 1.4em;
+}
+
+#formBox button  {
+  margin-bottom: 1em;
+  font-size: 1.4em;
+}

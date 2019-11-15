@@ -40,7 +40,7 @@ export default {
     const l = ["BASE", "CRATE", "DP SWITCH", "ADDER: FLEX HOUSE", "PIPPING ASSEMBLY", "ADDER: PUMPS", "PAINT", "REWORK", "TEST", "OTHER"];
 
     e.forEach((data, index) => {
-      axios.post("https://dashboard-api-02.herokuapp.com/api/employees", {
+      instance.post("/employees", {
         isActive: true,
         isContractor: c[index],
         jobTitle: t[index],
@@ -49,13 +49,13 @@ export default {
       })
     })
     j.forEach((data, index) => {
-      axios.post("https://dashboard-api-02.herokuapp.com/api/jobs", {
+      instance.post("/jobs", {
         number: data,
         isActive: true
       })
     })
     l.forEach((data, index) => {
-      axios.post("https://dashboard-api-02.herokuapp.com/api/laborTypes", {
+      instance.post("/laborTypes", {
         name: data,
         isActive: true
       })
@@ -87,7 +87,7 @@ export default {
   },
   reset: async (id, fn) => {
     const resetEmployee = await axios.put(`https://dashboard-api-02.herokuapp.com/api/reset/${id}`, {});
-    const fetchEmployees = await axios.get("https://dashboard-api-02.herokuapp.com/api/employees");
+    const fetchEmployees = await instance.get("/employees");
     fn(fetchEmployees);
   },
   updateEmployee: (id, laborType, jobNumber, fn) => {
@@ -102,21 +102,21 @@ export default {
     axios.put(url + id, updates).then(response => fn());
   },
   fetchEmployees: async (dispatch) => {
-    const response = await axios.get("https://dashboard-api-02.herokuapp.com/api/employees");
+    const response = await instance.get("/employees");
     dispatch({
       type: Types.SET_EMPLOYEES,
       payload: response.data
     })
   },
   fetchLaborTypes: async (dispatch) => {
-    const response = await axios.get("https://dashboard-api-02.herokuapp.com/api/labortypes");
+    const response = await instance.get("/labortypes");
     dispatch({
       type: Types.SET_LABOR_TYPES,
       payload: response.data
     })
   },
   fetchJobNumbers: async (dispatch) => {
-    const response = await axios.get("https://dashboard-api-02.herokuapp.com/api/jobs");
+    const response = await instance.get("/jobs");
     dispatch({
       type: Types.SET_JOB_NUMBERS,
       payload: response.data
@@ -128,7 +128,7 @@ export default {
       startDate,
       endDate
     } = payload;
-    const response = await axios.post("https://dashboard-api-02.herokuapp.com/api/history", {
+    const response = await instance.post("/history", {
       startDate: moment(startDate).format("YYYY-MM-DD"),
       endDate: moment(endDate).format("YYYY-MM-DD")
     });
@@ -150,5 +150,12 @@ export default {
         }
       })
     }
+  },
+  logIn: async (username, password, fn) => {
+    const response = await instance.post("/login", {
+      username,
+      password
+    });
+    if(response) fn(response);
   }
 };

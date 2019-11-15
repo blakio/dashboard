@@ -255,5 +255,15 @@ export default {
         endDate
       }
     }
+  },
+  logIn: (payload, state) => {
+    const currentState = Util.breakRefAndCopy(state);
+    currentState.isLoggedIn = payload.isLoggedIn;
+    const token = (currentState.isLoggedIn) ? payload.token : "";
+    return {
+      ...state,
+      isLoggedIn: currentState.isLoggedIn,
+      token
+    }
   }
 }

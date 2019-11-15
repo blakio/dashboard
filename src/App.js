@@ -2,6 +2,7 @@ import React, { useReducer } from 'react';
 import Panel from './Panel';
 import MainPanel from './MainPanel';
 import EmployeePanel from './EmployeePanel';
+import LogInForm from './LogInForm';
 import { stringTypeAnnotation } from '@babel/types';
 
 import TimeSheetContext from "./Context/State";
@@ -14,9 +15,10 @@ function App() {
 
   return (<TimeSheetContext.Provider value={{...state, dispatch}}>
     <div id="dashboard" className="flex">
-      <Panel />
-      <EmployeePanel />
-      <MainPanel />
+      {!state.isLoggedIn && <LogInForm />}
+      {state.isLoggedIn && <Panel />}
+      {state.isLoggedIn && <EmployeePanel />}
+      {state.isLoggedIn && <MainPanel />}
     </div>
   </TimeSheetContext.Provider>);
 }
