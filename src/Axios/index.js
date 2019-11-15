@@ -2,22 +2,24 @@ import axios from "axios";
 import moment from "moment";
 import Types from "../Context/Types.js";
 
-// Set config defaults when creating the instance
-const instance = axios.create({
-  baseURL: 'https://dashboard-api-02.herokuapp.com/api/',
-  headers: {
-    'auth-token': window.localStorage.getItem("token")
+const baseURL = "https://dashboard-api-02.herokuapp.com/api";
+
+const getHeaderObj = () => {
+  return {
+    headers: {
+      'auth-token': window.localStorage.token
+    }
   }
-});
+}
 
 export default {
   get: async (path, params, fn) => {
-    await instance.get(path, { params })
+    await axios.get(path, { params })
       .then(response => { fn && fn(response) })
       .catch(error => console.log(error));
   },
   post: async (path, obj, fn, errorFn) => {
-    await instance.post(path, obj)
+    await axios.post(path, obj)
       .then(response => { fn && fn(response) })
       .catch(error => {
         console.log(error);
@@ -25,12 +27,12 @@ export default {
       });
   },
   put: async (path, obj, fn) => {
-    await instance.put(path, obj)
+    await axios.put(path, obj)
       .then(response => { fn && fn(response) })
       .catch(error => console.log(error));
   },
   delete: async (path, obj, fn) => {
-    await instance.delete(path, obj)
+    await axios.delete(path, obj)
       .then(response => { fn && fn(response) })
       .catch(error => console.log(error));
   },
@@ -43,78 +45,74 @@ export default {
     const l = ["BASE", "CRATE", "DP SWITCH", "ADDER: FLEX HOUSE", "PIPPING ASSEMBLY", "ADDER: PUMPS", "PAINT", "REWORK", "TEST", "OTHER"];
 
     e.forEach((data, index) => {
-      instance.post("/employees", {
+      axios.post(`${baseURL}/employees`, {
         isActive: true,
         isContractor: c[index],
         jobTitle: t[index],
         name: data,
         travelTime: tt[index]
-      })
+      }, getHeaderObj())
     })
     j.forEach((data, index) => {
-      instance.post("/jobs", {
+      axios.post(`${baseURL}/jobs`, {
         number: data,
         isActive: true
-      })
+      }, getHeaderObj())
     })
     l.forEach((data, index) => {
-      instance.post("/laborTypes", {
+      axios.post(`${baseURL}/laborTypes`, {
         name: data,
         isActive: true
-      })
+      }, getHeaderObj())
     })
   },
   clockIn: (id, obj, fn) => {
-    let url = `https://dashboard-api-02.herokuapp.com/api/clockin/${id}`;
+    let url = `${baseURL}/clockin/${id}`;
     axios.put(url,  obj, {
       headers: {
-        'auth-token': window.localStorage.getItem("token")
+        'auth-token': window.localStorage.token
       }
-    })
+    }, getHeaderObj())
     .then(data => {if(fn) fn()})
     .catch(error => { console.log(error) });
   },
   startLunch: (id, obj, fn) => {
-    let url = `https://dashboard-api-02.herokuapp.com/api/startlunch/${id}`;
+    let url = `${baseURL}/startlunch/${id}`;
     axios.put(url, obj, {
       headers: {
-        'auth-token': window.localStorage.getItem("token")
+        'auth-token': window.localStorage.token
       }
-    })
+    }, getHeaderObj())
     .then(data => {if(fn) fn()})
     .catch(error => console.log(JSON.stringify(error)));
   },
   endLunch: (id, obj, fn) => {
-    let url = `https://dashboard-api-02.herokuapp.com/api/endlunch/${id}`;
+    let url = `${baseURL}/endlunch/${id}`;
     axios.put(url, obj, {
       headers: {
-        'auth-token': window.localStorage.getItem("token")
+        'auth-token': window.localStorage.token
       }
-    })
+    }, getHeaderObj())
     .then(data => {if(fn) fn()})
     .catch(error => console.log(JSON.stringify(error)));
   },
   clockOut: (id, obj, fn) => {
-    let url = `https://dashboard-api-02.herokuapp.com/api/clockout/${id}`;
+    let url = `${baseURL}/clockout/${id}`;
     axios.put(url, obj, {
       headers: {
-        'auth-token': window.localStorage.getItem("token")
+        'auth-token': window.localStorage.token
       }
-    })
+    }, getHeaderObj())
     .then(data => {if(fn) fn()})
     .catch(error => console.log(error));
   },
   reset: async (id, fn) => {
-    const resetEmployee = await axios.put(`https://dashboard-api-02.herokuapp.com/api/reset/${id}`, {}, {
-      headers: {
-        'auth-token': window.localStorage.getItem("token")
-      }
-    });
-    const fetchEmployees = await instance.get("/employees");
+    const resetEmployee = await axios.put(`${baseURL}/reset/${id}`, {}, getHeaderObj());
+    const fetchEmployees = await axios.get(`${baseURL}/employees`);
     fn(fetchEmployees);
   },
   updateEmployee: (id, laborType, jobNumber, fn) => {
-    let url = `https://dashboard-api-02.herokuapp.com/api/employees/`
+    let url = `${baseURL}/employees/`
     const updates = {};
     if(laborType.length){
       updates.laborType = laborType
@@ -122,28 +120,24 @@ export default {
     if(jobNumber){
       updates.jobNumber = jobNumber
     }
-    axios.put(url + id, updates, {
-      headers: {
-        'auth-token': window.localStorage.getItem("token")
-      }
-    }).then(response => fn());
+    axios.put(url + id, updates, getHeaderObj()).then(response => fn());
   },
   fetchEmployees: async (dispatch) => {
-    const response = await instance.get("/employees");
+    const response = await axios.get(`${baseURL}/employees`, getHeaderObj());
     dispatch({
       type: Types.SET_EMPLOYEES,
       payload: response.data
     })
   },
   fetchLaborTypes: async (dispatch) => {
-    const response = await instance.get("/labortypes");
+    const response = await axios.get(`${baseURL}/labortypes`, getHeaderObj());
     dispatch({
       type: Types.SET_LABOR_TYPES,
       payload: response.data
     })
   },
   fetchJobNumbers: async (dispatch) => {
-    const response = await instance.get("/jobs");
+    const response = await axios.get(`${baseURL}/jobs`, getHeaderObj());
     dispatch({
       type: Types.SET_JOB_NUMBERS,
       payload: response.data
@@ -155,10 +149,10 @@ export default {
       startDate,
       endDate
     } = payload;
-    const response = await instance.post("/history", {
+    const response = await axios.post(`${baseURL}/history`, {
       startDate: moment(startDate).format("YYYY-MM-DD"),
       endDate: moment(endDate).format("YYYY-MM-DD")
-    });
+    }, getHeaderObj());
     if(response.data.length){
       dispatch({
         type: Types.SET_CSV_DATA,
@@ -179,10 +173,10 @@ export default {
     }
   },
   logIn: async (username, password, fn) => {
-    const response = await instance.post("/login", {
+    const response = await axios.post(`${baseURL}/login`, {
       username,
       password
-    });
+    }, getHeaderObj());
     if(response) fn(response);
   }
 };
