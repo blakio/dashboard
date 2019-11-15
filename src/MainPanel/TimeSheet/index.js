@@ -229,6 +229,14 @@ function TimeSheet() {
   const isTechSelected = isEmployeeSelected && selectedItems.employees[0].isTech;
   const isContractorSelected = isEmployeeSelected && selectedItems.employees[0].isContractor;
 
+  const getHeaderObj = () => {
+    return {
+      headers: {
+        'auth-token': window.localStorage.token
+      }
+    }
+  }
+
   return (<div id="timesheet">
     {toggleButton}
 
@@ -251,7 +259,7 @@ function TimeSheet() {
         onClick={() => {
           const response = axios.post("https://dashboard-api-02.herokuapp.com/api/totaljobhrs", {
             jobNumber: jobNumberSearch
-          }).then(data => {
+          }, getHeaderObj()).then(data => {
             const time = data.data;
             setJobNumberSearch(time)
           }).catch(e => setJobNumberSearch("job # not found"));
