@@ -4,7 +4,10 @@ import Types from "../Context/Types.js";
 
 // Set config defaults when creating the instance
 const instance = axios.create({
-  baseURL: 'https://dashboard-api-02.herokuapp.com/api/'
+  baseURL: 'https://dashboard-api-02.herokuapp.com/api/',
+  headers: {
+    'auth-token': window.localStorage.getItem("token")
+  }
 });
 
 export default {
@@ -63,30 +66,50 @@ export default {
   },
   clockIn: (id, obj, fn) => {
     let url = `https://dashboard-api-02.herokuapp.com/api/clockin/${id}`;
-    axios.put(url,  obj)
+    axios.put(url,  obj, {
+      headers: {
+        'auth-token': window.localStorage.getItem("token")
+      }
+    })
     .then(data => {if(fn) fn()})
     .catch(error => { console.log(error) });
   },
   startLunch: (id, obj, fn) => {
     let url = `https://dashboard-api-02.herokuapp.com/api/startlunch/${id}`;
-    axios.put(url, obj)
-      .then(data => {if(fn) fn()})
-      .catch(error => console.log(JSON.stringify(error)));
+    axios.put(url, obj, {
+      headers: {
+        'auth-token': window.localStorage.getItem("token")
+      }
+    })
+    .then(data => {if(fn) fn()})
+    .catch(error => console.log(JSON.stringify(error)));
   },
   endLunch: (id, obj, fn) => {
     let url = `https://dashboard-api-02.herokuapp.com/api/endlunch/${id}`;
-    axios.put(url, obj)
+    axios.put(url, obj, {
+      headers: {
+        'auth-token': window.localStorage.getItem("token")
+      }
+    })
     .then(data => {if(fn) fn()})
     .catch(error => console.log(JSON.stringify(error)));
   },
   clockOut: (id, obj, fn) => {
     let url = `https://dashboard-api-02.herokuapp.com/api/clockout/${id}`;
-    axios.put(url, obj)
-      .then(data => {if(fn) fn()})
-      .catch(error => console.log(error));
+    axios.put(url, obj, {
+      headers: {
+        'auth-token': window.localStorage.getItem("token")
+      }
+    })
+    .then(data => {if(fn) fn()})
+    .catch(error => console.log(error));
   },
   reset: async (id, fn) => {
-    const resetEmployee = await axios.put(`https://dashboard-api-02.herokuapp.com/api/reset/${id}`, {});
+    const resetEmployee = await axios.put(`https://dashboard-api-02.herokuapp.com/api/reset/${id}`, {}, {
+      headers: {
+        'auth-token': window.localStorage.getItem("token")
+      }
+    });
     const fetchEmployees = await instance.get("/employees");
     fn(fetchEmployees);
   },
@@ -99,7 +122,11 @@ export default {
     if(jobNumber){
       updates.jobNumber = jobNumber
     }
-    axios.put(url + id, updates).then(response => fn());
+    axios.put(url + id, updates, {
+      headers: {
+        'auth-token': window.localStorage.getItem("token")
+      }
+    }).then(response => fn());
   },
   fetchEmployees: async (dispatch) => {
     const response = await instance.get("/employees");
