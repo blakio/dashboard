@@ -260,6 +260,7 @@ export default {
     const currentState = Util.breakRefAndCopy(state);
     currentState.isLoggedIn = payload.isLoggedIn;
     const token = (currentState.isLoggedIn) ? payload.token : "";
+    window.localStorage.setItem('token', token);
     return {
       ...state,
       isLoggedIn: currentState.isLoggedIn,
