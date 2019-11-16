@@ -17,10 +17,10 @@ function App() {
 
   return (<TimeSheetContext.Provider value={{...state, dispatch}}>
     <div id="dashboard" className="flex">
-      {!state.isLoggedIn && <LogInForm />}
-      {state.isLoggedIn && <Panel />}
-      {state.isLoggedIn && <EmployeePanel />}
-      {state.isLoggedIn && <MainPanel />}
+      {/*!state.isLoggedIn && <LogInForm />*/}
+      <Panel />
+      <EmployeePanel />
+      <MainPanel />
     </div>
   </TimeSheetContext.Provider>);
 }
