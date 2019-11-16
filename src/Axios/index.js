@@ -9,7 +9,7 @@ const getHeaderObj = () => {
   const token = data && data.token || {};
   return {
     headers: {
-      'auth-token': token
+      'auth-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NzM5MTc3NjJ9.rRHPpSqeMmk9MX8PjSPzKQHQNaln2hBgPlKKubZSMH8"//token
     }
   }
 }
