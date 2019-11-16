@@ -15,4 +15,6 @@
 #dateTimeWeather img {
   height: 2em;
   border-radius: 50%;
+  position: absolute;
+  top: 0;
 }
