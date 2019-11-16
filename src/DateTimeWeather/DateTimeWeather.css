@@ -1,0 +1,13 @@
+#dateTimeWeather {
+  border-radius: 2em;
+  top: 1vh;
+  position: absolute;
+  height: 3em;
+  width: 20em;
+  background-color: #f8f8f8;
+  color: rgba(33, 37, 63, 0.70)
+}
+
+#dateTimeWeather p {
+  letter-spacing: 3px;
+}

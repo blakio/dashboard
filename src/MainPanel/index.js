@@ -6,6 +6,7 @@ import Confirmation from "./Confirmation";
 import Error from "./Error";
 import Warning from "./Warning";
 import TimeSheetContext from "../Context/State";
+import DateTimeWeather from '../DateTimeWeather';
 
 function MainPanel() {
 
@@ -14,6 +15,7 @@ function MainPanel() {
   } = useContext(TimeSheetContext);
 
   return (<div id="middlePanel" className="flex">
+    <DateTimeWeather />
     <div id="middlePanelLiner">
       <TimeSheet />
       {message.confirmation.status && <Confirmation />}
