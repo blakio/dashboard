@@ -4,8 +4,8 @@
   position: absolute;
   height: 3em;
   width: 26em;
-  background-color: #f8f8f8;
-  color: rgba(33, 37, 63, 0.70)
+  background-color: #008280;
+  color: #fff;
 }
 
 #dateTimeWeather p {
