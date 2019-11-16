@@ -15,27 +15,12 @@ function LogInForm() {
     isAdminMode
   } = useContext(TimeSheetContext);
 
-  useEffect(() => {
-    const data = window.localStorage.data;
-    if(data){
-      const obj = JSON.parse(data);
-      dispatch({
-        type: Types.LOG_IN,
-        payload: {
-          isLoggedIn: true,
-          data: obj
-        }
-      })
-    }
-  }, []);
-
   const submitForm = () => {
     if(username.trim().length && password.trim().length){
       Axios.logIn(username, password, response => {
         dispatch({
           type: Types.LOG_IN,
           payload: {
-            isLoggedIn: true,
             data: response.data
           }
         })

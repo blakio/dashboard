@@ -15,12 +15,14 @@ function App() {
 
   const [state, dispatch] = useReducer(Reducer, initialState);
 
+  const hasToken = window.localStorage.data;
+
   return (<TimeSheetContext.Provider value={{...state, dispatch}}>
     <div id="dashboard" className="flex">
-      {/*!state.isLoggedIn && <LogInForm />*/}
-      <Panel />
-      <EmployeePanel />
-      <MainPanel />
+      {!hasToken && <LogInForm />}
+      {hasToken && <Panel />}
+      {hasToken && <EmployeePanel />}
+      {hasToken && <MainPanel />}
     </div>
   </TimeSheetContext.Provider>);
 }

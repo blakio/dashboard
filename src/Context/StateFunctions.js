@@ -258,17 +258,11 @@ export default {
   },
   logIn: (payload, state) => {
     const currentState = Util.breakRefAndCopy(state);
-    currentState.isLoggedIn = payload.data.isLoggedIn;
-    let token = (currentState.isLoggedIn) ? payload.data.token : "";
-    if(token === "" && window.localStorage.token){
-      token = JSON.parse(window.localStorage.token).token;
-    }
-    const isAdminLoggedIn = (token !== "") && payload.data.isAdmin;
+    const isAdminLoggedIn = payload.data.isAdmin;
     window.localStorage.setItem('data', JSON.stringify(payload.data));
     return {
       ...state,
-      isLoggedIn: true,
-      token,
+      token: JSON.stringify(payload.data),
       isAdminLoggedIn
     }
   }
