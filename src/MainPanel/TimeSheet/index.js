@@ -14,6 +14,10 @@ function TimeSheet() {
 
   const [jobNumberSearch, setJobNumberSearch] = useState("");
 
+  useEffect(() => {
+    Axios.getWeather();
+  }, []);
+
   const {
     isAdminMode,
     isAdminLoggedIn,

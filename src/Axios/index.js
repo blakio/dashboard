@@ -5,9 +5,11 @@ import Types from "../Context/Types.js";
 const baseURL = "https://dashboard-api-02.herokuapp.com/api";
 
 const getHeaderObj = () => {
+  const data = window.localStorage.length ? JSON.parse(window.localStorage.data) : {};
+  const token = data && data.token || {};
   return {
     headers: {
-      'auth-token': window.localStorage.token
+      'auth-token': token
     }
   }
 }
@@ -70,7 +72,7 @@ export default {
     let url = `${baseURL}/clockin/${id}`;
     axios.put(url,  obj, {
       headers: {
-        'auth-token': window.localStorage.token
+        'auth-token': JSON.parse(window.localStorage.data).token
       }
     }, getHeaderObj())
     .then(data => {if(fn) fn()})
@@ -80,7 +82,7 @@ export default {
     let url = `${baseURL}/startlunch/${id}`;
     axios.put(url, obj, {
       headers: {
-        'auth-token': window.localStorage.token
+        'auth-token': JSON.parse(window.localStorage.data).token
       }
     }, getHeaderObj())
     .then(data => {if(fn) fn()})
@@ -90,7 +92,7 @@ export default {
     let url = `${baseURL}/endlunch/${id}`;
     axios.put(url, obj, {
       headers: {
-        'auth-token': window.localStorage.token
+        'auth-token': JSON.parse(window.localStorage.data).token
       }
     }, getHeaderObj())
     .then(data => {if(fn) fn()})
@@ -100,7 +102,7 @@ export default {
     let url = `${baseURL}/clockout/${id}`;
     axios.put(url, obj, {
       headers: {
-        'auth-token': window.localStorage.token
+        'auth-token': JSON.parse(window.localStorage.data).token
       }
     }, getHeaderObj())
     .then(data => {if(fn) fn()})
@@ -178,5 +180,12 @@ export default {
       password
     }, getHeaderObj());
     if(response) fn(response);
+  },
+  getWeather: () => {
+    const apiKey = "1001a1dcc738f2ecade5496fbf796f50";
+    const cityId = "4562144&APPID";
+    const string = `http://api.openweathermap.org/data/2.5/forecast?id=${cityId}=${apiKey}`
+    axios.get(string).then(data => {
+    })
   }
 };

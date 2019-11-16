@@ -15,19 +15,6 @@ function App() {
 
   const [state, dispatch] = useReducer(Reducer, initialState);
 
-  useEffect(() => {
-    const token = window.localStorage.token;
-    if(token){
-      dispatch({
-        type: Types.LOG_IN,
-        payload: {
-          isLoggedIn: true,
-          token
-        }
-      })
-    }
-  }, []);
-
   return (<TimeSheetContext.Provider value={{...state, dispatch}}>
     <div id="dashboard" className="flex">
       {!state.isLoggedIn && <LogInForm />}

@@ -256,15 +256,21 @@ export default {
       }
     }
   },
+  // src="https://openweathermap.org/img/wn/04d@2x.png"
   logIn: (payload, state) => {
     const currentState = Util.breakRefAndCopy(state);
-    currentState.isLoggedIn = payload.isLoggedIn;
-    const token = (currentState.isLoggedIn) ? payload.token : "";
-    window.localStorage.setItem('token', token);
+    currentState.isLoggedIn = payload.data.isLoggedIn;
+    let token = (currentState.isLoggedIn) ? payload.data.token : "";
+    if(token === "" && window.localStorage.token){
+      token = JSON.parse(window.localStorage.token).token;
+    }
+    const isAdminLoggedIn = (token !== "") && payload.data.isAdmin;
+    window.localStorage.setItem('data', JSON.stringify(payload.data));
     return {
       ...state,
-      isLoggedIn: currentState.isLoggedIn,
-      token
+      isLoggedIn: true,
+      token,
+      isAdminLoggedIn
     }
   }
 }

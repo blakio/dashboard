@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import TimeSheetContext from "../Context/State";
 import Axios from "../Axios";
 
@@ -15,6 +15,20 @@ function LogInForm() {
     isAdminMode
   } = useContext(TimeSheetContext);
 
+  useEffect(() => {
+    const data = window.localStorage.data;
+    if(data){
+      const obj = JSON.parse(data);
+      dispatch({
+        type: Types.LOG_IN,
+        payload: {
+          isLoggedIn: true,
+          data: obj
+        }
+      })
+    }
+  }, []);
+
   const submitForm = () => {
     if(username.trim().length && password.trim().length){
       Axios.logIn(username, password, response => {
@@ -22,7 +36,7 @@ function LogInForm() {
           type: Types.LOG_IN,
           payload: {
             isLoggedIn: true,
-            token: response.data
+            data: response.data
           }
         })
       })
