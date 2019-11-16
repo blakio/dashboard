@@ -5,7 +5,7 @@ import Types from "../Context/Types.js";
 const baseURL = "https://dashboard-api-02.herokuapp.com/api";
 
 const getHeaderObj = () => {
-  const data = (window.localStorage.length && window.localStorage.data) ? JSON.parse(window.localStorage.data) : {};
+  const data = window.localStorage.data ? JSON.parse(window.localStorage.data) : {};
   const token = data && data.token || {};
   return {
     headers: {
