@@ -20,7 +20,7 @@ function DateTimeWeather() {
     setInterval(update, 1000);
     const apiKey = "1001a1dcc738f2ecade5496fbf796f50";
     const cityId = "4562144&APPID";
-    const string = `http://api.openweathermap.org/data/2.5/forecast?id=${cityId}=${apiKey}`
+    const string = `https://api.openweathermap.org/data/2.5/forecast?id=${cityId}=${apiKey}`
     axios.get(string).then(data => {
       const K = data.data.list[0].main.temp;
       const F = (K - 273.15) * (9/5) + 32;
