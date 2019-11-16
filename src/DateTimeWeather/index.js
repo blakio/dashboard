@@ -10,7 +10,7 @@ import './DateTimeWeather.css';
 
 function DateTimeWeather() {
 
-  const [time, setTime] = useState(moment().format('MM/DD/YYYY HH:mm:ss'))
+  const [time, setTime] = useState(moment().format('MM/DD/YYYY | HH:mm:ss'))
   const [temp, setTemp] = useState("")
   const [icon, setIcon] = useState("")
 
