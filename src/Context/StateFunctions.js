@@ -256,7 +256,6 @@ export default {
       }
     }
   },
-  // src="https://openweathermap.org/img/wn/04d@2x.png"
   logIn: (payload, state) => {
     const currentState = Util.breakRefAndCopy(state);
     currentState.isLoggedIn = payload.data.isLoggedIn;

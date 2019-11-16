@@ -12,6 +12,7 @@ function DateTimeWeather() {
 
   const [time, setTime] = useState(moment().format('MM/DD/YYYY HH:mm:ss'))
   const [temp, setTemp] = useState("")
+  const [icon, setIcon] = useState("")
 
   useEffect(() => {
     function update() {
@@ -25,6 +26,7 @@ function DateTimeWeather() {
       const K = data.data.list[0].main.temp;
       const F = (K - 273.15) * (9/5) + 32;
       setTemp(`${F.toFixed(2)} F`);
+      setIcon(data.data.list[0].weather[0].icon)
     })
   }, []);
 
@@ -32,9 +34,13 @@ function DateTimeWeather() {
     dispatch
   } = useContext(TimeSheetContext);
 
-
   return (<div id="dateTimeWeather" className="flex">
-    <p>{time} {` | ${temp}`}</p>
+    <p>
+      {time} {` | ${temp}`}
+      <span>
+        <img src={`https://openweathermap.org/img/wn/${icon}@2x.png`}/>
+      </span>
+    </p>
   </div>);
 }
 
