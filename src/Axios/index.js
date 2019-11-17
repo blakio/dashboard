@@ -9,19 +9,19 @@ const getHeaderObj = () => {
   const token = data && data.token || {};
   return {
     headers: {
-      'auth-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NzM5MTc3NjJ9.rRHPpSqeMmk9MX8PjSPzKQHQNaln2hBgPlKKubZSMH8"//token
+      'auth-token': localStorage.data ? JSON.parse(localStorage.data).token : ""
     }
   }
 }
 
 export default {
   get: async (path, params, fn) => {
-    await axios.get(path, { params })
+    await axios.get(path, { params }, getHeaderObj())
       .then(response => { fn && fn(response) })
       .catch(error => console.log(error));
   },
   post: async (path, obj, fn, errorFn) => {
-    await axios.post(path, obj)
+    await axios.post(path, obj, getHeaderObj())
       .then(response => { fn && fn(response) })
       .catch(error => {
         console.log(error);
@@ -29,12 +29,12 @@ export default {
       });
   },
   put: async (path, obj, fn) => {
-    await axios.put(path, obj)
+    await axios.put(path, obj, getHeaderObj())
       .then(response => { fn && fn(response) })
       .catch(error => console.log(error));
   },
   delete: async (path, obj, fn) => {
-    await axios.delete(path, obj)
+    await axios.delete(path, obj, getHeaderObj())
       .then(response => { fn && fn(response) })
       .catch(error => console.log(error));
   },
@@ -70,41 +70,25 @@ export default {
   },
   clockIn: (id, obj, fn) => {
     let url = `${baseURL}/clockin/${id}`;
-    axios.put(url,  obj, {
-      headers: {
-        'auth-token': JSON.parse(window.localStorage.data).token
-      }
-    }, getHeaderObj())
+    axios.put(url,  obj, getHeaderObj())
     .then(data => {if(fn) fn()})
     .catch(error => { console.log(error) });
   },
   startLunch: (id, obj, fn) => {
     let url = `${baseURL}/startlunch/${id}`;
-    axios.put(url, obj, {
-      headers: {
-        'auth-token': JSON.parse(window.localStorage.data).token
-      }
-    }, getHeaderObj())
+    axios.put(url, obj, getHeaderObj())
     .then(data => {if(fn) fn()})
     .catch(error => console.log(JSON.stringify(error)));
   },
   endLunch: (id, obj, fn) => {
     let url = `${baseURL}/endlunch/${id}`;
-    axios.put(url, obj, {
-      headers: {
-        'auth-token': JSON.parse(window.localStorage.data).token
-      }
-    }, getHeaderObj())
+    axios.put(url, obj, getHeaderObj())
     .then(data => {if(fn) fn()})
     .catch(error => console.log(JSON.stringify(error)));
   },
   clockOut: (id, obj, fn) => {
     let url = `${baseURL}/clockout/${id}`;
-    axios.put(url, obj, {
-      headers: {
-        'auth-token': JSON.parse(window.localStorage.data).token
-      }
-    }, getHeaderObj())
+    axios.put(url, obj, getHeaderObj())
     .then(data => {if(fn) fn()})
     .catch(error => console.log(error));
   },

@@ -236,7 +236,7 @@ function TimeSheet() {
   const getHeaderObj = () => {
     return {
       headers: {
-        'auth-token': window.localStorage.token
+        'auth-token': localStorage.data ? JSON.parse(localStorage.data).token : ""
       }
     }
   }
