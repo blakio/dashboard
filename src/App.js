@@ -19,10 +19,10 @@ function App() {
 
   return (<TimeSheetContext.Provider value={{...state, dispatch}}>
     <div id="dashboard" className="flex">
-      {!hasToken && <LogInForm />}
-      {hasToken && <Panel />}
-      {hasToken && <EmployeePanel />}
-      {hasToken && <MainPanel />}
+      {/*!hasToken && <LogInForm />*/}
+      <Panel />
+      <EmployeePanel />
+      <MainPanel />
     </div>
   </TimeSheetContext.Provider>);
 }
